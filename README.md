@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Database Init
+
+```bash
+
+docker run --name pg-control-calificaciones -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=control_calificaciones -v ./database/init.sql:/docker-entrypoint-initdb.d/init.sql -d postgres
+
+docker run --name pg-control-calificaciones -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=control_calificaciones -d postgres
+
+docker start pg-control-calificaciones
+docker stop pg-control-calificaciones
+docker rm pg-control-calificaciones
+```

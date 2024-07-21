@@ -35,7 +35,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 ## Database Init
 
 exmaple .env file:
@@ -55,4 +54,12 @@ docker run --name pg-control-calificaciones -p 5432:5432 -e POSTGRES_USER=postgr
 docker start pg-control-calificaciones
 docker stop pg-control-calificaciones
 docker rm pg-control-calificaciones
+```
+
+Run Prisma:
+
+```bash
+npm run db-migrate
+npx prisma db push
+npx prisma studio
 ```

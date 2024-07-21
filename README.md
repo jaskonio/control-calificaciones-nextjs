@@ -38,6 +38,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Database Init
 
+exmaple .env file:
+
+```bash
+DATABASE_URL="postgresql://postgres:password@localhost:5432/mydb?schema=public"
+URL="http://localhost:3000"
+
+```
+
 ```bash
 
 docker run --name pg-control-calificaciones -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=control_calificaciones -v ./database/init.sql:/docker-entrypoint-initdb.d/init.sql -d postgres

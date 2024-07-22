@@ -1,5 +1,14 @@
+export type State = {
+    errors?: {
+        customerId?: string[];
+        amount?: string[];
+        status?: string[];
+    };
+    message?: string | null;
+};
+
 export type Teacher = {
-    id: string;
+    id?: string;
     username: string;
     password: string;
     firstName: string;

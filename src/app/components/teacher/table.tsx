@@ -1,4 +1,4 @@
-import { fetchAllTeacher } from "@/lib/actions";
+import { fetchAllTeacher } from "@/lib/teacherActions";
 import { DeleteTeacher, UpdateTeacher } from "./buttons";
 
 export default async function TeacherTable() {
@@ -48,8 +48,8 @@ export default async function TeacherTable() {
                     </td>
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex justify-end gap-3">
-                        <UpdateTeacher id={teacher.id} />
-                        <DeleteTeacher id={teacher.id} />
+                        <UpdateTeacher id={teacher.id ? teacher.id: ''} />
+                        <DeleteTeacher id={teacher.id ? teacher.id: ''} />
                       </div>
                     </td>
                   </tr>

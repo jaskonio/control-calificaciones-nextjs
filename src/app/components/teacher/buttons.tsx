@@ -1,4 +1,4 @@
-import { deleteTeacher } from '@/lib/actions';
+import { deleteTeacher } from '@/lib/teacherActions';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 

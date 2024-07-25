@@ -83,7 +83,6 @@ export async function fetchDeleteTeacher(teacherId:string) {
     try {
         const response = await fetch(process.env.URL + `/api/teacher/${teacherId}`, {method: 'DELETE'})
         revalidatePath('/teacher');
-        // return data as Teacher[]
     }
     catch (error) {
         console.log(error)

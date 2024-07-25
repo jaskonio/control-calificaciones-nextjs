@@ -1,4 +1,4 @@
-import { deleteTeacher } from '@/lib/teacherActions';
+import { fetchDeleteTeacher } from '@/lib/teacherActions';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -26,7 +26,7 @@ export function UpdateTeacher({ id }: { id: string }) {
 }
 
 export function DeleteTeacher({ id }: { id: string }) {
-  const deleteTeacherWithId = deleteTeacher.bind(null, id);
+  const deleteTeacherWithId = fetchDeleteTeacher.bind(null, id);
 
   return (
     <>

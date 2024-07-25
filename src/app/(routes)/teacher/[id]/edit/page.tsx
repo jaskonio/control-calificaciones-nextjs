@@ -1,16 +1,11 @@
-import { fetchTeacherById } from "@/lib/actions";
+import EditTeacherForm from "@/app/components/teacher/edit-form";
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const teacher = await fetchTeacherById(params.id);
+    const id = params.id;
 
     return (
         <div>
-            {
-                <div key={teacher?.id}>
-                    <p>{teacher?.id}</p>
-                    <p>{teacher?.firstName}</p>
-                </div>
-            }
+            <EditTeacherForm  key={id} teacherId={id}/>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 export function DeleteButton() {
@@ -33,4 +34,25 @@ export function CreateButton({href, placeholder}: {href:string, placeholder:stri
             <PlusIcon className="h-5 md:ml-4" />
         </Link>
     );
+}
+
+export function LoginButton() {
+    'use client';
+
+    return (
+        <button
+        className="bg-white text-black px-4 py-2 rounded-md mt-4"
+        onClick={() => signOut()}
+      >
+        Logout
+      </button>
+    )
+}
+
+export function Infouser() {
+    return (
+        <div>
+            Infouser
+        </div>
+    )
 }

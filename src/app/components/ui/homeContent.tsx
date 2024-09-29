@@ -5,7 +5,7 @@ import { BookOpen, Users, GraduationCap, UserCheck } from 'lucide-react'
 
 
 export default async function HomeContent() {
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     const data = [
         { title: 'Años Escolares', description: 'Gestiona los períodos académicos', icon: BookOpen, href: '/school', color: 'bg-blue-500' },

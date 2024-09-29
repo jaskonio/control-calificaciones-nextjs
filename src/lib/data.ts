@@ -3,13 +3,15 @@ import { SchoolYearService } from './services/schoolYearService'
 const schoolYearService = new SchoolYearService()
 
 export async function getAllSchoolYear(): Promise<SchoolYear[]> {
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     const result = await schoolYearService.getAll()
     return result
 }
 
 export async function getSchoolYearById(id: number): Promise<SchoolYear | null> {
+    await new Promise(resolve => setTimeout(resolve, 500))
+
     const result = await schoolYearService.getById(id)
     return result
 }

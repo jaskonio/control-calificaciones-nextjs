@@ -38,6 +38,7 @@ export default async function TeacherHomeContent() {
                   <TableBody>
                     {schoolYears.map((teacher) => (
                       <TableRow key={teacher.teacher_id}>
+                        <TableCell>{teacher.teacher_id}</TableCell>
                         <TableCell>{teacher.user.name}</TableCell>
                         <TableCell>{teacher.user.email}</TableCell>
                         <TableCell>

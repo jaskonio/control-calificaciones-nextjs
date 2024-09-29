@@ -4,9 +4,12 @@ interface SchoolYear {
     end_date: string;
 }
 
+type UserRole = 'admin' | 'teacher' | 'tutor' | 'student';
+
+
 interface User {
     user_id: number;
-    role: 'admin' | 'teacher' | 'tutor' | 'student';
+    role: UserRole;
     name: string;
     email: string;
     password: string;
@@ -15,6 +18,10 @@ interface User {
 interface Teacher {
     teacher_id: number;
     user_id: number; // Relación con User
+}
+
+interface TeacherView extends Teacher {
+    user: User;
 }
 
 interface Tutor {

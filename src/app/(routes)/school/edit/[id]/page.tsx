@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { updateSchoolYear } from "@/lib/actions"
-import { getSchoolYearById } from "@/lib/data"
+import { updateSchoolYear } from "@/lib/schoolActions"
+import { schoolService } from "@/lib/services"
 
 export default async function EditSchoolYear({ params }: { params: { id: string } }) {
-  const schoolYear = await getSchoolYearById(parseInt(params.id))
+  const schoolYear = await schoolService.getById(parseInt(params.id))
 
   if (!schoolYear) {
     return (

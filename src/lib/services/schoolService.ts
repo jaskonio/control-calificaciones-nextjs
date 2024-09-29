@@ -1,6 +1,6 @@
 import { school_years } from '../data/db';
 
-export class SchoolYearService {
+export class SchoolService {
     private school_years: SchoolYear[] = school_years;
     private schoolYearIdCounter = school_years.length+1;
 
@@ -35,7 +35,6 @@ export class SchoolYearService {
         const index = this.school_years.findIndex(year => year.year_id === year_id);
         if (index !== -1) {
             this.school_years.splice(index, 1);
-            // Implementar lógica adicional para manejar entidades relacionadas si es necesario
             return true;
         }
         return false;

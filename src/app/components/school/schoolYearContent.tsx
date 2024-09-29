@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { PlusCircle, Pencil, Trash2 } from 'lucide-react'
-import { getAllSchoolYear } from '@/lib/data'
-import { deleteSchoolYear } from '@/lib/actions'
+import { deleteSchoolYear } from '@/lib/schoolActions'
+import { schoolService } from '@/lib/services'
 
 
 export default async function SchoolYearsContent() {
-  const schoolYears = await getAllSchoolYear()
+  const schoolYears = await schoolService.getAll()
 
   return (
     <div className="bg-gradient-to-br from-blue-100 to-indigo-100 py-12">

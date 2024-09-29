@@ -1,45 +1,42 @@
-"use server";
+'use server'
 
-import { Teacher } from "./definition"
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { addSchoolYearData, deleteSchoolYearById, updateSchoolYearData } from './data'
 
-export async function fetchAllTeacher() {
-    try {
-        const response = await fetch(process.env.URL + '/api/teacher', {method: 'GET'})
-        const data = await response.json()
 
-        return data as Teacher[]
-    }
-    catch (error) {
-        console.log(error)
-    }
+export async function addSchoolYear(formData: FormData) {
+  console.log('Añadiendo año escolar:', Object.fromEntries(formData))
 
-    return []
+  let start_date = formData.get('start_date') as string
+  let end_date = formData.get('end_date') as string
+
+  addSchoolYearData(start_date, end_date)
+
+  revalidatePath('/school')
+  redirect('/school')
 }
 
-export async function fetchTeacherById(id:string) {
-    try {
-        const response = await fetch(`${process.env.URL}/api/teacher/${id}`, {method: 'GET'})
-        const data = await response.json()
+export async function updateSchoolYear(formData: FormData) {
+  console.log('Actualizando año escolar:', Object.fromEntries(formData))
 
-        return data as Teacher
-    }
-    catch (error) {
-        console.log(error)
-    }
+  const updateSchoolYear = {
+    year_id: Number(formData.get('year_id')),
+    start_date: formData.get('start_date') as string,
+    end_date: formData.get('end_date') as string,
+  };
 
-    return null
+  updateSchoolYearData(updateSchoolYear.year_id, updateSchoolYear)
+
+  revalidatePath('/school')
+  redirect('/school')
 }
 
-export async function deleteTeacher(teacherId:string) {
-    try {
-        const response = await fetch(process.env.URL + `/api/teacher/${teacherId}`, {method: 'DELETE'})
-        const data = await response.json()
+export async function deleteSchoolYear(formData: FormData) {
+  const year_id = formData.get('year_id')
+  console.log('Eliminando año escolar:', year_id)
 
-        return data as Teacher[]
-    }
-    catch (error) {
-        console.log(error)
-    }
+  deleteSchoolYearById(Number(year_id))
 
-    return []
+  revalidatePath('/school')
 }

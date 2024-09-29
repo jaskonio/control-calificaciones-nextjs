@@ -15,7 +15,7 @@ export default async function HomeContent() {
     ]
 
     return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
+    <div className="bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
             <div className="container mx-auto px-4">
             <h1 className="text-4xl font-bold text-center mb-8 text-indigo-800">Sistema de Gestión Escolar</h1>
             

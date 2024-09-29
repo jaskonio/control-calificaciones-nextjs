@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function HomeLoadingSkeleton() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
+    <div className="bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
       <div className="container mx-auto px-4">
         <Skeleton className="h-12 w-3/4 mx-auto mb-8" />
         

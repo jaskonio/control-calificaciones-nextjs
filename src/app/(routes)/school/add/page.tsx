@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 
 export default function AddSchoolYear() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
+    <div className="bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
           <div className="container mx-auto px-4">
             <Card className="max-w-md mx-auto">
               <CardHeader className="bg-indigo-600 text-white">

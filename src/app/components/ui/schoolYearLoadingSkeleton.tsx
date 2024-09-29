@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 export default function SchoolYearLoadingSkeleton() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
+    <div className="bg-gradient-to-br from-blue-100 to-indigo-100 py-12">
       <div className="container mx-auto px-4">
         <Card className="overflow-hidden">
           <CardHeader className="bg-indigo-600">

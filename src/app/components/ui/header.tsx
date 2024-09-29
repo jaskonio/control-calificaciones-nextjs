@@ -9,7 +9,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
             <GraduationCap className="h-8 w-8 text-indigo-600" />
-            <span className="text-xl font-bold text-gray-900">EduGest</span>
+            <span className="text-xl font-bold text-gray-900">GestiónEscolar</span>
           </Link>
           <nav className="hidden md:flex space-x-4">
             <Link href="/school" className="text-gray-600 hover:text-indigo-600 transition-colors duration-300">

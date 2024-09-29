@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
             <GraduationCap className="h-8 w-8 text-indigo-600 mr-2" />
-            <span className="text-xl font-bold text-gray-900">EduGest</span>
+            <span className="text-xl font-bold text-gray-900">GestiónEscolar</span>
           </div>
           <nav className="flex flex-wrap justify-center md:justify-end space-x-4 mb-4 md:mb-0">
             <Link href="/about" className="text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-300">
@@ -26,7 +26,7 @@ export default function Footer() {
           </nav>
         </div>
         <div className="mt-8 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} EduGest. Todos los derechos reservados.
+          © {new Date().getFullYear()} GestiónEscolar. Todos los derechos reservados.
         </div>
       </div>
     </footer>

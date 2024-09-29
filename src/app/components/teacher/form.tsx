@@ -1,7 +1,7 @@
 'use client';
 
 import { Teacher } from "@/lib/definition";
-import { onSubmitCreateOrUpdateTeacher } from "@/lib/teacherActions";
+import { onSubmitCreateOrUpdateTeacher } from "@/lib/services/schoolYearService";
 import { useFormState } from "react-dom";
 
 export default function TeacherForm({teacher}: {teacher:Teacher|null}) {

@@ -1,4 +1,4 @@
-import { fetchAllTeacher } from "@/lib/teacherActions";
+import { fetchAllTeacher } from "@/lib/services/schoolYearService";
 import { DeleteTeacher } from "./buttons";
 import { UpdateButton } from "../ui/button";
 

@@ -1,4 +1,4 @@
-import { fetchTeacherById } from "@/lib/teacherActions";
+import { fetchTeacherById } from "@/lib/services/schoolYearService";
 import TeacherForm from "./form";
 
 export default async function EditTeacherForm({teacherId}: {teacherId:string}) {

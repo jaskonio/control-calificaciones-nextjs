@@ -1,12 +1,11 @@
-import { Infouser, LoginButton } from "./components/ui/button";
+import { Suspense } from "react";
+import HomeContent from "./components/ui/homeContent";
+import HomeLoadingSkeleton from "./components/ui/homeLoadingSkeleton";
 
-export default  function Home() {
-
+export default function Home() {
   return (
-    <>
-      <h1>Home</h1>
-      {/* <LoginButton /> */}
-      <Infouser />
-    </>
+    <Suspense fallback={<HomeLoadingSkeleton />}>
+      <HomeContent/>
+    </Suspense>
   );
 }

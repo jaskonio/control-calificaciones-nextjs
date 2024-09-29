@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Header from "./components/ui/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          inter.className
-        )}>{children}</body>
+      <body 
+        className={cn("min-h-screen bg-background font-sans antialiased", inter.className )}>
+          <Header />
+          <main className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100">
+            {children}
+          </main>
+        </body>
     </html>
   );
 }

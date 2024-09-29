@@ -2,7 +2,7 @@ import { school_years } from '../data/db';
 
 export class SchoolYearService {
     private school_years: SchoolYear[] = school_years;
-    private schoolYearIdCounter = 1;
+    private schoolYearIdCounter = school_years.length+1;
 
     async getAll(): Promise<SchoolYear[]> {
         return this.school_years;

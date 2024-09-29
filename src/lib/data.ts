@@ -6,6 +6,7 @@ export async function getAllSchoolYear(): Promise<SchoolYear[]> {
     await new Promise(resolve => setTimeout(resolve, 500))
 
     const result = await schoolYearService.getAll()
+
     return result
 }
 
@@ -16,8 +17,13 @@ export async function getSchoolYearById(id: number): Promise<SchoolYear | null> 
     return result
 }
 
-export async function addSchoolYear(start_date: string, end_date: string): Promise<SchoolYear> {
+export async function addSchoolYearData(start_date: string, end_date: string): Promise<SchoolYear> {
     const result = await schoolYearService.add(start_date, end_date)
+    return result
+}
+
+export async function updateSchoolYearData(year_id: number, data: SchoolYear): Promise<SchoolYear | null> {
+    const result = await schoolYearService.update(year_id, data)
     return result
 }
 

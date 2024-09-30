@@ -1,12 +1,11 @@
-import SchoolYearsContent from "@/app/components/school/schoolYearContent";
-import SchoolYearLoadingSkeleton from "@/app/components/school/schoolYearLoadingSkeleton";
 import TeacherHomeContent from "@/app/components/teacher/teacherHomeContent";
+import { BaseTableLoadingSkeleton } from "@/app/components/ui/table";
 import { Suspense } from "react";
 
-export default async function SchoolYearsList() {
+export default async function Page() {
 
   return (
-    <Suspense fallback={<SchoolYearLoadingSkeleton/>}>
+    <Suspense fallback={<BaseTableLoadingSkeleton/>}>
       <TeacherHomeContent></TeacherHomeContent>
     </Suspense>
 

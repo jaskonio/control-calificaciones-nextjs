@@ -1,24 +1,37 @@
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, PlusCircle, Trash2 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
-export function EditButton({href}: {href:string}) {
+export function AddButton({href}: {href:string}) {
     return (
-        <Button variant="outline" size="sm" className='bg-white'>
-            <Link href={href}>
-                <Edit className="h-4 w-4" />
-            </Link>
-        </Button>
+        <Link href={href}>
+            <Button className="bg-green-500 hover:bg-green-600 transition-colors duration-300">
+                <PlusCircle className="h-4 w-4" />
+                </Button>
+        </Link>
     )
 }
 
-export function DeleteButton() {
+export function EditButton({href}: {href:string}) {
     return (
-        <Button type="submit" variant="destructive" size="sm">
+        <Link href={href}>
+            <Button variant="outline" size="sm" className='bg-white'>
+                <Edit className="h-4 w-4" />
+            </Button>
+        </Link>
+    )
+}
+
+export function DeleteButton({action, formInputName, entityId}: {action:any, formInputName: string, entityId: string}) {
+    return (
+        <form action={action}>
+            <input type="hidden" name={formInputName} value={entityId} />
+            <Button type="submit" variant="destructive" size="sm">
             <Trash2 className="h-4 w-4" />
         </Button>
+        </form>
     );
 }
 

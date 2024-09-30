@@ -1,26 +1,24 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
+import { PlusIcon } from '@heroicons/react/24/outline';
+import { Edit, Trash2 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
-export function DeleteButton() {
+export function EditButton({href}: {href:string}) {
     return (
-        <button className="rounded-md border p-2 hover:bg-gray-100">
-        <span className="sr-only">Delete</span>
-        <TrashIcon className="w-5" />
-      </button>
-    );
+        <Button variant="outline" size="sm" className='bg-white'>
+            <Link href={href}>
+                <Edit className="h-4 w-4" />
+            </Link>
+        </Button>
+    )
 }
 
-
-export function UpdateButton({href}: {href:string}) {
-   
+export function DeleteButton() {
     return (
-        <Link
-            href={href}
-            className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-        >
-            <PencilIcon className="w-5" />
-        </Link>
+        <Button type="submit" variant="destructive" size="sm">
+            <Trash2 className="h-4 w-4" />
+        </Button>
     );
 }
 

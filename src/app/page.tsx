@@ -5,7 +5,7 @@ import { School, Users, BookOpen, Calendar, ClipboardList, UserCheck } from "luc
 
 export default function Component() {
   return (
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto">
         <section className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 text-primary">Sistema de Gestión Escolar Integral</h2>
           <p className="text-xl text-secondary mb-8">

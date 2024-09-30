@@ -15,7 +15,7 @@ export default async function HomeContent() {
     ]
 
     return (
-    <main className="container mx-auto px-4 py-12">
+        <main className="container mx-auto">
             <div className="container mx-auto px-4">
             <h1 className="text-4xl font-bold text-center mb-16 text-primary">Sistema de Gestión Escolar</h1>
             

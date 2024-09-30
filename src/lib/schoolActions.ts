@@ -11,7 +11,7 @@ export async function addSchoolYear(formData: FormData) {
   let start_date = formData.get('start_date') as string
   let end_date = formData.get('end_date') as string
 
-  schoolService.add(start_date, end_date)
+  await schoolService.add(start_date, end_date)
 
   revalidatePath('/school')
   redirect('/school')
@@ -26,7 +26,7 @@ export async function updateSchoolYear(formData: FormData) {
     end_date: formData.get('end_date') as string,
   };
 
-  schoolService.update(updateSchoolYear.year_id, updateSchoolYear)
+  await schoolService.update(updateSchoolYear.year_id, updateSchoolYear)
 
   revalidatePath('/school')
   redirect('/school')
@@ -36,7 +36,7 @@ export async function deleteSchoolYear(formData: FormData) {
   const year_id = formData.get('year_id')
   console.log('Eliminando año escolar:', year_id)
 
-  schoolService.delete(Number(year_id))
+  await schoolService.delete(Number(year_id))
 
   revalidatePath('/school')
 }

@@ -8,7 +8,7 @@ import { BaseTable } from "../ui/table"
 export default async function TeacherHomeContent() {
   const title = 'Docentes Escolares'
   const teachers = await teacherService.getAll()
-  const columns = ['ID', 'Nombre', 'E-mail', 'Acciones']
+  const columns = ['ID', 'Nombre', 'Apellido', 'Username', 'E-mail', 'Acciones']
 
   return (
     <div className="container mx-auto px-4">
@@ -19,6 +19,8 @@ export default async function TeacherHomeContent() {
         rowContent={teachers.map((teacher) => (
           <TableRow key={teacher.teacher_id}>
             <TableCell>{teacher.teacher_id}</TableCell>
+            <TableCell>{teacher.first_name}</TableCell>
+            <TableCell>{teacher.last_name}</TableCell>
             <TableCell>{teacher.user.name}</TableCell>
             <TableCell>{teacher.user.email}</TableCell>
             <TableCell>

@@ -16,7 +16,7 @@ export async function addTeacher(formData: FormData) {
   let firstName = formData.get('first_name') as string
   let lastName = formData.get('last_name') as string
 
-  teacherService.add(role, name, email, password, firstName, lastName)
+  await teacherService.add(role, name, email, password, firstName, lastName)
 
   revalidatePath('/teachers')
   redirect('/teachers')
@@ -38,7 +38,7 @@ export async function updateTeacher(formData: FormData) {
     } as User
   };
 
-  teacherService.update(updateTeacher.teacher_id, updateTeacher)
+  await teacherService.update(updateTeacher.teacher_id, updateTeacher)
 
   revalidatePath('/teachers')
   redirect('/teachers')
@@ -48,7 +48,7 @@ export async function deleteTeacher(formData: FormData) {
   const teafcherId = formData.get('teacher_id')
   console.log('Eliminando Profesor:', teafcherId)
 
-  teacherService.delete(Number(teafcherId))
+  await teacherService.delete(Number(teafcherId))
 
   revalidatePath('/teachers')
 }

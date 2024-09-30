@@ -61,13 +61,18 @@ export class TeacherService {
             return null;
         }
 
-        const teacher = await this.getById(id);
+        updatedData.user = user
+
+        const teacher = this.data.find(t => t.teacher_id === id);
 
         if (!teacher) {
             return null;
         }
 
-        return teacher;
+        Object.assign(teacher, updatedData);
+       
+        const teacherUpdate = this.getById(id)
+        return teacherUpdate;
     }
 
     async delete(id: number): Promise<boolean> {

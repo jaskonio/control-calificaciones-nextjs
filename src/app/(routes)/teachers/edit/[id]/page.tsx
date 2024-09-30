@@ -35,7 +35,16 @@ export default async function EditTeacher({ params }: { params: { id: string } }
               <input type="hidden" name="user_id" value={teacher.user_id} />
 
               <div className="space-y-2">
-                <Label htmlFor="name">Nombre</Label>
+                <Label htmlFor="first_name">Nombre</Label>
+                <Input type="text" id="first_name" name="first_name" required defaultValue={teacher.first_name} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="last_name">Apellido</Label>
+                <Input type="text" id="last_name" name="last_name" required defaultValue={teacher.last_name} />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="name">Useraname</Label>
                 <Input type="text" id="name" name="name" required defaultValue={teacher.user.name} />
               </div>
               <div className="space-y-2">

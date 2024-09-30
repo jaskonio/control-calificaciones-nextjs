@@ -23,9 +23,9 @@ export default function RootLayout({
       <body 
         className={cn("flex flex-col min-h-screen bg-background font-sans antialiased", inter.className )}>
           <Header />
-          <main className="flex-grow bg-gradient-to-br from-blue-100 to-indigo-100">
+          <div className="min-h-screen bg-gradient-to-b from-secondary-light to-white">
             {children}
-          </main>
+          </div>
           <Footer />
         </body>
     </html>

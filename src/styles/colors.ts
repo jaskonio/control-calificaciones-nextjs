@@ -8,27 +8,27 @@ export const colors = {
 
 export const tailwindColors = {
     primary: {
-        DEFAULT: '#272E37',
+        DEFAULT: colors.primary,
         light: '#3A4452',
         dark: '#1A1E24',
     },
     secondary: {
-        DEFAULT: '#73878A',
+        DEFAULT: colors.secondary,
         light: '#8FA3A6',
         dark: '#5A6B6E',
     },
     accent1: {
-        DEFAULT: '#593E2B',
+        DEFAULT: colors.accent1,
         light: '#7A5A3E',
         dark: '#3E2B1E',
     },
     accent2: {
-        DEFAULT: '#DF7B33',
+        DEFAULT: colors.accent2,
         light: '#E59A5F',
         dark: '#B85F1F',
     },
     accent3: {
-        DEFAULT: '#E0AD46',
+        DEFAULT: colors.accent3,
         light: '#E8C172',
         dark: '#C99328',
     },

@@ -1,9 +1,8 @@
 import { addSchoolYear } from "@/lib/schoolActions";
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { BaseCard } from "@/app/components/ui/cards";
+import { FormSubmitButton } from "@/app/components/ui/button";
 
 export default function AddSchoolYear() {
   return (
@@ -20,9 +19,7 @@ export default function AddSchoolYear() {
             <Label htmlFor="end_date">Fecha de Fin</Label>
             <Input type="date" id="end_date" name="end_date" required />
           </div>
-          <Button type="submit" className="w-full bg-green-500 hover:bg-green-600 transition-colors duration-300">
-          Añadir
-          </Button>
+          <FormSubmitButton />
         </form>
         )}
       ></BaseCard>

@@ -47,6 +47,13 @@ export function CreateButton({href, placeholder}: {href:string, placeholder:stri
     );
 }
 
+export function FormSubmitButton() {
+    return (
+        <Button type="submit" className="w-full bg-green-500 hover:bg-green-600 transition-colors duration-300">
+        Enviar
+        </Button>
+    )
+}
 export function LoginButton() {
     'use client';
 

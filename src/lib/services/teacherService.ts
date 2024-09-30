@@ -53,7 +53,7 @@ export class TeacherService {
     }
 
     async update(id: number, updatedData: TeacherView): Promise<TeacherView | null> {
-        const user = await this.userService.update(updatedData.user.user_id, updatedData.user)
+        const user = await this.userService.update(updatedData.user_id, updatedData.user)
 
         if (!user) {
             return null;

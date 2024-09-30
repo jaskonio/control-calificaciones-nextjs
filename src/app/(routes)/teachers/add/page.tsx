@@ -1,5 +1,5 @@
+import { FormSubmitButton } from "@/app/components/ui/button"
 import { BaseCard } from "@/app/components/ui/cards"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { addTeacher } from "@/lib/teacherActions"
@@ -20,9 +20,7 @@ export default function AddTeacher() {
             <Label htmlFor="email">E-Mail</Label>
             <Input type="email" id="email" name="email" required />
           </div>
-          <Button type="submit" className="w-full bg-green-500 hover:bg-green-600 transition-colors duration-300">
-          Añadir
-          </Button>
+          <FormSubmitButton />
         </form>
         )}
       ></BaseCard>

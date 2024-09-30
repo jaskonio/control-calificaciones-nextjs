@@ -1,0 +1,45 @@
+import { FormSubmitButton } from "@/app/components/ui/button"
+import { BaseCard } from "@/app/components/ui/cards"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { addStudent } from "@/lib/studentsActions"
+
+export default function Page() {
+  return (
+    <div className="container mx-auto px-4">
+      <BaseCard
+        title="Añadir Nuevo Estudiante"
+        content={(
+        <form action={addStudent} className="space-y-4">
+          <input type="hidden" name="role" value="student" />
+          <div className="space-y-2">
+            <Label htmlFor="first_name">Nombre</Label>
+            <Input type="text" id="first_name" name="first_name" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="last_name">Apellido</Label>
+            <Input type="text" id="last_name" name="last_name" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="birth_data">Fecha Nacimiento</Label>
+            <Input type="date" id="birth_data" name="birth_data" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="start_date">Username</Label>
+            <Input type="text" id="name" name="name" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">E-Mail</Label>
+            <Input type="email" id="email" name="email" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="password">Contraseña</Label>
+            <Input type="password" id="password" name="password" required />
+          </div>
+          <FormSubmitButton />
+        </form>
+        )}
+      ></BaseCard>
+    </div>
+  )
+}

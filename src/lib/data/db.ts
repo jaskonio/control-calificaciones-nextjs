@@ -153,28 +153,28 @@ export const students: Student[] = [
     "first_name": "first_name 1",
     "last_name": "last_name 1",
     "birth_data": "2024-01-01",
-    "user_id": 11
+    "user_id": 1
   },
   {
     "student_id": 2,
     "first_name": "first_name 2",
     "last_name": "last_name 2",
     "birth_data": "2024-01-01",
-    "user_id": 12,
+    "user_id": 2,
   },
   {
     "student_id": 3,
     "first_name": "first_name 3",
     "last_name": "last_name 3",
     "birth_data": "2024-01-01",
-    "user_id": 11,
+    "user_id": 3,
   },
   {
     "student_id": 4,
     "first_name": "first_name 4",
     "last_name": "last_name 4",
     "birth_data": "2024-01-01",
-    "user_id": 13
+    "user_id": 4
   }
 ]
 

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { BookOpen, Users, GraduationCap, UserCheck } from 'lucide-react'
+import { GraduationCap, UserCheck, House, BookOpenText, CalendarRange } from 'lucide-react'
 import { Separator } from "@/components/ui/separator";
 
 
@@ -9,10 +9,11 @@ export default async function HomeContent() {
     await new Promise(resolve => setTimeout(resolve, 500))
 
     const adminCards = [
-        { title: 'Años Escolares', description: 'Gestiona los períodos académicos', icon: BookOpen, href: '/school', color: 'bg-blue-500' },
-        { title: 'Tutores', description: 'Administra la información de los tutores', icon: Users, href: '/tutors', color: 'bg-green-500' },
-        { title: 'Docentes', description: 'Gestiona el personal docente', icon: GraduationCap, href: '/teachers', color: 'bg-yellow-500' },
-        { title: 'Estudiantes', description: 'Administra la información de los estudiantes', icon: UserCheck, href: '/students', color: 'bg-purple-500' },
+        { title: 'Años Escolares', description: 'Gestiona los períodos académicos', icon: CalendarRange, href: '/school'},
+        { title: 'Docentes', description: 'Gestiona el personal docente', icon: GraduationCap, href: '/teachers'},
+        { title: 'Estudiantes', description: 'Administra la información de los estudiantes', icon: UserCheck, href: '/students'},
+        { title: 'Asignaturas', description: 'Administra la información de las asignaturas', icon: BookOpenText, href: '/subjects'},
+        { title: 'Clases', description: 'Administra la información de las clases', icon: House, href: '/courses'},
     ]
 
     return (

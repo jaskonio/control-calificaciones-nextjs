@@ -23,16 +23,16 @@ export default async function HomeContent() {
                 {data.map((item, index) => (
                 <Card key={index} className="overflow-hidden transition-all duration-300 border-accent1 border-opacity-20 hover:shadow-lg hover:-translate-y-1">
                     <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-xl text-accent2">
-                        <item.icon className="h-12 w-12 text-accent3" />
-                        {item.title}
-                    </CardTitle>
+                        <CardTitle className="flex items-center gap-2 text-accent2">
+                            <item.icon className="h-12 w-12 text-accent3" />
+                            {item.title}
+                        </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-4">
-                    <CardDescription className="text-secondary mb-4">{item.description}</CardDescription>
-                    <Button asChild className="w-full bg-accent2 text-white transition-colors duration-300 hover:bg-accent1-dark">
-                        <Link href={item.href}>Acceder</Link>
-                    </Button>
+                        <CardDescription className="text-secondary mb-6">{item.description}</CardDescription>
+                        <Button asChild className="w-full bg-accent2 transition-colors duration-300 hover:bg-accent1-dark">
+                            <Link href={item.href}>Acceder</Link>
+                        </Button>
                     </CardContent>
                 </Card>
                 ))}

@@ -62,7 +62,12 @@ export default function Component() {
   )
 }
 
-function FeatureCard({ icon, title, description }) {
+type FeatureCardProps = {
+  icon: any;
+  title: any;
+  description:any;
+}
+function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
     <Card className="border-accent1 border-opacity-20">
       <CardHeader>

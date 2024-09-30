@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="es" className="h-full">
       <body 
         className={cn("flex flex-col min-h-screen bg-background font-sans antialiased", inter.className )}>
           <Header />

@@ -1,11 +1,12 @@
+type UserRole = 'admin' | 'teacher' | 'tutor' | 'student';
+type ParallelType = 'A' | 'B' | 'C' | 'D' | 'E';
+
+// Data Base
 interface SchoolYear {
     year_id: number;
     start_date: string;
     end_date: string;
 }
-
-type UserRole = 'admin' | 'teacher' | 'tutor' | 'student';
-
 
 interface User {
     user_id: number;
@@ -17,62 +18,53 @@ interface User {
 
 interface Teacher {
     teacher_id: number;
-    user_id: number; // Relación con User
+    first_name: string;
+    last_name: string;
+    user_id: number;
+}
+
+interface Student {
+    student_id: number;
+    first_name: string;
+    last_name: string;
+    birth_data: string;
+    user_id: number;
+}
+
+interface Subject {
+    subject_id: number;
+    name: string;
+    description: string;
+}
+
+interface Course {
+    course_id: number;
+    name: string;
+    parallel: ParallelType;
+}
+
+// relationship by School year
+interface Tutor {
+    tutor_id: number;
+    teacher_id: number;
+    course_id: number
+    year_id: number;
+}
+
+// View
+interface SchoolYearView extends SchoolYear {
 }
 
 interface TeacherView extends Teacher {
     user: User;
 }
 
-interface Tutor {
-    tutor_id: number;
-    user_id: number; // Relación con User
-    school_year_id: number; // Relación con SchoolYear
+interface StudentView extends Student {
+    user: User;
 }
 
-interface Subject {
-    subject_id: number;
-    name: string;
-    school_year_id: number; // Relación con SchoolYear
+interface SubjectView extends Subject {
 }
 
-interface Course {
-    course_id: number;
-    name: string;
-    parallel: string;
-    school_year_id: number; // Relación con SchoolYear
-}
-
-interface SubjectAssignment {
-    assignment_id: number;
-    course_id: number; // Relación con Course
-    subject_id: number; // Relación con Subject
-    teacher_id: number; // Relación con Teacher
-    school_year_id: number; // Relación con SchoolYear
-}
-
-interface Student {
-    student_id: number;
-    user_id: number; // Relación con User
-    tutor_id: number; // Relación con Tutor
-    current_course_id: number; // Relación con Course
-    school_year_id: number; // Relación con SchoolYear
-}
-
-interface Grade {
-    grade_id: number;
-    student_id: number; // Relación con Student
-    subject_id: number; // Relación con Subject
-    period: string;
-    exam: number;
-    assignment: number;
-    project: number;
-    final_grade: number;
-}
-
-interface UserAssignment {
-    user_assignment_id: number;
-    user_id: number; // Relación con User
-    course_id: number; // Relación con Course
-    school_year_id: number; // Relación con SchoolYear
+interface CourseView extends Course {
 }

@@ -13,7 +13,10 @@ export async function addTeacher(formData: FormData) {
   let email = formData.get('email') as string
   let password = formData.get('password') as string
 
-  teacherService.add(role, name, email, password)
+  let firstName = formData.get('first_name') as string
+  let lastName = formData.get('last_name') as string
+
+  teacherService.add(role, name, email, password, firstName, lastName)
 
   revalidatePath('/teachers')
   redirect('/teachers')
@@ -25,6 +28,8 @@ export async function updateTeacher(formData: FormData) {
   const updateTeacher:TeacherView = {
     teacher_id: Number(formData.get('teacher_id')),
     user_id: Number(formData.get('user_id')),
+    first_name: formData.get('first_name') as string,
+    last_name: formData.get('last_name') as string,
     user: {
       role: formData.get('role') as UserRole,
       name: formData.get('name') as string,

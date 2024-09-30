@@ -35,11 +35,13 @@ export class TeacherService {
         return null
     }
 
-    async add(role: UserRole, name: string, email: string, password: string): Promise<TeacherView> {
+    async add(role: UserRole, name: string, email: string, password: string, first_name: string, last_name: string): Promise<TeacherView> {
         const user = await this.userService.add(role, name, email, password);
 
         const newTeacher: Teacher = {
             teacher_id: this.idCounter++,
+            first_name: first_name,
+            last_name: last_name,
             user_id: user.user_id
         };
     

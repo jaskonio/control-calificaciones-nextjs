@@ -48,7 +48,7 @@ export default async function EditTeacher({ params }: { params: { id: string } }
                 <Input type="text" id="name" name="name" required defaultValue={teacher.user.name} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Fecha de Fin</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <Input type="email" id="email" name="email" required defaultValue={teacher.user.email} />
               </div>
               <div className="space-y-2">

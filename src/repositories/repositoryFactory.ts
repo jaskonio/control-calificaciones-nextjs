@@ -51,6 +51,15 @@ class RepositoryFactory {
                 throw new Error(`Unsupported storage type: ${this.storageType}`);
         }
     }
+
+    static getCourseRepository(): IRepository<Course> {
+        switch (this.storageType) {
+            case 'FILE':
+                return new FileRepository<Course>(courses, 'course_id');
+            default:
+                throw new Error(`Unsupported storage type: ${this.storageType}`);
+        }
+    }
 }
 
 export default RepositoryFactory;

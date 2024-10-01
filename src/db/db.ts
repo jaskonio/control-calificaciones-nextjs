@@ -127,23 +127,23 @@ export const subjects: Subject[] = [
 export const courses: Course[] = [
   {
     "course_id": 1,
-    "name": "Grade 1",
+    "name": "1º ESO",
     "parallel": "A"
   },
   {
     "course_id": 2,
-    "name": "Grade 2",
+    "name": "1º ESO",
     "parallel": "B"
   },
   {
     "course_id": 3,
-    "name": "Grade 1",
-    "parallel": "B"
+    "name": "2º ESO",
+    "parallel": "A"
   },
   {
     "course_id": 4,
-    "name": "Grade 3",
-    "parallel": "A"
+    "name": "2º ESO",
+    "parallel": "B"
   }
 ]
 

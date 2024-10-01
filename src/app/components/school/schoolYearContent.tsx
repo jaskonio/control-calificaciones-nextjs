@@ -1,8 +1,8 @@
 import { TableCell, TableRow } from "@/components/ui/table"
-import { deleteSchoolYear } from '@/lib/schoolActions'
-import { schoolService } from '@/lib/services'
+import { deleteSchoolYear } from '@/actions/schoolActions'
 import { AddButton, DeleteButton, EditButton } from '../ui/button'
 import { BaseTable } from "../ui/table"
+import { schoolService } from "@/services"
 
 
 export default async function SchoolYearsContent() {

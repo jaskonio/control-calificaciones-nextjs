@@ -1,10 +1,10 @@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { updateTeacher } from "@/lib/teacherActions"
-import { studentService } from "@/lib/services"
+import { updateTeacher } from "@/actions/teacherActions"
 import { BaseCard } from "@/app/components/ui/cards"
 import { FormSubmitButton } from "@/app/components/ui/button"
 import { ResoucesNotFound } from "@/app/components/ui/errors"
+import { studentService } from "@/services"
 
 
 export default async function Page({ params }: { params: { id: string } }) {

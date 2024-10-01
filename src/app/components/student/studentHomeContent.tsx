@@ -1,8 +1,8 @@
 import { TableCell, TableRow } from "@/components/ui/table"
-import { studentService } from '@/lib/services'
-import { deleteStudent } from '@/lib/studentsActions'
+import { deleteStudent } from '@/actions/studentsActions'
 import { AddButton, DeleteButton, EditButton } from '../ui/button'
 import { BaseTable } from "../ui/table"
+import { studentService } from "@/services"
 
 
 export default async function StudenHomeContent() {

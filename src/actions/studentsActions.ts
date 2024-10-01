@@ -1,8 +1,8 @@
 'use server';
 
+import { studentService } from '@/services';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { studentService } from './services';
 
 const base_path = '/students'
 

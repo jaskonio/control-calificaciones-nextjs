@@ -2,7 +2,7 @@ import { FormSubmitButton } from "@/app/components/ui/button"
 import { BaseCard } from "@/app/components/ui/cards"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { addStudent } from "@/lib/studentsActions"
+import { addStudent } from "@/actions/studentsActions"
 
 export default function Page() {
   return (

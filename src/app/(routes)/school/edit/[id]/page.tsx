@@ -3,8 +3,8 @@ import { BaseCard } from "@/app/components/ui/cards"
 import { ResoucesNotFound } from "@/app/components/ui/errors"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { updateSchoolYear } from "@/lib/schoolActions"
-import { schoolService } from "@/lib/services"
+import { updateSchoolYear } from "@/actions/schoolActions"
+import { schoolService } from "@/services"
 
 export default async function EditSchoolYear({ params }: { params: { id: string } }) {
   const schoolYear = await schoolService.getById(parseInt(params.id))

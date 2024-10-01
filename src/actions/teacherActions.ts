@@ -1,8 +1,8 @@
 'use server';
 
+import { teacherService } from '@/services';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { teacherService } from './services';
 
 
 export async function addTeacher(formData: FormData) {

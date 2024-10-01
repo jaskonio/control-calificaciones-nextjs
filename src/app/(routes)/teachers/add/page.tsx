@@ -2,7 +2,7 @@ import { FormSubmitButton } from "@/app/components/ui/button"
 import { BaseCard } from "@/app/components/ui/cards"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { addTeacher } from "@/lib/teacherActions"
+import { addTeacher } from "@/actions/teacherActions"
 
 export default function AddTeacher() {
   return (

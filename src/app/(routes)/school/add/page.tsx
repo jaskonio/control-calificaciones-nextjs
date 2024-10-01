@@ -1,4 +1,4 @@
-import { addSchoolYear } from "@/lib/schoolActions";
+import { addSchoolYear } from "@/actions/schoolActions";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { BaseCard } from "@/app/components/ui/cards";

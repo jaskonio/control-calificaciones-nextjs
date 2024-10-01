@@ -1,8 +1,8 @@
 'use server'
 
+import { schoolService } from '@/services'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { schoolService } from './services'
 
 
 export async function addSchoolYear(formData: FormData) {

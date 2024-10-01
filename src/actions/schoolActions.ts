@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import { schoolService } from '@/services'
 import { revalidatePath } from 'next/cache'

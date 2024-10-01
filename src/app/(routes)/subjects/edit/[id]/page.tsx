@@ -3,13 +3,13 @@ import { BaseCard } from "@/app/components/ui/cards"
 import { ResoucesNotFound } from "@/app/components/ui/errors"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { updateSchoolYear } from "@/actions/schoolActions"
-import { schoolService } from "@/services"
+import { updateSubjects } from "@/actions/subjectsActions"
+import { subjectsService } from "@/services"
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const schoolYear = await schoolService.getById(parseInt(params.id))
+  const subject = await subjectsService.getById(parseInt(params.id))
 
-  if (!schoolYear) {
+  if (!subject) {
     return (
         <div className="container mx-auto px-4 flex items-center justify-center">
           <ResoucesNotFound 
@@ -28,15 +28,16 @@ export default async function Page({ params }: { params: { id: string } }) {
     <BaseCard
       title="Editar Año Escolar"
       content={(
-        <form action={updateSchoolYear} className="space-y-4">
-              <input type="hidden" name="year_id" value={schoolYear.year_id} />
+        <form action={updateSubjects} className="space-y-4">
+              <input type="hidden" name="subject_id" value={subject.subject_id} />
+
               <div className="space-y-2">
-                <Label htmlFor="start_date">Fecha de Inicio</Label>
-                <Input type="date" id="start_date" name="start_date" required defaultValue={schoolYear.start_date} />
+                <Label htmlFor="name">Fecha de Inicio</Label>
+                <Input type="text" id="name" name="name" required defaultValue={subject.name} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="end_date">Fecha de Fin</Label>
-                <Input type="date" id="end_date" name="end_date" required defaultValue={schoolYear.end_date} />
+                <Label htmlFor="description">Descripción</Label>
+                <Input type="text" id="description" name="description" required defaultValue={subject.description} />
               </div>
           <FormSubmitButton />
       </form>

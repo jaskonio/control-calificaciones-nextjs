@@ -1,4 +1,4 @@
-import { school_years, users, teachers, students } from '@/db/db';
+import { school_years, users, teachers, students, subjects, courses} from '@/db/db';
 import { FileRepository } from './file/fileRepository';
 import { IRepository } from './interfaces/IRepository';
 
@@ -38,6 +38,15 @@ class RepositoryFactory {
         switch (this.storageType) {
             case 'FILE':
                 return new FileRepository<Student>(students, 'student_id');
+            default:
+                throw new Error(`Unsupported storage type: ${this.storageType}`);
+        }
+    }
+
+    static getSubjectsRepository(): IRepository<Subject> {
+        switch (this.storageType) {
+            case 'FILE':
+                return new FileRepository<Subject>(subjects, 'subject_id');
             default:
                 throw new Error(`Unsupported storage type: ${this.storageType}`);
         }

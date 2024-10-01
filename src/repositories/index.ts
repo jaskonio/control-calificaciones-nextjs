@@ -6,4 +6,6 @@ const userRepository = RepositoryFactory.getUserRepository()
 const teacherRepository = RepositoryFactory.getTeacherRepository()
 const studentRepository = RepositoryFactory.getStudentRepository()
 
-export { schoolRepository, userRepository, teacherRepository, studentRepository }
+const subjectsRepository = RepositoryFactory.getSubjectsRepository()
+
+export { schoolRepository, userRepository, teacherRepository, studentRepository, subjectsRepository }

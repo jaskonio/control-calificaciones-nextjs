@@ -1,12 +1,5 @@
-"use client"
-
 import { BaseCard } from "@/app/components/ui/cards"
 import LoginForm from "@/app/components/login/loginForm"
-
-
-export async function submitLoginForm(data: any) {
-  console.log('Login:', data)
-}
 
 export default function Page() {
   return (
@@ -14,7 +7,7 @@ export default function Page() {
       <BaseCard
         title="Login"
         content={(
-          <LoginForm submitHandler={submitLoginForm}></LoginForm>
+          <LoginForm></LoginForm>
         )}
       ></BaseCard>
     </div>

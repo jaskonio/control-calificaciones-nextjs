@@ -23,7 +23,7 @@ const formSchema = z.object({
     password: z.string().min(4, "No puede estar vacio")
 })
 
-export default function LoginForm({ submitHandler }: { submitHandler: any }) {
+export default function LoginForm() {
 	const [showPassword, setShowPassword] = useState(true)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -35,7 +35,7 @@ export default function LoginForm({ submitHandler }: { submitHandler: any }) {
   })
 
   function handlerOnSubmit(values: z.infer<typeof formSchema>) {
-    submitHandler(values)
+    console.log('handlerOnSubmit')
   }
 
   return (

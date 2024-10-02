@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { Edit, PlusCircle, Trash2 } from 'lucide-react';
-import { signOut } from 'next-auth/react';
+import { Edit, LogIn, PlusCircle, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 export function AddButton({href}: {href:string}) {
@@ -54,16 +53,15 @@ export function FormSubmitButton() {
         </Button>
     )
 }
-export function LoginButton() {
-    'use client';
 
+export function LoginButton() {
     return (
-        <button
-        className="bg-white text-black px-4 py-2 rounded-md mt-4"
-        onClick={() => signOut()}
-      >
-        Logout
-      </button>
+        <Link href="/login">
+            <Button variant="outline" className="bg-accent2 hover:bg-accent text-white">
+                <LogIn className="h-4 w-4" />
+                <span>Iniciar Sesión</span>
+            </Button>
+        </Link>
     )
 }
 

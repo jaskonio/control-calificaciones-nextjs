@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { GraduationCap } from 'lucide-react'
-import { LoginButton } from './button'
+import { AuthButton } from '../login/buttons'
+
 
 export default function Header() {
   return (
@@ -11,7 +12,7 @@ export default function Header() {
             <GraduationCap className="h-8 w-8 text-accent2" />
             <span className="text-3xl font-bold text-accent3">GestiónEscolar</span>
           </Link>
-          <LoginButton></LoginButton>
+          <AuthButton></AuthButton>
         </div>
       </div>
     </header>

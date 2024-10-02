@@ -54,17 +54,6 @@ export function FormSubmitButton() {
     )
 }
 
-export function LoginButton() {
-    return (
-        <Link href="/login">
-            <Button variant="outline" className="bg-accent2 hover:bg-accent text-white">
-                <LogIn className="h-4 w-4" />
-                <span>Iniciar Sesión</span>
-            </Button>
-        </Link>
-    )
-}
-
 export function Infouser() {
     return (
         <div>

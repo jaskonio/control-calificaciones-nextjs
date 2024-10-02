@@ -1,9 +1,10 @@
+import { auth } from "@/auth";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { School, Users, BookOpen, Calendar, ClipboardList, UserCheck } from "lucide-react"
 
 
-export default function Component() {
+export default async function Component() {
   return (
       <main className="container mx-auto">
         <section className="text-center mb-16">

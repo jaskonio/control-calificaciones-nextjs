@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { Edit, LogIn, PlusCircle, Trash2 } from 'lucide-react';
+import { Edit, Loader2, PlusCircle, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 export function AddButton({href}: {href:string}) {
@@ -46,10 +46,14 @@ export function CreateButton({href, placeholder}: {href:string, placeholder:stri
     );
 }
 
-export function FormSubmitButton() {
+export function FormSubmitButton({loading} : {loading?:boolean}) {
+    if (!loading) {
+        loading = false
+    }
+
     return (
         <Button type="submit" className="w-full bg-green-500 hover:bg-green-600 transition-colors duration-300">
-        Enviar
+        {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Enviar"}
         </Button>
     )
 }

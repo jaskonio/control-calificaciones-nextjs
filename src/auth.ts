@@ -15,7 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const user = await userEntities.find(e => e.name == credentials.username)
 
           if (!user) {
-            return null
+            throw new Error("Invalid user")
           }
 
           if (user.password == credentials.password) {

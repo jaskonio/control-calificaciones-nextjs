@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "./components/ui/header";
 import Footer from "./components/ui/footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Header />
           <div className="min-h-screen bg-gradient-to-b from-secondary-light to-white py-12">
             {children}
+            <Toaster />
           </div>
           <Footer />
         </body>

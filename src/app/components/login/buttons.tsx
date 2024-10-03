@@ -1,7 +1,8 @@
-import { auth, signOut } from "@/auth"
+import { auth } from "@/auth"
 import { Button } from "@/components/ui/button"
-import { LogIn, LogOut } from "lucide-react"
+import { LogIn } from "lucide-react"
 import Link from "next/link"
+import { AvatarPopover } from "../ui/avatar"
  
 
 export function SignInButton() {
@@ -15,21 +16,6 @@ export function SignInButton() {
     )
 }
 
-export function SignOutButton() {
-    return (
-        <form
-        action={async (formData) => {
-            "use server"
-            await signOut({redirectTo: '/'})}}
-        >
-            <Button type="submit" variant="outline" className="bg-accent2 hover:bg-accent text-white">
-                <LogOut className="h-4 w-4" />
-                <span>Cerra sesión</span>
-            </Button>
-        </form>
-    )
-}
-
 export async function AuthButton(){
     "use server";
 
@@ -39,5 +25,5 @@ export async function AuthButton(){
         return (<SignInButton></SignInButton>)
     }
 
-    return (<SignOutButton></SignOutButton>)
+    return (<AvatarPopover></AvatarPopover>)
 }

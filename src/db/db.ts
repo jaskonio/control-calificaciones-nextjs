@@ -39,6 +39,13 @@ export const users: User[] = [
     "name": "Michael Lee",
     "email": "michael.lee@school.com",
     "password": "teacher456"
+  },
+  {
+    "user_id": 9999,
+    "role": "admin",
+    "name": "jonatan",
+    "email": "jonatan@school.com",
+    "password": "jonatan"
   }
 ]
 

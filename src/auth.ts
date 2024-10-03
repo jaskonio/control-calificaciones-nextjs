@@ -1,29 +1,32 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+import { userRepository } from "./repositories"
+
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-        // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-        // e.g. domain, username, password, 2FA token, etc.
         credentials: {
           username: {},
           password: {},
         },
         authorize: async (credentials) => {
-            console.log('authorize')
-            console.log(credentials)
+          const userEntities = await userRepository.getAll()
+          const user = await userEntities.find(e => e.name == credentials.username)
 
-            if (credentials.username == "jonatan") {
-                return {
-                    id: '1', 
-                    // name: credentials.username,
-                    username: credentials.username, 
-                    password: credentials.password
-                }
-            }
-            
-            throw new Error("Invalid user")
+          if (!user) {
+            return null
+          }
+
+          if (user.password == credentials.password) {
+              return {
+                  id: user.user_id.toString(), 
+                  name: user.name,
+                  email: user.email
+              }
+          }
+
+          throw new Error("Invalid user")
         },
       }),
   ],

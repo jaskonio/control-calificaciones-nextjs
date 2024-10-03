@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 
-const base_path = '/courses'
+const base_path = '/admin/courses'
 
 
 export async function addCourse(data: CourseView) {

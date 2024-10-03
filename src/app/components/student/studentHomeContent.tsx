@@ -14,7 +14,7 @@ export default async function StudenHomeContent() {
     <div className="container mx-auto px-4">
       <BaseTable
         title={title}
-        buttons={<AddButton href="/students/add" />}
+        buttons={<AddButton href="/admin/students/add" />}
         columns={columns}
         rowContent={data.map((item) => (
           <TableRow key={item.student_id}>
@@ -26,7 +26,7 @@ export default async function StudenHomeContent() {
             <TableCell>{item.user.email}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
-                <EditButton href={`/students/edit/${item.student_id}`} />
+                <EditButton href={`/admin/students/edit/${item.student_id}`} />
                 <DeleteButton
                   action={deleteStudent}
                   entityId={item.student_id.toString()}

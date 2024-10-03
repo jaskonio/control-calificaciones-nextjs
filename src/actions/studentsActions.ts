@@ -4,7 +4,9 @@ import { studentService } from '@/services';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-const base_path = '/students'
+
+const base_path = '/admin/students'
+
 
 export async function addStudent(formData: FormData) {
   console.log('Añadiendo Estudiante:', Object.fromEntries(formData))

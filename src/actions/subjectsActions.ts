@@ -4,7 +4,9 @@ import { subjectsService } from '@/services';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-const base_path = '/subjects'
+
+const base_path = '/admin/subjects'
+
 
 export async function addSubjects(formData: FormData) {
   console.log('Añadiendo Asignatura:', Object.fromEntries(formData))

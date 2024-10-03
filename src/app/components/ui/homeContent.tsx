@@ -9,11 +9,11 @@ export default async function HomeContent() {
     await new Promise(resolve => setTimeout(resolve, 500))
 
     const adminCards = [
-        { title: 'Años Escolares', description: 'Gestiona los períodos académicos', icon: CalendarRange, href: '/school'},
-        { title: 'Docentes', description: 'Gestiona el personal docente', icon: GraduationCap, href: '/teachers'},
-        { title: 'Estudiantes', description: 'Administra la información de los estudiantes', icon: UserCheck, href: '/students'},
-        { title: 'Asignaturas', description: 'Administra la información de las asignaturas', icon: BookOpenText, href: '/subjects'},
-        { title: 'Clases', description: 'Administra la información de las clases', icon: House, href: '/courses'},
+        { title: 'Años Escolares', description: 'Gestiona los períodos académicos', icon: CalendarRange, href: '/admin/school'},
+        { title: 'Docentes', description: 'Gestiona el personal docente', icon: GraduationCap, href: '/admin/teachers'},
+        { title: 'Estudiantes', description: 'Administra la información de los estudiantes', icon: UserCheck, href: '/admin/students'},
+        { title: 'Asignaturas', description: 'Administra la información de las asignaturas', icon: BookOpenText, href: '/admin/subjects'},
+        { title: 'Clases', description: 'Administra la información de las clases', icon: House, href: '/admin/courses'},
     ]
 
     return (

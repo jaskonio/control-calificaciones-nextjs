@@ -5,6 +5,9 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 
+const base_path = '/admin/school'
+
+
 export async function addSchoolYear(formData: FormData) {
   console.log('Añadiendo año escolar:', Object.fromEntries(formData))
 
@@ -13,8 +16,8 @@ export async function addSchoolYear(formData: FormData) {
 
   await schoolService.add(start_date, end_date)
 
-  revalidatePath('/school')
-  redirect('/school')
+  revalidatePath(base_path)
+  redirect(base_path)
 }
 
 export async function updateSchoolYear(formData: FormData) {
@@ -28,8 +31,8 @@ export async function updateSchoolYear(formData: FormData) {
 
   await schoolService.update(updateSchoolYear.year_id, updateSchoolYear)
 
-  revalidatePath('/school')
-  redirect('/school')
+  revalidatePath(base_path)
+  redirect(base_path)
 }
 
 export async function deleteSchoolYear(formData: FormData) {
@@ -38,5 +41,5 @@ export async function deleteSchoolYear(formData: FormData) {
 
   await schoolService.delete(Number(year_id))
 
-  revalidatePath('/school')
+  revalidatePath(base_path)
 }

@@ -14,7 +14,7 @@ export default async function TeacherHomeContent() {
     <div className="container mx-auto px-4">
       <BaseTable
         title={title}
-        buttons={<AddButton href="/teachers/add" />}
+        buttons={<AddButton href="/admin/teachers/add" />}
         columns={columns}
         rowContent={teachers.map((teacher) => (
           <TableRow key={teacher.teacher_id}>
@@ -25,7 +25,7 @@ export default async function TeacherHomeContent() {
             <TableCell>{teacher.user.email}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
-                <EditButton href={`/teachers/edit/${teacher.teacher_id}`} />
+                <EditButton href={`/admin/teachers/edit/${teacher.teacher_id}`} />
                 <DeleteButton
                   action={deleteTeacher}
                   entityId={teacher.teacher_id.toString()}

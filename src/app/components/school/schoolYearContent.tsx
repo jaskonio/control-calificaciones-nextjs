@@ -14,7 +14,7 @@ export default async function SchoolYearsContent() {
     <div className="container mx-auto px-4">
       <BaseTable
         title={title}
-        buttons={<AddButton href="/school/add/"/>}
+        buttons={<AddButton href="/admin/school/add/"/>}
         columns={columns}
         rowContent={data.map((item) => (
           <TableRow key={item.year_id}>
@@ -23,7 +23,7 @@ export default async function SchoolYearsContent() {
             <TableCell>{item.end_date}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
-                <EditButton href={`/school/edit/${item.year_id}`} />
+                <EditButton href={`/admin/school/edit/${item.year_id}`} />
                 <DeleteButton
                   action={deleteSchoolYear}
                   entityId={item.year_id.toString()}

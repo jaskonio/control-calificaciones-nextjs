@@ -14,7 +14,7 @@ export default async function SubjectsTableList() {
     <div className="container mx-auto px-4">
       <BaseTable
         title={title}
-        buttons={<AddButton href="/subjects/add/"/>}
+        buttons={<AddButton href="/admin/subjects/add/"/>}
         columns={columns}
         rowContent={data.map((item) => (
           <TableRow key={item.subject_id}>
@@ -22,7 +22,7 @@ export default async function SubjectsTableList() {
             <TableCell>{item.description}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
-                <EditButton href={`/subjects/edit/${item.subject_id}`} />
+                <EditButton href={`/admin/subjects/edit/${item.subject_id}`} />
                 <DeleteButton
                   action={deleteSubjects}
                   entityId={item.subject_id.toString()}

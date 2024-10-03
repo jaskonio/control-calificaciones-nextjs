@@ -5,6 +5,9 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 
+const base_path = '/admin/teachers'
+
+
 export async function addTeacher(formData: FormData) {
   console.log('Añadiendo Profesor:', Object.fromEntries(formData))
 
@@ -18,8 +21,8 @@ export async function addTeacher(formData: FormData) {
 
   await teacherService.add(role, name, email, password, firstName, lastName)
 
-  revalidatePath('/teachers')
-  redirect('/teachers')
+  revalidatePath(base_path)
+  redirect(base_path)
 }
 
 export async function updateTeacher(formData: FormData) {
@@ -40,8 +43,8 @@ export async function updateTeacher(formData: FormData) {
 
   await teacherService.update(updateTeacher.teacher_id, updateTeacher)
 
-  revalidatePath('/teachers')
-  redirect('/teachers')
+  revalidatePath(base_path)
+  redirect(base_path)
 }
 
 export async function deleteTeacher(formData: FormData) {
@@ -50,5 +53,5 @@ export async function deleteTeacher(formData: FormData) {
 
   await teacherService.delete(Number(teafcherId))
 
-  revalidatePath('/teachers')
+  revalidatePath(base_path)
 }

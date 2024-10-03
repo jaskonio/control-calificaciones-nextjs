@@ -14,7 +14,7 @@ export default async function CoursesTableList() {
     <div className="container mx-auto px-4">
       <BaseTable
         title={title}
-        buttons={<AddButton href="/courses/add/"/>}
+        buttons={<AddButton href="/admin/courses/add/"/>}
         columns={columns}
         rowContent={data.map((item) => (
           <TableRow key={item.course_id}>
@@ -23,7 +23,7 @@ export default async function CoursesTableList() {
             <TableCell>{item.parallel}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
-                <EditButton href={`/courses/edit/${item.course_id}`} />
+                <EditButton href={`/admin/courses/edit/${item.course_id}`} />
                 <DeleteButton
                   action={deleteCourse}
                   entityId={item.course_id.toString()}

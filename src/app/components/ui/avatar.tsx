@@ -1,29 +1,18 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { auth, signOut } from "@/auth";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { signOut } from "next-auth/react";
 
 
-export async function AvatarPopover() {
-    let username = "Username"
-
-    const session = await auth();
-
-    console.log(session);
-
-    if (session?.user?.name) {
-        username = session.user.name;
-    }
-
-
+export function AvatarPopover({userInfo}: { userInfo: any}) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <Avatar>
-                    <AvatarFallback className="font-bold text-gray-600">{username.slice(0,2).toUpperCase()}</AvatarFallback>
+                    <AvatarFallback className="font-bold text-gray-600">{userInfo.name.slice(0,2).toUpperCase()}</AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuLabel>{ username }</DropdownMenuLabel>
+                <DropdownMenuLabel>{ userInfo.name }</DropdownMenuLabel>
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
@@ -31,13 +20,7 @@ export async function AvatarPopover() {
 
                 <DropdownMenuSeparator />
                 <DropdownMenuItem >
-                    <form
-                        action={async() => {
-                            "use server" 
-                            await signOut({redirectTo:'/'})
-                        }}>
-                        <button type="submit">cerrar sesión</button>
-                    </form>
+                    <button onClick={() => signOut({redirectTo: "/"})}>cerrar sesión</button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

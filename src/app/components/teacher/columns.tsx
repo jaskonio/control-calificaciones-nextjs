@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { ColumnDef } from "@tanstack/react-table"
 
 
-export function TeacherColumns(data: TeacherView[]): ColumnDef<TeacherView>[] {
+export function TeacherColumns(): ColumnDef<TeacherView>[] {
     return [
     {
         id: "select",

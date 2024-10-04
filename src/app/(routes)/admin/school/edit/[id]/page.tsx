@@ -15,9 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const schoolYear = await schoolService.getById(parseInt(params.id))
   const teachers = await teacherService.getAll()
 
-  const teachersSelected = teachers.map( t => {
-    if (schoolYear.)
-  })
+  const teachersSelected = []
   if (!schoolYear) {
     return (
         <div className="container mx-auto px-4 flex items-center justify-center">

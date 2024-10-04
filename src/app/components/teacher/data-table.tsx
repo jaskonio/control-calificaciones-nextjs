@@ -4,6 +4,8 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  Row,
+  RowSelectionState,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -15,20 +17,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useState } from "react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data: TData[],
+  defaultRows: any
 }
 
 export function TeacherDataTable<TData, TValue>({
   columns,
   data,
+  defaultRows,
 }: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>(defaultRows) //manage your own row selection state
+
   const table = useReactTable({
     data,
     columns,
+    initialState: {
+      
+      rowSelection
+    },
+    state: {
+      rowSelection
+    },
     getCoreRowModel: getCoreRowModel(),
+    onRowSelectionChange: setRowSelection,
   })
 
   return (

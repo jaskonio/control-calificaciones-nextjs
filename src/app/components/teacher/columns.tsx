@@ -4,8 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { ColumnDef } from "@tanstack/react-table"
 
 
-export function TeacherColumns(): ColumnDef<TeacherView>[] {
-    return [
+export const TeacherColumns: ColumnDef<TeacherView>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -23,11 +22,7 @@ export function TeacherColumns(): ColumnDef<TeacherView>[] {
             return (
             <Checkbox
             checked={row.getIsSelected()}
-            onCheckedChange={(value) => {
-                row.toggleSelected(!!value)
-                console.log(value)
-                console.log(row)
-            }}
+            onCheckedChange={(value) => { row.toggleSelected(!!value) }}
             aria-label="Selecciona row"
             />
         )},
@@ -47,4 +42,3 @@ export function TeacherColumns(): ColumnDef<TeacherView>[] {
         header: "Correo",
     },
 ]
-}

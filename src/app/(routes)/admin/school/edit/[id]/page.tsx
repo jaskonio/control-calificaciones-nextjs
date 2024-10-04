@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           ></BaseCard>
         </TabsContent>
         <TabsContent value="teachers">
-          <TeacherDataTable  columns={TeacherColumns()} data={teachers}></TeacherDataTable>
+          <TeacherDataTable  columns={TeacherColumns} data={teachers} defaultRows={teachers[0]}></TeacherDataTable>
         </TabsContent>
         <TabsContent value="students">
             Asignar students

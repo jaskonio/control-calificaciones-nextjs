@@ -1,42 +1,32 @@
 "use client"
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  Row,
-  RowSelectionState,
-  useReactTable,
-} from "@tanstack/react-table"
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { ColumnDef, flexRender, getCoreRowModel, RowSelectionState, useReactTable, } from "@tanstack/react-table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 import { useState } from "react"
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[],
-  defaultRows: any
+  selectedRowsById: any
 }
 
-export function TeacherDataTable<TData, TValue>({
+
+export function DataTable<TData, TValue>({
   columns,
   data,
-  defaultRows,
+  selectedRowsById,
 }: DataTableProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>(defaultRows) //manage your own row selection state
+  let selectRows:RowSelectionState = {}
+  selectedRowsById.map((sr: string) => {
+    selectRows[sr] = true
+  })
 
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>(selectRows)
   const table = useReactTable({
     data,
     columns,
     initialState: {
-      
       rowSelection
     },
     state: {

@@ -6,9 +6,7 @@ import { Label } from "@/components/ui/label"
 import { updateSchoolYear } from "@/actions/schoolActions"
 import { schoolService, teacherService } from "@/services"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import TeacherHomeContent from "@/app/components/teacher/teacherHomeContent"
-import { TeacherDataTable } from "@/app/components/teacher/data-table"
-import { TeacherColumns } from "@/app/components/teacher/columns"
+import { TeacherDataTable } from "@/app/components/teacher/teacher-data-table"
 
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -62,7 +60,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           ></BaseCard>
         </TabsContent>
         <TabsContent value="teachers">
-          <TeacherDataTable  columns={TeacherColumns} data={teachers} defaultRows={teachers[0]}></TeacherDataTable>
+          <TeacherDataTable data={teachers} defaultRows={[teachers[1]]}></TeacherDataTable>
         </TabsContent>
         <TabsContent value="students">
             Asignar students

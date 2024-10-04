@@ -21,7 +21,7 @@ export function SignInButton() {
 
 export function AuthButton(){
     const { data: session } = useSession()
-    console.log(session)
+
     if (!session) {
         return (<SignInButton></SignInButton>)
     }

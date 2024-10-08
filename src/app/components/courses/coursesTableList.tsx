@@ -7,7 +7,7 @@ import { coursesService } from "@/services"
 
 export default async function CoursesTableList() {
   const title = 'Clases'
-  const columns = ['ID', 'Nombre', 'Descripcion', 'Nivel', 'status']
+  const columns = ['ID', 'Nombre', 'Descripcion', 'Nivel', 'Estado', 'Acciones']
   const data = await coursesService.getAll()
 
   return (
@@ -21,6 +21,8 @@ export default async function CoursesTableList() {
             <TableCell>{item.id}</TableCell>
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.description}</TableCell>
+            <TableCell>{item.gradeLevel}</TableCell>
+            <TableCell>{item.status}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
                 <EditButton href={`/admin/courses/edit/${item.id}`} />

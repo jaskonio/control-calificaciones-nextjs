@@ -16,9 +16,14 @@ interface UpdateCourseInput {
 
 export class CourseService {
   async create(data: CreateCourseInput) {
-    return await prisma.course.create({
-      data,
-    });
+    try {
+        return await prisma.course.create({
+            data,
+        });
+    } catch (error) {
+        console.error(error)
+        return null
+    }
   }
 
   async getAll() {

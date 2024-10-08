@@ -9,9 +9,9 @@ import { redirect } from 'next/navigation'
 const base_path = '/admin/courses'
 
 
-export async function addCourse(data: Course) {
+export async function addCourse(data:any) {
   console.log('Añadiendo Clase:', data)
-
+  delete data['id']
   await coursesService.create(data)
 
   revalidatePath(base_path)

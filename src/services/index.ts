@@ -1,17 +1,18 @@
-import { schoolRepository, userRepository, teacherRepository, studentRepository, subjectsRepository, coursesRepository } from "@/repositories";
-import { StudentsService } from "./studentsService";
-import { SchoolService } from "./schoolService";
+import { StudentService } from "./studentsService";
+import { AcademicYearService } from "./schoolService";
 import { TeacherService } from "./teacherService";
-import { SubjectsService } from "./subjectsService";
-import { CoursesService } from "./coursesService";
+import { SubjectService } from "./subjectsService";
+import { CourseService } from "./coursesService";
+import { UserService } from "./userService";
 
-const schoolService = new SchoolService(schoolRepository)
+const schoolService = new AcademicYearService()
 
-const teacherService = new TeacherService(userRepository, teacherRepository)
-const studentService = new StudentsService(userRepository, studentRepository)
+const userService = new UserService()
+const teacherService = new TeacherService()
+const studentService = new StudentService()
 
-const subjectsService = new SubjectsService(subjectsRepository)
+const subjectsService = new SubjectService()
 
-const coursesService = new CoursesService(coursesRepository)
+const coursesService = new CourseService()
 
-export { schoolService, teacherService, studentService, subjectsService, coursesService}
+export { userService, schoolService, teacherService, studentService, subjectsService, coursesService}

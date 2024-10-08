@@ -1,29 +1,55 @@
-import { IRepository } from "@/repositories/interfaces/IRepository";
+import prisma from '../prisma/client';
+import { CourseStatus } from '@prisma/client';
 
-export class CoursesService {
-    private coursesRepository: IRepository<Course>;
+interface CreateCourseInput {
+  name: string;
+  description: string;
+  academicYearId: number;
+  gradeLevel: string;
+  status: CourseStatus;
+}
 
-    constructor(coursesRepository: IRepository<Course>) {
-        this.coursesRepository = coursesRepository;
-    }
+interface UpdateCourseInput {
+  id: number;
+  data: Partial<CreateCourseInput>;
+}
 
-    async getAll(): Promise<CourseView[]> {
-        return this.coursesRepository.getAll();
-    }
+export class CourseService {
+  async create(data: CreateCourseInput) {
+    return await prisma.course.create({
+      data,
+    });
+  }
 
-    async getById(id: number): Promise<CourseView | null> {
-        return this.coursesRepository.getById(id) || null;
-    }
+  async getAll() {
+    return await prisma.course.findMany({
+      include: {
+        academicYear: true,
+        classes: true,
+      },
+    });
+  }
 
-    async add(name: string, parallel: ParallelType): Promise<CourseView> {
-        return this.coursesRepository.create({course_id: 0, name, parallel});
-    }
+  async getById(id: number) {
+    return await prisma.course.findUnique({
+      where: { id },
+      include: {
+        academicYear: true,
+        classes: true,
+      },
+    });
+  }
 
-    async update(id: number, updatedData: Partial<CourseView>): Promise<CourseView | null> {
-        return this.coursesRepository.update(id, updatedData);
-    }
+  async update({ id, data }: UpdateCourseInput) {
+    return await prisma.course.update({
+      where: { id },
+      data,
+    });
+  }
 
-    async delete(id: number): Promise<boolean> {
-        return this.coursesRepository.delete(id);
-    }
+  async delete(id: number) {
+    return await prisma.course.delete({
+      where: { id },
+    });
+  }
 }

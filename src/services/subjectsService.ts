@@ -1,35 +1,50 @@
-import { IRepository } from "@/repositories/interfaces/IRepository";
+// src/services/subjectService.ts
+import prisma from '../prisma/client';
+import { Prisma, SubjectStatus } from '@prisma/client';
 
-export class SubjectsService {
-    private subjectsRepository: IRepository<Subject>;
+interface CreateSubjectInput {
+  name: string;
+  description: string;
+  gradeLevel: string;
+  status: SubjectStatus;
+}
 
-    constructor(subjectsRepository: IRepository<Subject>) {
-        this.subjectsRepository = subjectsRepository;
-    }
+interface UpdateSubjectInput {
+  data: Partial<CreateSubjectInput>;
+}
 
-    async getAll(): Promise<SubjectView[]> {
-        return this.subjectsRepository.getAll();
-    }
+export class SubjectService {
+  async create(data: CreateSubjectInput) {
+    return await prisma.subject.create({ data });
+  }
 
-    async getById(id: number): Promise<SubjectView | null> {
-        return this.subjectsRepository.getById(id) || null;
-    }
+  async getAll() {
+    return await prisma.subject.findMany({
+      include: {
+        classes: true,
+      },
+    });
+  }
 
-    async add(description: string, name: string): Promise<SubjectView> {
-        const newSubject: Subject = {
-            subject_id: 0,
-            name,
-            description,
-        };
+  async getById(id: number) {
+    return await prisma.subject.findUnique({
+      where: { id },
+      include: {
+        classes: true,
+      },
+    });
+  }
 
-        return this.subjectsRepository.create(newSubject);
-    }
+  async update(id: number, data: UpdateSubjectInput['data']) {
+    return await prisma.subject.update({
+      where: { id },
+      data,
+    });
+  }
 
-    async update(id: number, updatedData: Partial<SubjectView>): Promise<SubjectView | null> {
-        return this.subjectsRepository.update(id, updatedData);
-    }
-
-    async delete(id: number): Promise<boolean> {
-        return this.subjectsRepository.delete(id);
-    }
+  async delete(id: number) {
+    return await prisma.subject.delete({
+      where: { id },
+    });
+  }
 }

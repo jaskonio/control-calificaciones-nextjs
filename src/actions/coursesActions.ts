@@ -1,6 +1,7 @@
 'use server';
 
 import { coursesService } from '@/services';
+import { Course } from '@prisma/client';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -8,10 +9,10 @@ import { redirect } from 'next/navigation'
 const base_path = '/admin/courses'
 
 
-export async function addCourse(data: CourseView) {
+export async function addCourse(data: Course) {
   console.log('Añadiendo Clase:', data)
 
-  await coursesService.add(data.name, data.parallel)
+  await coursesService.create(data)
 
   revalidatePath(base_path)
   redirect(base_path)

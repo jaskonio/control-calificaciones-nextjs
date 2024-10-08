@@ -1,35 +1,54 @@
-import { IRepository } from "@/repositories/interfaces/IRepository";
+// src/services/academicYearService.ts
+import prisma from '../prisma/client';
+import { Prisma, AcademicYearStatus } from '@prisma/client';
 
-export class SchoolService {
-    private schoolRepository: IRepository<SchoolYear>;
+interface CreateAcademicYearInput {
+  name: string;
+  startDate: Date;
+  endDate: Date;
+  status: AcademicYearStatus;
+}
 
-    constructor(schoolRepository: IRepository<SchoolYear>) {
-        this.schoolRepository = schoolRepository;
-    }
+interface UpdateAcademicYearInput {
+  data: Partial<CreateAcademicYearInput>;
+}
 
-    async getAll(): Promise<SchoolYear[]> {
-        return this.schoolRepository.getAll();
-    }
+export class AcademicYearService {
+  async create(data: CreateAcademicYearInput) {
+    return await prisma.academicYear.create({ data });
+  }
 
-    async getById(id: number): Promise<SchoolYear | null> {
-        return this.schoolRepository.getById(id) || null;
-    }
+  async getAll() {
+    return await prisma.academicYear.findMany({
+      include: {
+        courses: true,
+        students: true,
+        events: true,
+      },
+    });
+  }
 
-    async add(start_date: string, end_date: string): Promise<SchoolYear> {
-        const newSchoolYear: SchoolYear = {
-            year_id: 0,
-            start_date,
-            end_date
-        };
+  async getById(id: number) {
+    return await prisma.academicYear.findUnique({
+      where: { id },
+      include: {
+        courses: true,
+        students: true,
+        events: true,
+      },
+    });
+  }
 
-        return this.schoolRepository.create(newSchoolYear);
-    }
+  async update(id: number, data: UpdateAcademicYearInput['data']) {
+    return await prisma.academicYear.update({
+      where: { id },
+      data,
+    });
+  }
 
-    async update(id: number, updatedData: Partial<SchoolYear>): Promise<SchoolYear | null> {
-        return this.schoolRepository.update(id, updatedData);
-    }
-
-    async delete(id: number): Promise<boolean> {
-        return this.schoolRepository.delete(id);
-    }
+  async delete(id: number) {
+    return await prisma.academicYear.delete({
+      where: { id },
+    });
+  }
 }

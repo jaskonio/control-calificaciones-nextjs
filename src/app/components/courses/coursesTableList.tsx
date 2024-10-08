@@ -7,7 +7,7 @@ import { coursesService } from "@/services"
 
 export default async function CoursesTableList() {
   const title = 'Clases'
-  const columns = ['ID', 'Nombre', 'Categoria']
+  const columns = ['ID', 'Nombre', 'Descripcion', 'Nivel', 'status']
   const data = await coursesService.getAll()
 
   return (
@@ -17,16 +17,16 @@ export default async function CoursesTableList() {
         buttons={<AddButton href="/admin/courses/add/"/>}
         columns={columns}
         rowContent={data.map((item) => (
-          <TableRow key={item.course_id}>
-            <TableCell>{item.course_id}</TableCell>
+          <TableRow key={item.id}>
+            <TableCell>{item.id}</TableCell>
             <TableCell>{item.name}</TableCell>
-            <TableCell>{item.parallel}</TableCell>
+            <TableCell>{item.description}</TableCell>
             <TableCell>
               <div className="flex space-x-2">
-                <EditButton href={`/admin/courses/edit/${item.course_id}`} />
+                <EditButton href={`/admin/courses/edit/${item.id}`} />
                 <DeleteButton
                   action={deleteCourse}
-                  entityId={item.course_id.toString()}
+                  entityId={item.id.toString()}
                   formInputName="course_id"
                 />
               </div>

@@ -1,33 +1,28 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import { userRepository } from "./repositories"
+import { userService } from "./services"
 
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-        credentials: {
-          username: {},
-          password: {},
-        },
-        authorize: async (credentials) => {
-          const userEntities = await userRepository.getAll()
-          const user = await userEntities.find(e => e.name == credentials.username)
+      credentials: {
+        email: {},
+        password: {},
+      },
+      authorize: async (credentials) => {
+        const user = await userService.getByEmailAndPasword(credentials.email as string, credentials.password as string)
 
-          if (!user) {
-            throw new Error("Invalid user")
-          }
-
-          if (user.password == credentials.password) {
-              return {
-                  id: user.user_id.toString(), 
-                  name: user.name,
-                  email: user.email
-              }
-          }
-
+        if (user == null) {
           throw new Error("Invalid user")
-        },
-      }),
+        }
+
+        return {
+            id: user.id.toString(),
+            name: user.name,
+            email: user.email
+        }
+      },
+    }),
   ],
 })

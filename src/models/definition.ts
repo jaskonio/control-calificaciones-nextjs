@@ -67,4 +67,7 @@ interface SubjectView extends Subject {
 }
 
 interface CourseView extends Course {
+    course_id: number;
+    name: string;
+    parallel: ParallelType;
 }

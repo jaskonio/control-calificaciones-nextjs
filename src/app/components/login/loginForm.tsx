@@ -19,7 +19,7 @@ export default function LoginForm() {
   const { toast } = useToast()
 
   const formSchema = z.object({
-    username: z.string().min(1, {
+    email: z.string().min(1, {
       message: "Debes escribir el nombre de usuario.",
     }),
     password: z.string().min(1, {
@@ -33,7 +33,7 @@ export default function LoginForm() {
 
             const user = { 
                 redirect: false,
-                username: values.username,
+                email: values.email,
                 password: values.password
             }
 
@@ -66,7 +66,7 @@ export default function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   })
@@ -79,12 +79,12 @@ export default function LoginForm() {
           className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({field}) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Correo</FormLabel>
               <FormControl>
-                <Input placeholder="username" {...field} />
+                <Input placeholder="email" type="email" {...field}/>
               </FormControl>
               <FormMessage />
             </FormItem>

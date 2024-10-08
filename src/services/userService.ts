@@ -43,4 +43,22 @@ export class UserService {
       where: { id },
     });
   }
+
+  async getByEmailAndPasword(email: string, password: string) {
+    return await prisma.user.findFirst({
+        where: {
+            email: {
+                equals: email,
+            },
+            password: {
+                equals: password
+            }
+        },
+        include: {
+            parent: true,
+            student: true,
+            teacher: true
+        }
+    })
+  }
 }

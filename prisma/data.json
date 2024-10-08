@@ -1,0 +1,268 @@
+{
+  "Users": [
+    {
+      "id": 1,
+      "nombre": "Ana Pérez",
+      "email": "ana.perez@colegio.edu",
+      "contraseña": "hashed_password_1",
+      "rol": "admin",
+      "fecha_creacion": "2023-09-01T08:30:00Z",
+      "estado": "activo"
+    },
+    {
+      "id": 2,
+      "nombre": "Carlos García",
+      "email": "carlos.garcia@colegio.edu",
+      "contraseña": "hashed_password_2",
+      "rol": "profesor",
+      "fecha_creacion": "2023-09-05T09:00:00Z",
+      "estado": "activo"
+    },
+    {
+      "id": 3,
+      "nombre": "María López",
+      "email": "maria.lopez@colegio.edu",
+      "contraseña": "hashed_password_3",
+      "rol": "estudiante",
+      "fecha_creacion": "2023-09-10T10:15:00Z",
+      "estado": "activo"
+    },
+    {
+      "id": 4,
+      "nombre": "Juan Martínez",
+      "email": "juan.martinez@colegio.edu",
+      "contraseña": "hashed_password_4",
+      "rol": "padre",
+      "fecha_creacion": "2023-09-12T11:20:00Z",
+      "estado": "activo"
+    }
+  ],
+  
+  "AcademicYears": [
+    {
+      "id": 1,
+      "nombre": "2023-2024",
+      "fecha_inicio": "2023-09-01",
+      "fecha_fin": "2024-06-30",
+      "estado": "inactivo"
+    },
+    {
+      "id": 2,
+      "nombre": "2024-2025",
+      "fecha_inicio": "2024-09-01",
+      "fecha_fin": "2025-06-30",
+      "estado": "activo"
+    }
+  ],
+  
+  "Students": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "fecha_nacimiento": "2008-05-15",
+      "direccion": "Calle Falsa 123, Ciudad",
+      "telefono": "555-1234",
+      "fecha_ingreso": "2023-09-01",
+      "grado": "5to Grado",
+      "ano_escolar_id": 1
+    }
+  ],
+  
+  "Parents": [
+    {
+      "id": 1,
+      "user_id": 4,
+      "direccion": "Calle Falsa 123, Ciudad",
+      "telefono": "555-5678",
+      "correo_electronico": "juan.martinez@gmail.com",
+      "estudiante_id": 1
+    }
+  ],
+  
+  "Teachers": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "especialidad": "Matemáticas",
+      "telefono": "555-8765",
+      "direccion": "Avenida Siempre Viva 456, Ciudad",
+      "fecha_contratacion": "2023-09-05",
+      "estado": "activo"
+    }
+  ],
+  
+  "Subjects": [
+    {
+      "id": 1,
+      "nombre": "Matemáticas",
+      "descripcion": "Asignatura de matemáticas básicas",
+      "grado": "5to Grado",
+      "estado": "activa"
+    },
+    {
+      "id": 2,
+      "nombre": "Ciencias",
+      "descripcion": "Asignatura de ciencias naturales",
+      "grado": "5to Grado",
+      "estado": "activa"
+    }
+  ],
+  
+  "Courses": [
+    {
+      "id": 1,
+      "nombre": "Quinto A",
+      "descripcion": "Clase de quinto grado sección A",
+      "ano_escolar_id": 1,
+      "grado": "5to Grado",
+      "estado": "activo"
+    },
+    {
+      "id": 2,
+      "nombre": "Quinto B",
+      "descripcion": "Clase de quinto grado sección B",
+      "ano_escolar_id": 2,
+      "grado": "5to Grado",
+      "estado": "activo"
+    }
+  ],
+  
+  "Classes": [
+    {
+      "id": 1,
+      "curso_id": 1,
+      "materia_id": 1,
+      "profesor_id": 1,
+      "salon": "A101",
+      "hora_inicio": "08:00:00",
+      "hora_fin": "09:30:00",
+      "dia_semana": "lunes"
+    },
+    {
+      "id": 2,
+      "curso_id": 1,
+      "materia_id": 2,
+      "profesor_id": 1,
+      "salon": "A102",
+      "hora_inicio": "10:00:00",
+      "hora_fin": "11:30:00",
+      "dia_semana": "martes"
+    }
+  ],
+  
+  "Enrollments": [
+    {
+      "id": 1,
+      "estudiante_id": 1,
+      "clase_id": 1,
+      "fecha_inscripcion": "2023-09-01",
+      "estado": "activa"
+    },
+    {
+      "id": 2,
+      "estudiante_id": 1,
+      "clase_id": 2,
+      "fecha_inscripcion": "2023-09-01",
+      "estado": "activa"
+    }
+  ],
+  
+  "Grades": [
+    {
+      "id": 1,
+      "inscripcion_id": 1,
+      "tipo_evaluacion": "examen",
+      "valor": 85.5,
+      "fecha_evaluacion": "2023-10-15",
+      "descripcion": "Examen parcial de matemáticas"
+    },
+    {
+      "id": 2,
+      "inscripcion_id": 2,
+      "tipo_evaluacion": "actividad",
+      "valor": 90.0,
+      "fecha_evaluacion": "2023-10-20",
+      "descripcion": "Proyecto de ciencias"
+    }
+  ],
+  
+  "Attendance": [
+    {
+      "id": 1,
+      "inscripcion_id": 1,
+      "fecha": "2023-09-05",
+      "estado_asistencia": "presente",
+      "comentarios": ""
+    },
+    {
+      "id": 2,
+      "inscripcion_id": 2,
+      "fecha": "2023-09-06",
+      "estado_asistencia": "ausente",
+      "comentarios": "Enfermedad"
+    }
+  ],
+  
+  "Events": [
+    {
+      "id": 1,
+      "titulo": "Día de la Ciencia",
+      "descripcion": "Evento dedicado a actividades científicas",
+      "fecha": "2023-11-10",
+      "hora": "09:00:00",
+      "ubicacion": "Auditorio Principal",
+      "tipo_evento": "extracurricular",
+      "ano_escolar_id": 1
+    },
+    {
+      "id": 2,
+      "titulo": "Reunión de Padres",
+      "descripcion": "Reunión para discutir el progreso académico de los estudiantes",
+      "fecha": "2023-12-05",
+      "hora": "18:00:00",
+      "ubicacion": "Sala de Conferencias",
+      "tipo_evento": "reunión",
+      "ano_escolar_id": 1
+    }
+  ],
+  
+  "Reports": [
+    {
+      "id": 1,
+      "titulo": "Reporte de Calificaciones Q1",
+      "descripcion": "Calificaciones del primer trimestre",
+      "tipo_informe": "académico",
+      "fecha_generacion": "2023-10-25T14:30:00Z",
+      "ruta_archivo": "/reports/calificaciones_q1.pdf"
+    },
+    {
+      "id": 2,
+      "titulo": "Informe de Asistencia Septiembre",
+      "descripcion": "Asistencia de los estudiantes durante septiembre",
+      "tipo_informe": "administrativo",
+      "fecha_generacion": "2023-10-30T10:00:00Z",
+      "ruta_archivo": "/reports/asistencia_septiembre.pdf"
+    }
+  ],
+  
+  "Settings": [
+    {
+      "id": 1,
+      "clave": "fecha_inicio_clases",
+      "valor": "2023-09-01",
+      "descripcion": "Fecha de inicio de clases para el año escolar"
+    },
+    {
+      "id": 2,
+      "clave": "max_calificacion",
+      "valor": "100",
+      "descripcion": "Calificación máxima posible"
+    },
+    {
+      "id": 3,
+      "clave": "notificaciones_email",
+      "valor": "true",
+      "descripcion": "Habilitar notificaciones por email"
+    }
+  ]
+}

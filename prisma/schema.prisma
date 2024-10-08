@@ -13,13 +13,243 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  admin
+  teacher
+  student
+  parent
+}
+
+enum UserStatus {
+  active
+  inactive
+}
+
+enum GradeType {
+  activity
+  assignment
+  exam
+}
+
+enum AttendanceStatus {
+  present
+  absent
+  excused
+}
+
+enum EventType {
+  extracurricular
+  meeting
+  workshop
+  other
+}
+
+enum ReportType {
+  academic
+  administrative
+}
+
+enum AcademicYearStatus {
+  active
+  inactive
+}
+
+enum TeacherStatus {
+  active
+  inactive
+}
+
+enum SubjectStatus {
+  active
+  inactive
+}
+
+enum CourseStatus {
+  active
+  inactive
+}
+
+enum DayOfWeek {
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+  sunday
+}
+
+enum EnrollmentStatus {
+  active
+  inactive
+}
+
+/// Models representing different entities in the system
+
+model User {
+  id             Int            @id @default(autoincrement())
+  name           String
+  email          String         @unique
+  password       String
+  role           UserRole
+  createdAt      DateTime       @default(now())
+  status         UserStatus
+  // Relationships
+  student        Student?
+  teacher        Teacher?
+  parent         Parent?
+}
+
+model AcademicYear {
+  id            Int               @id @default(autoincrement())
+  name          String            @unique // e.g., "2023-2024"
+  startDate     DateTime
+  endDate       DateTime
+  status        AcademicYearStatus
+  // Relationships
+  courses       Course[]
+  students      Student[]
+  events        Event[]
+}
+
+model Student {
+  id               Int             @id @default(autoincrement())
+  userId           Int             @unique
+  birthDate        DateTime
+  address          String
+  phone            String
+  enrollmentDate   DateTime
+  gradeLevel       String          // e.g., "5th Grade"
+  academicYearId   Int
+  // Relationships
+  user             User            @relation(fields: [userId], references: [id])
+  academicYear     AcademicYear    @relation(fields: [academicYearId], references: [id])
+  parents          Parent[]
+  enrollments      Enrollment[]
+}
+
+model Parent {
+  id                Int       @id @default(autoincrement())
+  userId            Int       @unique
+  address           String
+  phone             String
+  email             String
+  studentId         Int
+  // Relationships
+  user        User      @relation(fields: [userId], references: [id])
+  student     Student   @relation(fields: [studentId], references: [id])
+}
+
 model Teacher {
-  id          Int      @id @default(autoincrement())
-  username    String   @db.VarChar(255)
-  password    String   @db.VarChar(255)
-  firstName   String   @db.VarChar(255)
-  lastName    String   @db.VarChar(255)
-  birthDate   DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                Int       @id @default(autoincrement())
+  userId            Int       @unique
+  expertise         String    // Area of expertise
+  phone             String
+  address           String
+  hireDate          DateTime
+  status            TeacherStatus
+  // Relationships
+  user        User      @relation(fields: [userId], references: [id])
+  classes     Class[]
+}
+
+model Subject {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique // e.g., "Mathematics"
+  description String
+  gradeLevel  String       // e.g., "5th Grade"
+  status      SubjectStatus
+  // Relationships
+  classes     Class[]
+}
+
+model Course {
+  id             Int           @id @default(autoincrement())
+  name           String        @unique // e.g., "Fifth A"
+  description    String
+  academicYearId Int
+  gradeLevel     String        // e.g., "5th Grade"
+  status         CourseStatus
+  // Relationships
+  academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id])
+  classes        Class[]
+}
+
+model Class {
+  id          Int          @id @default(autoincrement())
+  courseId    Int
+  subjectId   Int
+  teacherId   Int
+  classroom   String       // e.g., "A101"
+  startTime   String       // "HH:MM:SS" format
+  endTime     String       // "HH:MM:SS" format
+  dayOfWeek   DayOfWeek
+  // Relationships
+  course      Course       @relation(fields: [courseId], references: [id])
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  teacher     Teacher      @relation(fields: [teacherId], references: [id])
+  enrollments Enrollment[]
+}
+
+model Enrollment {
+  id               Int               @id @default(autoincrement())
+  studentId        Int
+  classId          Int
+  enrollmentDate   DateTime
+  status           EnrollmentStatus
+  // Relationships
+  student          Student           @relation(fields: [studentId], references: [id])
+  class            Class             @relation(fields: [classId], references: [id])
+  grades           Grade[]
+  attendances      Attendance[]
+}
+
+model Grade {
+  id               Int               @id @default(autoincrement())
+  enrollmentId     Int
+  evaluationType   GradeType
+  score            Float             // e.g., 85.5
+  evaluationDate    DateTime
+  description      String
+  // Relationships
+  enrollment       Enrollment        @relation(fields: [enrollmentId], references: [id])
+}
+
+model Attendance {
+  id                Int               @id @default(autoincrement())
+  enrollmentId      Int
+  date              DateTime
+  attendanceStatus  AttendanceStatus
+  comments          String?
+  // Relationships
+  enrollment        Enrollment        @relation(fields: [enrollmentId], references: [id])
+}
+
+model Event {
+  id              Int               @id @default(autoincrement())
+  title           String
+  description     String
+  date            DateTime
+  time            String            // "HH:MM:SS" format
+  location        String
+  eventType       EventType
+  academicYearId  Int
+  // Relationships
+  academicYear    AcademicYear      @relation(fields: [academicYearId], references: [id])
+}
+
+model Report {
+  id               Int               @id @default(autoincrement())
+  title            String
+  description      String
+  reportType       ReportType
+  generationDate   DateTime
+  filePath         String            // e.g., "/reports/grades_q1.pdf"
+}
+
+model Setting {
+  id          Int       @id @default(autoincrement())
+  key         String    @unique // e.g., "class_start_date"
+  value       String    // e.g., "2023-09-01" or "true"
+  description String
 }

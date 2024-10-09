@@ -1,7 +1,7 @@
 import { BaseCard } from "@/app/components/ui/cards"
 import CourseForm from "@/app/components/courses/courseForm"
-import { addCourse } from "@/actions/coursesActions"
 import { schoolService } from "@/services"
+import { addCourse } from "@/actions/coursesActions"
 
 
 export default async function Page() {

@@ -37,11 +37,11 @@ interface Subject {
     description: string;
 }
 
-interface Course {
-    course_id: number;
-    name: string;
-    parallel: ParallelType;
-}
+// interface Course {
+//     course_id: number;
+//     name: string;
+//     parallel: ParallelType;
+// }
 
 // relationship by School year
 interface Tutor {

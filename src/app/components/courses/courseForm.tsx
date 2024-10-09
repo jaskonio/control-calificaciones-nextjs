@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { z } from "zod"
-import SelectAcademicYear from "../school/comboSelect"
 import { AcademicYear } from "@prisma/client"
 
 
@@ -32,7 +31,7 @@ const formSchema = z.object({
     status: z.string().min(2, {
       message: "El nombre de la clase debe tener mas de 2 carecteres.",
     }),
-    academicYearId: z.string().transform( (v) => Number(v) || 0),
+    academicYearId: z.string(),
   })
 
 type CourseFormProps = {
@@ -54,7 +53,7 @@ export default function CourseForm({id=0, name='', description='', gradeLevel=''
         description: description,
         gradeLevel: gradeLevel,
         status: status,
-        academicYearId: academicYearAvailables[0].id
+        academicYearId: academicYearAvailables[0].id.toString()
     },
   })
 

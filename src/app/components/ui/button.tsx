@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { Edit, Loader2, PlusCircle, Trash2 } from 'lucide-react';
+import { Edit, Loader2, PlusCircle, Trash2, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export function AddButton({href}: {href:string}) {
@@ -28,7 +28,7 @@ export function DeleteButton({action, formInputName, entityId}: {action:any, for
         <form action={action}>
             <input type="hidden" name={formInputName} value={entityId} />
             <Button type="submit" variant="destructive" size="sm">
-            <Trash2 className="h-4 w-4" />
+            <TrashIcon className="h-4 w-4" />
         </Button>
         </form>
     );

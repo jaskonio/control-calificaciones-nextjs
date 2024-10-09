@@ -1,8 +1,9 @@
 import { TableCell, TableRow } from "@/components/ui/table"
-import { deleteCourse } from '@/actions/coursesActions'
-import { AddButton, DeleteButton, EditButton } from '../ui/button'
+import { AddButton, EditButton } from '../ui/button'
 import { BaseTable } from "../ui/table"
 import { coursesService } from "@/services"
+import DeleteCourseButton from "./deleteButton"
+import { deleteCourse } from "@/actions/coursesActions"
 
 
 export default async function CoursesTableList() {
@@ -26,11 +27,7 @@ export default async function CoursesTableList() {
             <TableCell>
               <div className="flex space-x-2">
                 <EditButton href={`/admin/courses/edit/${item.id}`} />
-                <DeleteButton
-                  action={deleteCourse}
-                  entityId={item.id.toString()}
-                  formInputName="course_id"
-                />
+                <DeleteCourseButton onDelete={deleteCourse} record={item} ></DeleteCourseButton>
               </div>
             </TableCell>
           </TableRow>

@@ -53,8 +53,13 @@ export class CourseService {
   }
 
   async delete(id: number) {
-    return await prisma.course.delete({
-      where: { id },
-    });
+    try{
+      return await prisma.course.delete({
+        where: { id },
+      });
+    } catch(error) {
+      console.error(error)
+      return null
+    }
   }
 }

@@ -1,11 +1,12 @@
 import { BaseCard } from "@/app/components/ui/cards"
 import { ResoucesNotFound } from "@/app/components/ui/errors"
-import { coursesService } from "@/services"
+import { coursesService, schoolService } from "@/services"
 import CourseForm from "@/app/components/courses/courseForm"
 import { updateCourse } from "@/actions/coursesActions"
 
 export default async function Page({ params }: { params: { id: string } }) {
   const course = await coursesService.getById(parseInt(params.id))
+  const values = await schoolService.getAll()
 
   if (!course) {
     return (
@@ -26,7 +27,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     <BaseCard
       title="Editar Año Escolar"
       content={(
-        <CourseForm course_id={course.course_id} name={course.name} parallel={course.parallel} submitHandler={updateCourse}></CourseForm>
+        <CourseForm id={course.id} name={course.name} description={course.description} gradeLevel={course.gradeLevel} status={course.status} academicYearAvailables={values} submitHandler={updateCourse}></CourseForm>
       )}
     ></BaseCard>
   </div>

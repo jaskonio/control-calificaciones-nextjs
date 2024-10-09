@@ -17,22 +17,26 @@ interface UpdateCourseInput {
 export class CourseService {
   async create(data: CreateCourseInput) {
     try {
-        return await prisma.course.create({
-            data,
-        });
+      return await prisma.course.create({
+        data,
+      });
     } catch (error) {
-        console.error(error)
-        return null
+      console.error(error)
+      return null
     }
   }
 
   async getAll() {
-    return await prisma.course.findMany({
-      include: {
-        academicYear: true,
-        classes: true,
-      },
-    });
+    try {
+      return await prisma.course.findMany({
+        include: {
+          academicYear: true,
+          classes: true,
+        },
+      });
+    } catch (error) {
+      return []
+    }
   }
 
   async getById(id: number) {
@@ -53,11 +57,11 @@ export class CourseService {
   }
 
   async delete(id: number) {
-    try{
+    try {
       return await prisma.course.delete({
         where: { id },
       });
-    } catch(error) {
+    } catch (error) {
       console.error(error)
       return null
     }

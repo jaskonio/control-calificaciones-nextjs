@@ -28,6 +28,9 @@ export class CourseService {
 
   async getAll() {
     try {
+      const wait = (t: number) => new Promise((resolve, reject) => setTimeout(resolve, t))
+      await wait(2000)
+
       return await prisma.course.findMany({
         include: {
           academicYear: true,

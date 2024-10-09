@@ -13,7 +13,7 @@ type ResoucesNotFoundProps = {
 }
 export function ResoucesNotFound({title, description, content, prevhref, prevhrefMessage}: ResoucesNotFoundProps) {
     return (
-        <Card className="max-w-md w-full">
+        <Card className="max-w-md mx-auto">
             <CardHeader className="text-center">
                 <div className="mx-auto bg-red-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                     <UserX className="h-8 w-8 text-red-600" />

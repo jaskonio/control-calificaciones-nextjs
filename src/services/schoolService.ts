@@ -1,6 +1,5 @@
-// src/services/academicYearService.ts
 import prisma from '../prisma/client';
-import { Prisma, AcademicYearStatus } from '@prisma/client';
+import { AcademicYearStatus } from '@prisma/client';
 
 interface CreateAcademicYearInput {
   name: string;
@@ -29,7 +28,7 @@ export class AcademicYearService {
   }
 
   async getById(id: number) {
-    return await prisma.academicYear.findUnique({
+     const data = await prisma.academicYear.findUnique({
       where: { id },
       include: {
         courses: true,
@@ -37,6 +36,8 @@ export class AcademicYearService {
         events: true,
       },
     });
+
+    return data
   }
 
   async update(id: number, data: UpdateAcademicYearInput['data']) {

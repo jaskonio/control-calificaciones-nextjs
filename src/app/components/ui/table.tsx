@@ -1,7 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { AddButton, EditButton } from "./button"
 
 
 function BaseTableButtons({ buttons }: { buttons: any }) {
@@ -23,7 +22,7 @@ export async function BaseTable({ title, buttons, columns, rowContent }: BaseTab
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="bg-accent text-white text-center">
+      <CardHeader className="text-center">
         <CardTitle className="text-2xl">{title}</CardTitle>
       </CardHeader>
 
@@ -31,7 +30,7 @@ export async function BaseTable({ title, buttons, columns, rowContent }: BaseTab
         <BaseTableButtons buttons={buttons} />
 
         <Table>
-          <TableHeader>
+          <TableHeader className="text-lg">
             <TableRow>
               {columns.map((col, index) => (
                 <TableHead key={index}>{col}</TableHead>
@@ -50,9 +49,9 @@ export async function BaseTable({ title, buttons, columns, rowContent }: BaseTab
 export function BaseTableLoadingSkeleton() {
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="bg-indigo-600">
+      <CardHeader className="bg-indigo-100">
         <CardTitle className="text-2xl text-white">
-          <Skeleton className="h-8 w-48 bg-indigo-400" />
+          <Skeleton className="h-8 w-48" />
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6">

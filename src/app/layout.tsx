@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "./components/ui/header";
@@ -7,7 +7,7 @@ import Footer from "./components/ui/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
 
-const inter = Poppins({ subsets: ["latin-ext"], weight: ["600", "800"]});
+const font = Montserrat({ subsets: ["latin"]});
 
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="h-full">
       <body 
-        className={cn("flex flex-col min-h-screen bg-background", inter.className )}>
+        className={cn("flex flex-col min-h-screen bg-background", font.className )}>
         <SessionProvider>
 
           <Header />

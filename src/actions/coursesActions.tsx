@@ -3,13 +3,15 @@
 import { coursesService } from '@/services';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { logger } from "@/logger";
 
 
 const base_path = '/admin/courses'
 
 
 export async function addCourse(data: any) {
-  console.log('Añadiendo Clase:', data)
+  logger.info(`Añadiendo Clase:  ${data.name}`)
+
   delete data['id']
   data['academicYearId'] = Number(data['academicYearId'])
   await coursesService.create(data)
@@ -19,7 +21,7 @@ export async function addCourse(data: any) {
 }
 
 export async function updateCourse(data: any) {
-  console.log('Actualizando Clase:', data.id)
+  logger.info(`Actualizando Clase: ${data.id}`)
 
   data['academicYearId'] = Number(data['academicYearId'])
 
@@ -30,7 +32,7 @@ export async function updateCourse(data: any) {
 }
 
 export async function deleteCourse(id: number) {
-  console.log('Eliminando Clase:', id)
+  logger.info(`Eliminando Clase: ${id}`)
 
   await coursesService.delete(Number(id))
 

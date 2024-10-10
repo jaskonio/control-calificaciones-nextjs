@@ -19,18 +19,10 @@ import { AcademicYear } from "@prisma/client"
 
 const formSchema = z.object({
     id: z.number(),
-    name: z.string().min(2, {
-        message: "El nombre de la clase debe tener mas de 2 carecteres.",
-    }),
-    description: z.string().min(2, {
-      message: "El nombre de la clase debe tener mas de 2 carecteres.",
-    }),
-    gradeLevel: z.string().min(2, {
-      message: "El nombre de la clase debe tener mas de 2 carecteres.",
-    }),
-    status: z.string().min(2, {
-      message: "El nombre de la clase debe tener mas de 2 carecteres.",
-    }),
+    name: z.string().min(2).max(200),
+    description: z.string().min(2).max(200),
+    gradeLevel: z.string().min(2).max(200),
+    status: z.string().min(2).max(200),
     academicYearId: z.string(),
   })
 

@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react"
 export function SignInButton() {
     return (
         <Link href="/login">
-            <Button variant="outline" className="bg-accent2 hover:bg-accent text-white">
+            <Button className="hover:bg-slate-800">
                 <LogIn className="h-4 w-4" />
                 <span>Iniciar Sesión</span>
             </Button>

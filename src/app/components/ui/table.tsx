@@ -23,7 +23,7 @@ export async function BaseTable({ title, buttons, columns, rowContent }: BaseTab
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="bg-accent3 text-white text-center">
+      <CardHeader className="bg-accent text-white text-center">
         <CardTitle className="text-2xl">{title}</CardTitle>
       </CardHeader>
 

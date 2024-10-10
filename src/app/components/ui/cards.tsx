@@ -9,7 +9,7 @@ type BaseCardProps = {
 export function BaseCard({ title, content }: BaseCardProps) {
   return (
     <Card className="max-w-md mx-auto">
-      <CardHeader className="bg-accent3 text-white text-center">
+      <CardHeader className="text-center">
         <CardTitle className="text-2xl">{title}</CardTitle>
       </CardHeader>
       <CardContent className="p-6">
@@ -22,9 +22,9 @@ export function BaseCard({ title, content }: BaseCardProps) {
 export function BaseCardLoadingSkeleton() {
   return (
     <Card className="max-w-md mx-auto">
-      <CardHeader className="bg-indigo-600">
+      <CardHeader className="bg-indigo-200">
         <CardTitle className="text-2xl text-white">
-          <Skeleton className="h-8 w-48 bg-indigo-400" />
+          <Skeleton className="h-8 w-48 bg-indigo-100" />
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6">

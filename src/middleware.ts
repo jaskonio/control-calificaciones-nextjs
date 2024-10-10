@@ -30,7 +30,7 @@ export default auth(async (req) => {
         return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
 
-    if ( isPublicRoute && isAuth && !req.nextUrl.pathname.startsWith('/admin')) {
+    if ( isProtectedRoute && isAuth && !req.nextUrl.pathname.startsWith('/admin')) {
         return NextResponse.redirect(new URL('/admin', req.nextUrl))
     }
 

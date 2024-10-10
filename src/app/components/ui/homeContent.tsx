@@ -22,19 +22,19 @@ export default async function HomeContent() {
             <h1 className="text-4xl font-bold text-center mb-16 text-primary">Sistema de Gestión Escolar</h1>
             
             <Separator className="my-4" />
-            <h1 className="text-3xl font-bold text-center mb-16 text-secondary">Administración</h1>
+            <h1 className="text-3xl font-bold text-center mb-16 text-primary">Administración</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {adminCards.map((item, index) => (
-                <Card key={index} className="overflow-hidden transition-all duration-300 border-accent1 border-opacity-20 hover:shadow-lg hover:-translate-y-1">
+                <Card key={index} className="overflow-hidden transition-all duration-300 border-accent border-opacity-20 hover:shadow-lg hover:-translate-y-1">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-accent2">
-                            <item.icon className="h-12 w-12 text-accent3" />
+                        <CardTitle className="flex items-center gap-2 text-primary">
+                            <item.icon className="h-12 w-12" />
                             {item.title}
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-4">
-                        <CardDescription className="text-secondary mb-6">{item.description}</CardDescription>
-                        <Button asChild className="w-full bg-accent2 transition-colors duration-300 hover:bg-accent1-dark">
+                        <CardDescription className="text-primary mb-6">{item.description}</CardDescription>
+                        <Button asChild className="w-full bg-accent-foreground transition-colors duration-300 hover:bg-accent-foreground">
                             <Link href={item.href}>Acceder</Link>
                         </Button>
                     </CardContent>

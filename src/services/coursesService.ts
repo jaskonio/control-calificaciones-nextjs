@@ -43,7 +43,7 @@ export class CourseService {
   }
 
   async getById(id: number) {
-    return await prisma.course.findUnique({
+    return await prisma.course.findFirstOrThrow({
       where: { id },
       include: {
         academicYear: true,

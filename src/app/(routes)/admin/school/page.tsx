@@ -6,7 +6,7 @@ import { schoolService } from "@/services";
 export default async function Page() {
   const data = await schoolService.getAll()
   const title = 'Años Escolares'
-  const columns = ['ID', 'Nombre', 'Fecha de Inicio', 'Fecha de Fin', 'Acciones']
+  const columns = ['ID', 'Nombre', 'Fecha de Inicio', 'Fecha de Fin', 'Estado', 'Acciones']
   const primaryKey = 'id'
   const columnKeys = ['id', 'name', 'startDate', 'endDate', 'status']
   const baseAddUrl = '/admin/school/add/'

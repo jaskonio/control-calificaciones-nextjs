@@ -44,7 +44,7 @@ export class AcademicYearService {
 
   async getById(id: number): Promise<AcademicYearViewModel | null> {
     try {
-      const data = await prisma.academicYear.findUnique({
+      const data = await prisma.academicYear.findFirstOrThrow({
         where: { id },
         include: {
           courses: true,

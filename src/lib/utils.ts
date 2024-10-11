@@ -12,3 +12,11 @@ export function formatDateToString(date: Date): string {
 
   return `${year}-${month}-${day}`;
 }
+
+export function parseStringToDate(dateString: string): Date {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    throw new Error(`Fecha inválida: ${dateString}`);
+  }
+  return date;
+}

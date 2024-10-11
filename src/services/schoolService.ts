@@ -1,36 +1,30 @@
 import { error } from 'console';
 import prisma from '../prisma/client';
-import { AcademicYearStatus } from '@prisma/client';
-import { formatDateToString } from '@/lib/utils';
+import { AcademicYearViewModel, CreateAcademicYearModel, UpdateAcademicYearModel } from '@/models/academicYear';
+import { transformAcademicYearToViewModel, transformInputToPrismaData } from '@/prisma/transformer/academicYear';
 
-interface CreateAcademicYearInput {
-  name: string;
-  startDate: string;
-  endDate: string;
-  status: AcademicYearStatus;
-}
-
-interface UpdateAcademicYearInput {
-  data: Partial<CreateAcademicYearInput>;
-}
 
 export class AcademicYearService {
-  async create(data: CreateAcademicYearInput) {
+  async create(data: CreateAcademicYearModel) {
     try {
-      const dataParsed = {
-        name: data.name,
-        status: data.status,
-        startDate: new Date(data.startDate),
-        endDate: new Date(data.endDate)
-      }
-      return await prisma.academicYear.create({ data: dataParsed });
+      const dataParsed = transformInputToPrismaData(data);
+
+      const createdAcademicYear = await prisma.academicYear.create({
+        data: dataParsed, include: {
+          courses: true,
+          students: true,
+          events: true,
+        },
+      });
+
+      return transformAcademicYearToViewModel(createdAcademicYear);
     } catch (error) {
       console.error(error)
-      throw Error("Error creating acedemic year.")
+      throw Error("Error creando el año académico")
     }
   }
 
-  async getAll() {
+  async getAll(): Promise<AcademicYearViewModel[]> {
     try {
       const data = await prisma.academicYear.findMany({
         include: {
@@ -41,27 +35,14 @@ export class AcademicYearService {
         orderBy: { id: 'asc' }
       })
 
-      const dataUpdated = data.map(r => {
-        return {
-          id: r.id,
-          name: r.name,
-          status: r.status,
-          startDate: formatDateToString(r.startDate),
-          endDate: formatDateToString(r.endDate),
-          courses: r.courses,
-          students: r.students,
-          events: r.events
-        }
-      })
-
-      return dataUpdated
+      return data.map(transformAcademicYearToViewModel)
     } catch (eroor) {
       console.error(error)
-      throw new Error('Error al obtener los registros')
+      throw new Error('Error al obtener los registros.')
     }
   }
 
-  async getById(id: number) {
+  async getById(id: number): Promise<AcademicYearViewModel | null> {
     try {
       const data = await prisma.academicYear.findUnique({
         where: { id },
@@ -72,49 +53,44 @@ export class AcademicYearService {
         },
       });
 
-      if (data == null) {
-        return null
-      }
+      if (!data) return null
 
-      const dataUpdated = {
-        name: data.name,
-        status: data.status,
-        startDate: formatDateToString(data.startDate),
-        endDate: formatDateToString(data.endDate),
-        courses: data.courses,
-        students: data.students,
-        events: data.events
-      }
-
-      return dataUpdated
+      return transformAcademicYearToViewModel(data)
     } catch (error) {
       console.error(error)
-      throw new Error(`Error al recuperar el ID: ${id}`)
+      throw new Error(`Error al recuperar el año académico con ID: ${id}`)
     }
   }
 
-  async update(id: number, data: UpdateAcademicYearInput['data']) {
+  async update(id: number, data: UpdateAcademicYearModel): Promise<AcademicYearViewModel> {
     try {
-      const dataParsed = {
-        name: data.name,
-        status: data.status,
-        startDate: data.startDate ? new Date(data.startDate) : new Date(),
-        endDate: data.endDate ? new Date(data.endDate) : new Date()
-      }
+      const dataParsed = transformInputToPrismaData(data);
 
-      return await prisma.academicYear.update({
+      const updatedAcademicYear = await prisma.academicYear.update({
         where: { id },
         data: dataParsed,
+        include: {
+          courses: true,
+          students: true,
+          events: true,
+        },
       });
+
+      return transformAcademicYearToViewModel(updatedAcademicYear);
     } catch (error) {
       console.error(error)
-      throw new Error(`Error al actualizar el ID: ${id}`)
+      throw new Error(`Error al actualizar el año académico con ID: ${id}`)
     }
   }
 
   async delete(id: number) {
-    return await prisma.academicYear.delete({
-      where: { id },
-    });
+    try {
+      return await prisma.academicYear.delete({
+        where: { id },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Error al eliminar el año académico con ID: ${id}`);
+    }
   }
 } 

@@ -8,38 +8,28 @@ import { redirect } from 'next/navigation'
 const base_path = '/admin/school'
 
 
-export async function addSchoolYear(formData: FormData) {
-  console.log('Añadiendo año escolar:', Object.fromEntries(formData))
+export async function addSchoolYear(data: any) {
+  console.log('Añadiendo año escolar')
 
-  let start_date = formData.get('start_date') as string
-  let end_date = formData.get('end_date') as string
-
-  await schoolService.add(start_date, end_date)
+  await schoolService.create(data)
 
   revalidatePath(base_path)
   redirect(base_path)
 }
 
-export async function updateSchoolYear(formData: FormData) {
-  console.log('Actualizando año escolar:', Object.fromEntries(formData))
+export async function updateSchoolYear(id: number, data: any) {
+  console.log('Actualizando año escolar')
 
-  const updateSchoolYear = {
-    year_id: Number(formData.get('year_id')),
-    start_date: formData.get('start_date') as string,
-    end_date: formData.get('end_date') as string,
-  };
-
-  await schoolService.update(updateSchoolYear.year_id, updateSchoolYear)
+  await schoolService.update(id, data)
 
   revalidatePath(base_path)
   redirect(base_path)
 }
 
-export async function deleteSchoolYear(formData: FormData) {
-  const year_id = formData.get('year_id')
-  console.log('Eliminando año escolar:', year_id)
+export async function deleteSchoolYear(id: number) {
+  console.log('Eliminando año escolar:', id)
 
-  await schoolService.delete(Number(year_id))
+  await schoolService.delete(Number(id))
 
   revalidatePath(base_path)
 }

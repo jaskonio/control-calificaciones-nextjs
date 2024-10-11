@@ -1,6 +1,7 @@
 "use client"
 
 
+import { updateSchoolYear } from "@/actions/schoolActions";
 import { GenericCardForm } from "../ui/form"
 import SchoolFields from "./schoolFields";
 import SchoolSchema from "./schoolSchema";
@@ -14,6 +15,7 @@ type CourseFormProps = {
 export default function EditSchoolForm({ id, defaultValues }: CourseFormProps) {
     const handleCreateUser = (data: any) => {
         console.log("Datos del formulario:", data);
+        updateSchoolYear(id, data)
     };
 
     return (

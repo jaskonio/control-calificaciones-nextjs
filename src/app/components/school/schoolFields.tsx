@@ -1,25 +1,26 @@
+import { FieldConfig, FieldType } from "../ui/form";
 
-const SchoolFields = [
+const SchoolFields: FieldConfig[] = [
     {
-        type: "text",
+        type: FieldType.Text,
         name: "name",
         label: "Nombre del año escolar",
         placeholder: "Ingresa un nombre",
     },
     {
-        type: "date",
+        type: FieldType.Date,
         name: "startDate",
         label: "Fecha Inicio",
         placeholder: "Ingresa tu edad",
     },
     {
-        type: "date",
+        type: FieldType.Date,
         name: "endDate",
         label: "Fecha fin",
         placeholder: "Ingresa tu edad",
     },
     {
-        type: "select",
+        type: FieldType.Select,
         name: "status",
         label: "Estado",
         options: [

@@ -5,6 +5,8 @@ import { formatDateToString } from "@/lib/utils"
 
 export default async function Page({ params }: { params: { id: string } }) {
   const schoolYear = await schoolService.getById(parseInt(params.id))
+  console.log("result getById")
+  console.log(schoolYear)
 
   let defaultValues = {
     name: schoolYear?.name,
@@ -21,9 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     defaultValues.endDate = formatDateToString(schoolYear.endDate)
   }
 
-  console.log(defaultValues)
-
   return (
-    <EditSchoolForm id={Number(params.id)} defaultValues={defaultValues} ></EditSchoolForm>
+    <EditSchoolForm id={Number(params.id)} defaultValues={schoolYear} ></EditSchoolForm>
   )
 }

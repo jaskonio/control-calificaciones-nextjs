@@ -2,8 +2,7 @@
 
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useForm, useFormContext } from "react-hook-form";
+import { FieldValues, useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -16,41 +15,64 @@ import {
     FormLabel,
     FormMessage
 } from "@/components/ui/form"
+import { ZodSchema } from "zod";
 
-const NumberInput = ({ form, name, label, placeholder }) => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+interface SelectOption {
+    label: string;
+    value: string;
+}
 
-    return (
-        <div className="mb-4">
-            {label && <Label htmlFor={name}>{label}</Label>}
-            <Input
-                type="number"
-                id={name}
-                placeholder={placeholder}
-                {...register(name)}
-                className={errors[name] ? "border-red-500" : ""}
-            />
-            {errors[name] && (
-                <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>
-            )}
-        </div>
-    );
+export enum FieldType {
+    Text = "text",
+    Number = "number",
+    Select = "select",
+    Date = "date"
 };
 
-const TextInput = ({ form, name, label, placeholder }) => {
+export type FieldConfig = {
+    type: FieldType;
+    name: string;
+    label: string;
+    placeholder?: string;
+    options?: SelectOption[]; // Solo para tipo 'select'
+}
+
+type inputComponent = {
+    form: UseFormReturn;
+    fieldConfig: FieldConfig
+}
+
+const NumberInput = ({ form, fieldConfig }: inputComponent) => {
     return (
         <div className="mb-4">
             <FormField
                 control={form['control']}
-                name={name}
+                name={fieldConfig.name}
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>{label}</FormLabel>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
                         <FormControl>
-                            <Input type="text" {...field} placeholder={placeholder} />
+                            <Input type="number" {...field} placeholder={fieldConfig.placeholder} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </div>
+    )
+};
+
+const TextInput = ({ form, fieldConfig }: inputComponent) => {
+    return (
+        <div className="mb-4">
+            <FormField
+                control={form['control']}
+                name={fieldConfig.name}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
+                        <FormControl>
+                            <Input type="text" {...field} placeholder={fieldConfig.placeholder} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -60,23 +82,23 @@ const TextInput = ({ form, name, label, placeholder }) => {
     );
 };
 
-const SelectInput = ({ form, name, label, options }) => {
+const SelectInput = ({ form, fieldConfig }: inputComponent) => {
     return (
         <div className="mb-4">
             <FormField
                 control={form.control}
-                name={name}
+                name={fieldConfig.name}
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>{label}</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Selecciona del año academico" />
+                                    <SelectValue placeholder={fieldConfig.placeholder} />
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                {options.map((option, index) => (
+                                {fieldConfig.options?.map((option, index) => (
                                     <SelectItem key={index} value={option.value}>{option.label}</SelectItem>)
                                 )}
                             </SelectContent>
@@ -89,62 +111,55 @@ const SelectInput = ({ form, name, label, options }) => {
     );
 };
 
-const DateInput = ({ form, name, label, placeholder }) => {
+const DateInput = ({ form, fieldConfig }: inputComponent) => {
     return (
         <div className="mb-4">
             <FormField
                 control={form['control']}
-                name={name}
-                render={({ field }) => (
+                name={fieldConfig.name}
+                render={({ field }) => {
+                    // field.value = field.value instanceof Date ? field.value.toISOString().split('T')[0] : field.value
+                    return (
                     <FormItem>
-                        <FormLabel>{label}</FormLabel>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
                         <FormControl>
                             <Input type="date" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
-                )}
+                )}}
             />
         </div>
     );
 };
+interface GenericFormProps<TFormValues extends FieldValues> {
+    schema: ZodSchema<TFormValues>;
+    fields: FieldConfig[];
+    onSubmit: any;
+    defaultValues?: any;
+    submitButtonText?: string;
+}
 
-const inputComponents = {
-    text: TextInput,
-    number: NumberInput,
-    select: SelectInput,
-    date: DateInput
-};
-
-const GenericForm = ({ schema, fields, onSubmit, defaultValues, submitButtonText = "Enviar" }) => {
+const GenericForm = <TFormValues extends FieldValues>({ schema, fields, onSubmit, defaultValues, submitButtonText = "Enviar" }: GenericFormProps<TFormValues>) => {
     const form = useForm({
         resolver: zodResolver(schema),
         defaultValues
     });
 
-    const renderField = (field) => {
-        const Component = inputComponents[field.type];
-        if (!Component) {
-            console.warn(`Componente para el tipo "${field.type}" no está definido.`);
-            return null;
-        }
+    const renderField = (field: FieldConfig, index: number) => {
+        if (field.type == FieldType.Text) return (<TextInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Number) return (<NumberInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Select) return (<SelectInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Date) return (<DateInput form={form} fieldConfig={field} key={index} />);
 
-        return (
-            <Component
-                form={form}
-                key={field.name}
-                name={field.name}
-                label={field.label}
-                placeholder={field.placeholder}
-                options={field.options}
-            />
-        );
+        console.warn(`Componente para el tipo "${field.type}" no está definido.`);
+        return null;
     };
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-lg">
-                {fields.map((field) => renderField(field))}
+                {fields.map((field, index) => renderField(field, index))}
                 <Button type="submit" className="mt-4">
                     {submitButtonText}
                 </Button>
@@ -153,15 +168,11 @@ const GenericForm = ({ schema, fields, onSubmit, defaultValues, submitButtonText
     );
 };
 
-type GenericCardForm = {
-    title: string,
-    schema: any,
-    fields: any,
-    onSubmit: any,
-    defaultValues?: any,
-    submitButtonText: string
+interface GenericCardFormProps<TFormValues extends FieldValues> extends GenericFormProps<TFormValues> {
+    title: string;
 }
-const GenericCardForm = ({ title, schema, fields, onSubmit, defaultValues, submitButtonText = "Enviar" }: GenericCardForm) => {
+
+const GenericCardForm = <TFormValues extends FieldValues>({ title, schema, fields, onSubmit, defaultValues, submitButtonText }: GenericCardFormProps<TFormValues>) => {
     return (
         <BaseCard
             title={title}
@@ -176,4 +187,4 @@ const GenericCardForm = ({ title, schema, fields, onSubmit, defaultValues, submi
     );
 };
 
-export { NumberInput, TextInput, SelectInput, GenericForm, GenericCardForm };
+export { GenericForm, GenericCardForm };

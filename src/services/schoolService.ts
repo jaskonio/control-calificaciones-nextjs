@@ -36,7 +36,7 @@ export class AcademicYearService {
       })
 
       return data.map(transformAcademicYearToViewModel)
-    } catch (eroor) {
+    } catch (error) {
       console.error(error)
       throw new Error('Error al obtener los registros.')
     }

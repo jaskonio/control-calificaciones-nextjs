@@ -1,62 +1,82 @@
+import { CourseViewModel, CreateCourseModel, UpdateCourseModel } from '@/models/courses';
 import prisma from '../prisma/client';
-import { CourseStatus } from '@prisma/client';
+import { transformCourseInputToPrismaData, transformCourseToViewModel } from '@/prisma/transformer/courses';
 
-interface CreateCourseInput {
-  name: string;
-  description: string;
-  academicYearId: number;
-  gradeLevel: string;
-  status: CourseStatus;
-}
-
-interface UpdateCourseInput {
-  id: number;
-  data: Partial<CreateCourseInput>;
-}
 
 export class CourseService {
-  async create(data: CreateCourseInput) {
+  async create(data: CreateCourseModel) {
     try {
+      const dataTransformed = transformCourseInputToPrismaData(data)
+      
       return await prisma.course.create({
-        data,
+        data: dataTransformed,
+        include: {
+          academicYear: true,
+          classes: true
+        }
       });
     } catch (error) {
       console.error(error)
-      return null
+      throw Error("Error creando el nuevo Curso")
     }
   }
 
-  async getAll() {
+  async getAll(): Promise<CourseViewModel[]>{
     try {
-      const wait = (t: number) => new Promise((resolve, reject) => setTimeout(resolve, t))
-      await wait(2000)
+      const results = await prisma.course.findMany({
+        include: {
+          academicYear: true,
+          classes: true,
+        },
+        orderBy: {
+          id: 'asc'
+        }
+      });
 
-      return await prisma.course.findMany({
+      return results.map(transformCourseToViewModel)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error al obtener los registros.')
+    }
+  }
+
+  async getById(id: number) {
+    try {
+      const data = await prisma.course.findFirstOrThrow({
+        where: { id },
         include: {
           academicYear: true,
           classes: true,
         },
       });
+
+      if (!data) return null
+
+      return transformCourseToViewModel(data)
     } catch (error) {
-      return []
+      console.error(error)
+      throw new Error(`Error al recuperar el cuerso con ID: ${id}`)
     }
   }
 
-  async getById(id: number) {
-    return await prisma.course.findFirstOrThrow({
-      where: { id },
-      include: {
-        academicYear: true,
-        classes: true,
-      },
-    });
-  }
+  async update(id: number, data: UpdateCourseModel) {
+    try {
+      const dataTransformed = transformCourseInputToPrismaData(data)
+      
+      const dataUpdated = await prisma.course.update({
+        where: { id },
+        data: dataTransformed,
+        include: {
+          academicYear: true,
+          classes: true
+        }
+      });
 
-  async update({ id, data }: UpdateCourseInput) {
-    return await prisma.course.update({
-      where: { id },
-      data,
-    });
+      return transformCourseToViewModel(dataUpdated)
+    } catch (error) {
+      console.error(error)
+      throw new Error(`Error al actualizar el curso con ID: ${id}`)
+    }
   }
 
   async delete(id: number) {
@@ -65,8 +85,8 @@ export class CourseService {
         where: { id },
       });
     } catch (error) {
-      console.error(error)
-      return null
+      console.error(error);
+      throw new Error(`Error al eliminar el curso con ID: ${id}`);
     }
   }
 }

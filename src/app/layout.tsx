@@ -27,7 +27,7 @@ export default function RootLayout({
         <SessionProvider>
 
           <Header />
-          <div className="min-h-screen bg-gradient-to-b from-secondary-light to-white py-12">
+          <div className="min-h-screen bg-gradient-to-b from-secondary-light to-white">
             {children}
             <Toaster />
           </div>

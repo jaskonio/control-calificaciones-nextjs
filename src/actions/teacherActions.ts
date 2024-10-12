@@ -47,11 +47,10 @@ export async function updateTeacher(formData: FormData) {
   redirect(base_path)
 }
 
-export async function deleteTeacher(formData: FormData) {
-  const teafcherId = formData.get('teacher_id')
-  console.log('Eliminando Profesor:', teafcherId)
+export async function deleteTeacher(id: number) {
+  console.log(`Eliminando Profesor: ${id}`)
 
-  await teacherService.delete(Number(teafcherId))
+  await teacherService.delete(Number(id))
 
   revalidatePath(base_path)
 }

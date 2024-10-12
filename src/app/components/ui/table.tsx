@@ -1,24 +1,27 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
+import { AddButton, EditButton } from "./button";
+import TableDeleteButton from "./tableButtons";
 
 
-function BaseTableButtons({ buttons }: { buttons: any }) {
-  return (
-    <div className="mb-6">
-      {buttons}
-    </div>
-  )
-}
+const getNestedValue = (obj: any, path: string) => {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
 
 type BaseTableProps = {
   title: string;
-  buttons: any;
-  columns: string[];
-  rowContent: any;
+  columnNames: string[];
+  columnKeys: string[];
+  primaryKey: string;
+  data: any[],
+  baseAddUrl: string;
+  baseEditUrl: string;
+  onDelete: any
+  onCanDelete: (row: any) => boolean
 }
 
-export async function BaseTable({ title, buttons, columns, rowContent }: BaseTableProps) {
+export function BaseTable({ title, columnNames, columnKeys, primaryKey, data, baseAddUrl, baseEditUrl, onDelete, onCanDelete }: BaseTableProps) {
 
   return (
     <Card className="overflow-hidden">
@@ -27,18 +30,34 @@ export async function BaseTable({ title, buttons, columns, rowContent }: BaseTab
       </CardHeader>
 
       <CardContent className="p-6">
-        <BaseTableButtons buttons={buttons} />
+        <div className="mb-6">
+          <AddButton href={baseAddUrl} />
+        </div>
 
         <Table>
           <TableHeader className="text-lg">
             <TableRow>
-              {columns.map((col, index) => (
+              {columnNames.map((col, index) => (
                 <TableHead key={index}>{col}</TableHead>
               ))}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {rowContent}
+            {data.map((item) => (
+              <TableRow key={item[primaryKey]}>
+                {columnKeys.map((colKey, index) => (<TableCell key={index}>{getNestedValue(item, colKey)}</TableCell>))}
+
+                <TableCell>
+                  <div className="flex space-x-2">
+                    <EditButton href={`${baseEditUrl}${item.id}`} />
+                    {onCanDelete(item)
+                      ? <TableDeleteButton canDelete={false} data={item} onDelete={onDelete}></TableDeleteButton>
+                      : <TableDeleteButton canDelete={true} data={item} onDelete={onDelete}></TableDeleteButton>
+                    }
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </CardContent>

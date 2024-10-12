@@ -1,7 +1,8 @@
 'use client'
 
+
 import { CustomErrorHomePage } from "@/app/components/ui/error";
-import { useRouter } from "next/navigation";
+
 
 export default function Error({
     error,

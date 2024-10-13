@@ -26,7 +26,7 @@ export function ConverterClassModelToViewModel(model: Class & {
 }
 
 
-export function ConverterClassInputToClassModel(input: ClassViewModel): CreateClassModel {
+export function ConverterClassInputToClassModel(input: CreateClassModel): Partial<Class> {
     return {
         courseId: input.courseId,
         subjectId: input.subjectId,

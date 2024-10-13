@@ -3,7 +3,7 @@ import { formatDateToString, parseStringToDate } from '@/lib/utils';
 import { AcademicYearViewModel, CreateAcademicYearModel } from '@/models/academicYear';
 
 
-export function transformAcademicYearToViewModel(academicYear: AcademicYear & {
+export function ConverterAcademicYearToViewModel(academicYear: AcademicYear & {
     courses: any[];
     students: any[];
     events: any[];
@@ -21,7 +21,7 @@ export function transformAcademicYearToViewModel(academicYear: AcademicYear & {
 }
 
 
-export function transformInputToPrismaData(input: CreateAcademicYearModel): Partial<AcademicYear> {
+export function ConverterInputToPrismaData(input: CreateAcademicYearModel): Partial<AcademicYear> {
     return {
         name: input.name,
         status: input.status,

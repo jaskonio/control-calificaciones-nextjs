@@ -13,7 +13,7 @@ export interface CreateStudentModel {
 export interface UpdateStudentModel extends CreateStudentModel {
 }
 
-export interface StudenViewModel {
+export interface StudentViewModel {
     id: number;
     userId: number;
     birthDate: string;

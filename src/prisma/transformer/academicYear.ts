@@ -1,4 +1,4 @@
-import { AcademicYear, AcademicYearStatus } from '@prisma/client';
+import { AcademicYear } from '@prisma/client';
 import { formatDateToString, parseStringToDate } from '@/lib/utils';
 import { AcademicYearViewModel, CreateAcademicYearModel } from '@/models/academicYear';
 

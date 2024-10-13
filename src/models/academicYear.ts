@@ -1,28 +1,18 @@
-import { AcademicYearStatus, Course, Student, Event } from '@prisma/client';
+import { Course, Student, Event, AcademicYear } from '@prisma/client';
 
-// Model to Create
-export interface CreateAcademicYearModel {
-  name: string;
-  startDate: string; // 'yyyy-MM-dd'
-  endDate: string;   // 'yyyy-MM-dd'
-  status: AcademicYearStatus;
+
+type rewriteProperties = {
+  startDate: string;
+  endDate: string
 }
 
-// Model to Update
-export interface UpdateAcademicYearModel {
-  name: string;
-  startDate: string; // 'yyyy-MM-dd'
-  endDate: string;   // 'yyyy-MM-dd'
-  status: AcademicYearStatus;
-}
+export type CreateAcademicYearModel = Omit<AcademicYear, 'id' | 'startDate' | 'endDate'> & rewriteProperties
 
-// Model To View
-export interface AcademicYearViewModel {
+export type UpdateAcademicYearModel = CreateAcademicYearModel
+
+export type AcademicYearViewModel = CreateAcademicYearModel & {
   id: number;
-  name: string;
-  status: AcademicYearStatus;
-  startDate: string; // 'yyyy-MM-dd'
-  endDate: string;   // 'yyyy-MM-dd'
+
   courses: Course[];
   students: Student[];
   events: Event[];

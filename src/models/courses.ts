@@ -1,24 +1,12 @@
-import { AcademicYear, Class, CourseStatus } from "@prisma/client";
+import { AcademicYear, Class, Course } from "@prisma/client";
 
 
-export interface CreateCourseModel {
-  name: string;
-  description: string;
-  academicYearId: number;  
-  gradeLevel: string;
-  status: CourseStatus
-}
+export type CreateCourseModel = Omit<Course, 'id'>
 
-export interface UpdateCourseModel extends CreateCourseModel{
-}
+export type UpdateCourseModel = CreateCourseModel
 
-export interface CourseViewModel {
+export type CourseViewModel = CreateCourseModel & {
   id: number;
-  name: string;
-  description: string;
-  academicYearId: number;
-  gradeLevel: string;
-  status: CourseStatus;
 
   academicYear: AcademicYear[];
   classes: Class[];

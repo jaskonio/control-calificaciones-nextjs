@@ -1,6 +1,6 @@
 import { AcademicYear, AcademicYearStatus } from '@prisma/client';
 import { formatDateToString, parseStringToDate } from '@/lib/utils';
-import { AcademicYearViewModel } from '@/models/academicYear';
+import { AcademicYearViewModel, CreateAcademicYearModel } from '@/models/academicYear';
 
 
 export function transformAcademicYearToViewModel(academicYear: AcademicYear & {
@@ -21,16 +21,11 @@ export function transformAcademicYearToViewModel(academicYear: AcademicYear & {
 }
 
 
-export function transformInputToPrismaData(input: {
-    name: string;
-    status: AcademicYearStatus;
-    startDate: string;
-    endDate: string;
-}) {
-    const name = input.name;
-    const status = input.status;
-    const startDate = parseStringToDate(input.startDate);
-    const endDate = parseStringToDate(input.endDate);
-
-    return { name, status, startDate, endDate };
+export function transformInputToPrismaData(input: CreateAcademicYearModel): Partial<AcademicYear> {
+    return {
+        name: input.name,
+        status: input.status,
+        startDate: parseStringToDate(input.startDate),
+        endDate: parseStringToDate(input.endDate)
+    }
 }

@@ -1,8 +1,8 @@
 import { StudentService } from "./studentsService";
-import { AcademicYearService } from "./schoolService";
+import { AcademicYearService } from "./acedemicYearService";
 import { TeacherService } from "./teacherService";
 import { SubjectService } from "./subjectsService";
-import { CourseService } from "./coursesService";
+import { CourseService } from "./courseService";
 import { UserService } from "./userService";
 
 const schoolService = new AcademicYearService()

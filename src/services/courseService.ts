@@ -1,12 +1,12 @@
-import { CourseViewModel, CreateCourseModel } from '@/models/courses';
+import { CourseViewModel, CreateCourseModel } from '@/models/course';
 import prisma from '../prisma/client';
-import { transformCourseInputToPrismaData, transformCourseToViewModel } from '@/prisma/transformer/courses';
+import { ConverterCourseInputToModel, ConverterCourseToViewModel } from '@/prisma/transformer/course';
 import { BaseService } from './baseService';
 
 
 export class CourseService extends BaseService<CreateCourseModel, CourseViewModel> {
   constructor() {
-    super(prisma, 'course', transformCourseInputToPrismaData, transformCourseToViewModel);
+    super(prisma, 'course', ConverterCourseInputToModel, ConverterCourseToViewModel);
   }
 
   protected getInclude() {

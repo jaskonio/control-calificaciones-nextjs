@@ -1,4 +1,4 @@
-import { CourseViewModel, CreateCourseModel } from "@/models/courses";
+import { CourseViewModel, CreateCourseModel } from "@/models/course";
 import { Course } from "@prisma/client";
 
 

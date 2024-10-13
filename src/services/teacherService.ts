@@ -1,56 +1,18 @@
+import { CreateTeacherModel, TeacherViewModel } from '@/models/teacher';
 import prisma from '../prisma/client';
-import { TeacherStatus } from '@prisma/client';
+import { ConverterTeacherInputToModel, ConverterTeacherToViewModel } from '@/prisma/transformer/teacher';
+import { BaseService } from './baseService';
 
-interface CreateTeacherInput {
-  userId: number;
-  expertise: string;
-  phone: string;
-  address: string;
-  hireDate: Date;
-  status: TeacherStatus;
-}
 
-interface UpdateTeacherInput {
-  id: number;
-  data: Partial<CreateTeacherInput>;
-}
-
-export class TeacherService {
-  async create(data: CreateTeacherInput) {
-    return await prisma.teacher.create({
-      data,
-    });
+export class TeacherService extends BaseService<CreateTeacherModel, TeacherViewModel> {
+  constructor() {
+    super(prisma, 'teacher', ConverterTeacherInputToModel, ConverterTeacherToViewModel);
   }
 
-  async getAll() {
-    return await prisma.teacher.findMany({
-      include: {
-        user: true,
-        classes: true,
-      },
-    });
-  }
-
-  async getById(id: number) {
-    return await prisma.teacher.findUnique({
-      where: { id },
-      include: {
-        user: true,
-        classes: true,
-      },
-    });
-  }
-
-  async update({ id, data }: UpdateTeacherInput) {
-    return await prisma.teacher.update({
-      where: { id },
-      data,
-    });
-  }
-
-  async delete(id: number) {
-    return await prisma.teacher.delete({
-      where: { id },
-    });
+  protected getInclude() {
+    return {
+      user: true,
+      classes: true,
+    }
   }
 }

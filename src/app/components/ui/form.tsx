@@ -26,7 +26,10 @@ export enum FieldType {
     Text = "text",
     Number = "number",
     Select = "select",
-    Date = "date"
+    Date = "date",
+    Password = "password",
+    Email = "email",
+    Phone = "phone"
 };
 
 export type FieldConfig = {
@@ -41,6 +44,66 @@ type inputComponent = {
     form: UseFormReturn;
     fieldConfig: FieldConfig
 }
+
+const PhoneInput = ({ form, fieldConfig }: inputComponent) => {
+    return (
+        <div className="mb-4">
+            <FormField
+                control={form['control']}
+                name={fieldConfig.name}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
+                        <FormControl>
+                            <Input type="number" {...field} placeholder={fieldConfig.placeholder} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </div>
+    )
+};
+
+const EmailInput = ({ form, fieldConfig }: inputComponent) => {
+    return (
+        <div className="mb-4">
+            <FormField
+                control={form['control']}
+                name={fieldConfig.name}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
+                        <FormControl>
+                            <Input type="email" {...field} placeholder={fieldConfig.placeholder} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </div>
+    );
+};
+
+const PasswordInput = ({ form, fieldConfig }: inputComponent) => {
+    return (
+        <div className="mb-4">
+            <FormField
+                control={form['control']}
+                name={fieldConfig.name}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
+                        <FormControl>
+                            <Input type="password" {...field} placeholder={fieldConfig.placeholder} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </div>
+    );
+};
 
 const NumberInput = ({ form, fieldConfig }: inputComponent) => {
     return (
@@ -151,6 +214,9 @@ const GenericForm = <TFormValues extends FieldValues>({ schema, fields, onSubmit
         if (field.type == FieldType.Number) return (<NumberInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Select) return (<SelectInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Date) return (<DateInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Email) return (<EmailInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Password) return (<PasswordInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Phone) return (<PhoneInput form={form} fieldConfig={field} key={index} />);
 
         console.warn(`Componente para el tipo "${field.type}" no está definido.`);
         return null;

@@ -1,11 +1,11 @@
-// src/components/navigation/SidebarNav.tsx
-
 "use client";
+
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { itemsConf } from './itemsConf';
 import NavigationItem from './navItem';
+
 
 const SidebarNav = () => {
   const pathname = usePathname();

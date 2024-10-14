@@ -8,38 +8,28 @@ import { redirect } from 'next/navigation'
 const base_path = '/admin/subjects'
 
 
-export async function addSubjects(formData: FormData) {
-  console.log('Añadiendo Asignatura:', Object.fromEntries(formData))
+export async function addSubjects(data: any) {
+  console.log('Añadiendo Asignatura')
 
-  let name = formData.get('name') as string
-  let description = formData.get('description') as string
-
-  await subjectsService.add(name, description)
+  await subjectsService.create(data)
 
   revalidatePath(base_path)
   redirect(base_path)
 }
 
-export async function updateSubjects(formData: FormData) {
-  console.log('Actualizando Asignatura:', Object.fromEntries(formData))
+export async function updateSubjects(id: number, data: any) {
+  console.log('Actualizando Asignatura')
 
-  const modelViewUpdated: SubjectView = {
-    subject_id: Number(formData.get('subject_id')),
-    name: formData.get('name') as string,
-    description: formData.get('description') as string,
-  };
-
-  await subjectsService.update(modelViewUpdated.subject_id, modelViewUpdated)
+  await subjectsService.update(id, data)
 
   revalidatePath(base_path)
   redirect(base_path)
 }
 
-export async function deleteSubjects(formData: FormData) {
-  const id = formData.get('subject_id')
+export async function deleteSubjects(id: number) {
   console.log('Eliminando Asignatura:', id)
 
-  await subjectsService.delete(Number(id))
+  await subjectsService.delete(id)
 
   revalidatePath(base_path)
 }

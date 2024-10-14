@@ -27,7 +27,7 @@ export async function updateSchoolYear(id: number, data: any) {
 }
 
 export async function deleteSchoolYear(id: number) {
-  console.log('Eliminando año escolar:', id)
+  console.log(`Eliminando año escolar: ${id}`)
 
   await schoolService.delete(Number(id))
 

@@ -1,4 +1,4 @@
-import { deleteSchoolYear } from "@/actions/schoolActions";
+import { deleteSchoolYear } from "@/actions/academicYearActions";
 import { BaseTable } from "@/app/components/ui/table";
 import { schoolService } from "@/services";
 

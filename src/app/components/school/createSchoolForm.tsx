@@ -1,6 +1,6 @@
 "use client"
 
-import { addSchoolYear } from "@/actions/schoolActions";
+import { addSchoolYear } from "@/actions/academicYearActions";
 import { GenericCardForm } from "../ui/form"
 import SchoolFields from "./schoolFields";
 import SchoolSchema from "./schoolSchema";

@@ -4,6 +4,8 @@ import { TeacherService } from "./teacherService";
 import { SubjectService } from "./subjectsService";
 import { CourseService } from "./courseService";
 import { UserService } from "./userService";
+import { ClassService } from "./classService";
+import { ParentService } from "./parentService";
 
 const schoolService = new AcademicYearService()
 
@@ -15,4 +17,7 @@ const subjectsService = new SubjectService()
 
 const coursesService = new CourseService()
 
-export { userService, schoolService, teacherService, studentService, subjectsService, coursesService}
+const classService = new ClassService()
+const parentService = new ParentService()
+
+export { userService, schoolService, teacherService, studentService, subjectsService, coursesService, classService, parentService }

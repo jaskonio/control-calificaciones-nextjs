@@ -4,16 +4,12 @@ import { updateCourse } from "@/actions/coursesActions";
 import { GenericCardForm } from "../ui/form"
 import CourseFields from "./courseFields";
 import CourseSchema from "./courseSchema";
+import { updateOptionFields } from "@/lib/utils";
 
 
 export default function EditCourseForm({ id, academicYearOptions, defaultValue }: { id: number, academicYearOptions: any[], defaultValue: any }) {
-  const CourseFieldsProcessed = CourseFields.map(x => {
-    if (x.name == 'academicYearId') {
-      x.options = academicYearOptions
-    }
-
-    return x
-  })
+  const optionsUpdate = {'academicYearId': academicYearOptions}
+  const CourseFieldsProcessed = updateOptionFields({ fields: CourseFields, options: optionsUpdate })
 
   const handleCreateUser = (data: any) => {
     console.log("Datos del formulario:", data);
@@ -27,6 +23,6 @@ export default function EditCourseForm({ id, academicYearOptions, defaultValue }
       onSubmit={handleCreateUser}
       schema={CourseSchema}
       defaultValues={defaultValue}
-      submitButtonText="Añadir"></GenericCardForm>
+      submitButtonText="Editar"></GenericCardForm>
   )
 }

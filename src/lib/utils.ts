@@ -1,3 +1,4 @@
+import { FieldConfig, SelectOption } from "@/app/components/ui/form";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -19,4 +20,20 @@ export function parseStringToDate(dateString: string): Date {
     throw new Error(`Fecha inválida: ${dateString}`);
   }
   return date;
+}
+
+type updateOptionFields = {
+  options: { [key: string]: SelectOption[] },
+  fields: FieldConfig[]
+}
+export function updateOptionFields({options, fields}: updateOptionFields) {
+  const fieldsUpdated = fields.map( f => {
+    if (Object.keys(options).includes(f.name)) {
+      f.options = options[f.name]
+    }
+
+    return f
+  })
+
+  return fieldsUpdated
 }

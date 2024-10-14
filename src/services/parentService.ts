@@ -1,18 +1,18 @@
-import { CourseViewModel, CreateCourseModel } from '@/models/Parent';
+import { ParentViewModel, CreateParentModel } from '@/models/parent';
 import prisma from '../prisma/client';
-import { ConverterCourseInputToModel, ConverterCourseToViewModel } from '@/prisma/transformer/course';
+import { ConverterParentInputToModel, ConverterParentToViewModel } from '@/prisma/transformer/parent';
 import { BaseService } from './baseService';
 
 
-export class CourseService extends BaseService<CreateCourseModel, CourseViewModel> {
+export class ParentService extends BaseService<CreateParentModel, ParentViewModel> {
   constructor() {
-    super(prisma, 'parent', ConverterCourseInputToModel, ConverterCourseToViewModel);
+    super(prisma, 'parent', ConverterParentInputToModel, ConverterParentToViewModel);
   }
 
   protected getInclude() {
     return {
-      academicYear: true,
-      classes: true,
+      user: true,
+      student: true,
     }
   }
 }

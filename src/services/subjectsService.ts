@@ -1,50 +1,17 @@
-// src/services/subjectService.ts
+import { SubjectViewModel, CreateSubjectModel } from '@/models/subject';
 import prisma from '../prisma/client';
-import { Prisma, SubjectStatus } from '@prisma/client';
+import { ConverterSubjectInputToModel, ConverterSubjectToViewModel } from '@/prisma/transformer/subject';
+import { BaseService } from './baseService';
 
-interface CreateSubjectInput {
-  name: string;
-  description: string;
-  gradeLevel: string;
-  status: SubjectStatus;
-}
 
-interface UpdateSubjectInput {
-  data: Partial<CreateSubjectInput>;
-}
-
-export class SubjectService {
-  async create(data: CreateSubjectInput) {
-    return await prisma.subject.create({ data });
+export class SubjectService extends BaseService<CreateSubjectModel, SubjectViewModel> {
+  constructor() {
+    super(prisma, 'subject', ConverterSubjectInputToModel, ConverterSubjectToViewModel);
   }
 
-  async getAll() {
-    return await prisma.subject.findMany({
-      include: {
-        classes: true,
-      },
-    });
-  }
-
-  async getById(id: number) {
-    return await prisma.subject.findUnique({
-      where: { id },
-      include: {
-        classes: true,
-      },
-    });
-  }
-
-  async update(id: number, data: UpdateSubjectInput['data']) {
-    return await prisma.subject.update({
-      where: { id },
-      data,
-    });
-  }
-
-  async delete(id: number) {
-    return await prisma.subject.delete({
-      where: { id },
-    });
+  protected getInclude() {
+    return {
+      classes: true
+    }
   }
 }

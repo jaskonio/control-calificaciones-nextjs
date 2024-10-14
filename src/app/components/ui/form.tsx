@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form"
 import { ZodSchema } from "zod";
 
-interface SelectOption {
+export interface SelectOption {
     label: string;
     value: string;
 }

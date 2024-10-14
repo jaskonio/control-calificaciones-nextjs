@@ -50,14 +50,12 @@ export abstract class BaseService<T, ViewModel> implements IBaseService<T, ViewM
         }
     }
 
-    async getById(id: number): Promise<ViewModel | null> {
+    async getById(id: number): Promise<ViewModel> {
         try {
-            const data = await (this.prisma[this.model] as any).findUnique({
+            const data = await (this.prisma[this.model] as any).findUniqueOrThrow({
                 where: { id },
                 include: this.getInclude(),
             });
-
-            if (!data) return null;
 
             return this.transformToViewModel(data);
         } catch (error) {

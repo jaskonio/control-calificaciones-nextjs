@@ -1,4 +1,4 @@
-import { CourseViewModel, CreateCourseModel } from "@/models/course";
+import { CourseInputModel, CourseViewModel } from "@/models/course";
 import { Course } from "@prisma/client";
 
 
@@ -10,7 +10,7 @@ export function ConverterCourseToViewModel(model: Course & {
         id: model.id,
         name: model.name,
         description: model.description,
-        academicYearId: model.academicYearId,
+        academicYearId: model.academicYearId.toString(),
         gradeLevel: model.gradeLevel,
         status: model.status,
 
@@ -20,11 +20,11 @@ export function ConverterCourseToViewModel(model: Course & {
 }
 
 
-export function ConverterCourseInputToModel(input: CreateCourseModel): Partial<Course> {
+export function ConverterCourseInputToModel(input: CourseInputModel): Partial<Course> {
     return {
         name: input.name,
         description: input.description,
-        academicYearId: input.academicYearId,
+        academicYearId: Number(input.academicYearId),
         gradeLevel: input.gradeLevel,
         status: input.status
     };

@@ -1,31 +1,23 @@
-import { BaseCard } from "@/app/components/ui/cards"
-import { ResoucesNotFound } from "@/app/components/ui/errors"
 import { coursesService, schoolService } from "@/services"
-import CourseForm from "@/app/components/courses/courseForm"
-import { updateCourse } from "@/actions/coursesActions"
+import EditCourseForm from "@/app/components/courses/editCourseForm"
+import { SelectOption } from "@/app/components/ui/form"
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const course = await coursesService.getById(parseInt(params.id))
-  const values = await schoolService.getAll()
+  const id = parseInt(params.id)
+  const course = await coursesService.getById(id)
+  const academicYearViewModels = await schoolService.getAll()
 
-  if (!course) {
-    return (
-      <ResoucesNotFound
-        title="Clase no encontrado"
-        content="Lo sentimos, no pudimos encontrar la clase que estás buscando."
-        description="Es posible que la clase haya sido eliminado o que la URL sea incorrecta. Por favor, verifica la información e intenta nuevamente."
-        prevhref="/admin/courses"
-        prevhrefMessage="Ver todos las clases"
-      />
-    )
-  }
+  const academicYearOptions: SelectOption[] = academicYearViewModels.map(o => {
+    return {
+      label: o.name,
+      value: o.id.toString()
+    }
+  })
 
   return (
-    <BaseCard
-      title="Editar Año Escolar"
-      content={(
-        <CourseForm id={course.id} name={course.name} description={course.description} gradeLevel={course.gradeLevel} status={course.status} academicYearAvailables={values} submitHandler={updateCourse}></CourseForm>
-      )}
-    ></BaseCard>
+    <EditCourseForm
+      id={id}
+      academicYearOptions={academicYearOptions}
+      defaultValue={course}></EditCourseForm>
   )
 }

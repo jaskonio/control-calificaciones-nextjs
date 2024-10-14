@@ -1,5 +1,6 @@
 import { FieldConfig, FieldType } from "../ui/form";
 
+
 const SchoolFields: FieldConfig[] = [
     {
         type: FieldType.Text,

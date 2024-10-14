@@ -1,18 +1,18 @@
-import { BaseCard } from "@/app/components/ui/cards"
-import CourseForm from "@/app/components/courses/courseForm"
 import { schoolService } from "@/services"
-import { addCourse } from "@/actions/coursesActions"
+import { SelectOption } from "@/app/components/ui/form"
+import CreateCourseForm from "@/app/components/courses/createCourseForm"
 
 
 export default async function Page() {
-  const values = await schoolService.getAll()
+  const academicYearViewModels = await schoolService.getAll()
+  const academicYearOptions: SelectOption[] = academicYearViewModels.map(o => {
+    return {
+      label: o.name,
+      value: o.id.toString()
+    }
+  })
 
   return (
-    <BaseCard
-      title="Añadir Nueva Clase"
-      content={(
-        <CourseForm submitHandler={addCourse} academicYearAvailables={values}></CourseForm>
-      )}
-    ></BaseCard>
+    <CreateCourseForm academicYearOptions={academicYearOptions}></CreateCourseForm>
   )
 }

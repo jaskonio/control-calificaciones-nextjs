@@ -59,6 +59,8 @@ docker rm pg-control-calificaciones
 Run Prisma:
 
 ```bash
+npx prisma migrate reset
+npx prisma migrate dev
 npx prisma db push
 npx @snaplet/seed init prisma/seed
 npx prisma db seed

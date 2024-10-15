@@ -108,7 +108,7 @@ model AcademicYear {
   status        AcademicYearStatus
   // Relationships
   courses       Course[]
-  students      Student[]
+  students      StudentsAcademicYears[]
   events        Event[]
 }
 
@@ -123,9 +123,19 @@ model Student {
   academicYearId   Int
   // Relationships
   user             User            @relation(fields: [userId], references: [id])
-  academicYear     AcademicYear    @relation(fields: [academicYearId], references: [id])
+  academicYear     StudentsAcademicYears[]
   parents          Parent[]
   enrollments      Enrollment[]
+}
+
+model StudentsAcademicYears {
+  academicYearId   Int
+  studentId        Int
+  // Relationships
+  academicYear     AcademicYear    @relation(fields: [academicYearId], references: [id])
+  student             Student            @relation(fields: [studentId], references: [id])
+
+  @@id([academicYearId, studentId])
 }
 
 model Parent {

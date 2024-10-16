@@ -27,7 +27,6 @@ const main = async () => {
   await seed.event((x) => x(10));
   await seed.report((x) => x(10));
   await seed.setting((x) => x(10));
-  await seed.studentsAcademicYears((x) => x(10));
 
   // Type completion not working? You might want to reload your TypeScript Server to pick up the changes
 

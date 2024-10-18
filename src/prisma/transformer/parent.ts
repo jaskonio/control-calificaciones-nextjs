@@ -13,14 +13,14 @@ export function ConverterParentToViewModel(model: Parent & {
         address: model.address,
         phone: model.phone,
         email: model.email,
-        studentId: model.studentId,
+        studentId: model.stuentId,
 
         user: model.user,
         student: model.student
     };
 }
 
-export function ConverterParentInputToModel(input: CreateParentModel): Partial<Parent> {
+export function ConverterParentInputToModel(input: CreateParentModel, type: string): Partial<Parent> {
     return {
         userId: input.userId,
         address: input.address,

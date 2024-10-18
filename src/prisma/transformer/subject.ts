@@ -16,7 +16,7 @@ export function ConverterSubjectToViewModel(model: Subject & {
     };
 }
 
-export function ConverterSubjectInputToModel(input: CreateSubjectModel): Partial<Subject> {
+export function ConverterSubjectInputToModel(input: CreateSubjectModel, type: string): Partial<Subject> {
     return {
         name: input.name,
         description: input.description,

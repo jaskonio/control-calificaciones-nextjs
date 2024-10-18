@@ -20,7 +20,7 @@ export function ConverterCourseToViewModel(model: Course & {
 }
 
 
-export function ConverterCourseInputToModel(input: CourseInputModel): Partial<Course> {
+export function ConverterCourseInputToModel(input: CourseInputModel, type: string): Partial<Course> {
     return {
         name: input.name,
         description: input.description,

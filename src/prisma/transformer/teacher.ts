@@ -21,7 +21,7 @@ export function ConverterTeacherToViewModel(model: Teacher & {
     };
 }
 
-export function ConverterTeacherInputToModel(input: CreateTeacherModel): Partial<Teacher> {
+export function ConverterTeacherInputToModel(input: CreateTeacherModel, type: string): Partial<Teacher> {
     return {
         userId: input.userId,
         expertise: input.expertise,

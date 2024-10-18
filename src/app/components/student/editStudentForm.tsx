@@ -10,13 +10,14 @@ export default function EditStudentForm({ id, defaultValues }: { id: number, def
         console.log("Datos del formulario:", data);
         updateStudent(id, data)
     };
+
     return (
         <GenericCardForm
-            title="Añadir Nuevo Estudiante"
+            title="Editar Estudiante"
             fields={StudentFields}
             onSubmit={handleCreateUser}
             schema={StudentSchema}
             defaultValues={defaultValues}
-            submitButtonText="Añadir"></GenericCardForm>
+            submitButtonText="Guardar"></GenericCardForm>
     )
 }

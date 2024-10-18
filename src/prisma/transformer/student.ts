@@ -1,6 +1,6 @@
 import { formatDateToString, parseStringToDate } from "@/lib/utils";
 import { CreateStudentModel, StudentViewModel } from "@/models/student";
-import { Student } from "@prisma/client";
+import { Student, UserRole } from "@prisma/client";
 
 
 export function ConverterStudentToViewModel(model: Student & {
@@ -11,13 +11,18 @@ export function ConverterStudentToViewModel(model: Student & {
 }): StudentViewModel {
     return {
         id: model.id,
+
+        name: model.user.name,
+        password: model.user.password,
+        email: model.user.email,
+        status: model.user.status,
+
         userId: model.userId,
         birthDate: formatDateToString(model.birthDate),
         address: model.address,
         phone: model.phone,
         enrollmentDate: formatDateToString(model.enrollmentDate),
         gradeLevel: model.gradeLevel,
-        academicYearId: model.academicYearId,
 
         user: model.user,
         academicYear: model.academicYear,
@@ -26,7 +31,31 @@ export function ConverterStudentToViewModel(model: Student & {
     };
 }
 
-export function ConverterStudentInputToModel(input: CreateStudentModel): Partial<Student> {
+export function ConverterStudentInputToModel(input: CreateStudentModel, type: string): Partial<any> {
+    let userModel = {}
+
+    if (type == 'create') {
+        userModel = {
+            create: {
+                name: input.name,
+                password: input.password,
+                email: input.email,
+                status: input.status,
+                role: UserRole.student
+            }
+        }
+    } else if (type == 'update') {
+        userModel = {
+            update: {
+                name: input.name,
+                password: input.password,
+                email: input.email,
+                status: input.status,
+                role: UserRole.student
+            }
+        }
+    }
+
     return {
         userId: input.userId,
         birthDate: parseStringToDate(input.birthDate),
@@ -34,6 +63,7 @@ export function ConverterStudentInputToModel(input: CreateStudentModel): Partial
         phone: input.phone,
         enrollmentDate: parseStringToDate(input.enrollmentDate),
         gradeLevel: input.gradeLevel,
-        academicYearId: input.academicYearId,
+
+        user: userModel
     };
 }

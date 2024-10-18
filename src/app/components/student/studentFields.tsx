@@ -48,6 +48,12 @@ const StudentFields: FieldConfig[] = [
         placeholder: "Ingresa tu Telefono",
     },
     {
+        type: FieldType.Date,
+        name: "enrollmentDate",
+        label: "Fecha de inscripcion",
+        placeholder: "Ingresa la fecha de inscripción",
+    },
+    {
         type: FieldType.Text,
         name: "gradeLevel",
         label: "Grado",

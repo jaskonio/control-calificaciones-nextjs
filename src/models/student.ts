@@ -1,13 +1,17 @@
-import { AcademicYear, Enrollment, Parent, User } from "@prisma/client";
+import { AcademicYear, Enrollment, Parent, User, UserStatus } from "@prisma/client";
 
 export interface CreateStudentModel {
+    name: string,
+    email: string,
+    password: string,
+    status: UserStatus,
+
     userId: number;
     birthDate: string;
     address: string;
     phone: string;
     enrollmentDate: string;
     gradeLevel: string;
-    academicYearId: number
 }
 
 export interface UpdateStudentModel extends CreateStudentModel {
@@ -15,13 +19,18 @@ export interface UpdateStudentModel extends CreateStudentModel {
 
 export interface StudentViewModel {
     id: number;
+
+    name: string,
+    email: string,
+    password: string,
+    status: UserStatus,
+
     userId: number;
     birthDate: string;
     address: string;
     phone: string;
     enrollmentDate: string;
     gradeLevel: string;
-    academicYearId: number
 
     user: User;
     academicYear: AcademicYear;

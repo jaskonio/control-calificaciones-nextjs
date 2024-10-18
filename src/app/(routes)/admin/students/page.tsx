@@ -6,9 +6,9 @@ import { studentService } from "@/services";
 export default async function Page() {
   const data = await studentService.getAll()
   const title = 'Años Escolares'
-  const columnNames = ['ID', 'Nombre', 'Dirección', 'Fecha De Nacimiento', 'Acciones']
+  const columnNames = ['ID', 'Nombre', 'Fecha de inscripcón', 'Fecha De Nacimiento', 'Acciones']
   const primaryKey = 'id'
-  const columnKeys = ['id', 'user.name', 'address', 'birthDate']
+  const columnKeys = ['id', 'name', 'enrollmentDate', 'birthDate']
   const baseAddUrl = '/admin/students/add/'
   const baseEditUrl = '/admin/students/edit/'
 

@@ -18,7 +18,7 @@ type BaseTableProps = {
   baseAddUrl: string;
   baseEditUrl: string;
   onDelete: any
-  onCanDelete: (row: any) => boolean
+  onCanDelete?: (row: any) => boolean
 }
 
 export function BaseTable({ title, columnNames, columnKeys, primaryKey, data, baseAddUrl, baseEditUrl, onDelete, onCanDelete }: BaseTableProps) {
@@ -50,7 +50,7 @@ export function BaseTable({ title, columnNames, columnKeys, primaryKey, data, ba
                 <TableCell>
                   <div className="flex space-x-2">
                     <EditButton href={`${baseEditUrl}${item.id}`} />
-                    {onCanDelete(item)
+                    {onCanDelete && onCanDelete(item)
                       ? <TableDeleteButton canDelete={false} data={item} onDelete={onDelete}></TableDeleteButton>
                       : <TableDeleteButton canDelete={true} data={item} onDelete={onDelete}></TableDeleteButton>
                     }

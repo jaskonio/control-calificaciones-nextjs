@@ -24,8 +24,8 @@ export function ConverterAcademicYearToViewModel(academicYear: AcademicYear & {
 export function ConverterInputToPrismaData(input: CreateAcademicYearModel): Partial<AcademicYear> {
     return {
         name: input.name,
-        status: input.status,
         startDate: parseStringToDate(input.startDate),
-        endDate: parseStringToDate(input.endDate)
+        endDate: parseStringToDate(input.endDate),
+        status: input.status
     }
 }

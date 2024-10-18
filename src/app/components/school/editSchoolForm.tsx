@@ -20,11 +20,11 @@ export default function EditSchoolForm({ id, defaultValues }: CourseFormProps) {
 
     return (
         <GenericCardForm
-            title="Añadir Nueva Clase"
+            title="Editar Clase"
             fields={SchoolFields}
             onSubmit={handleCreateUser}
             schema={SchoolSchema}
             defaultValues={defaultValues}
-            submitButtonText="Añadir"></GenericCardForm>
+            submitButtonText="Guardar"></GenericCardForm>
     )
 }

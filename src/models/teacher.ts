@@ -1,6 +1,11 @@
-import { Class, Teacher, User } from "@prisma/client";
+import { Class, Teacher, User, UserStatus } from "@prisma/client";
 
 type rewriteProperties = {
+    name: string,
+    email: string,
+    password: string,
+    statusUser: UserStatus,
+
     hireDate: string
 }
 

@@ -5,10 +5,10 @@ import { teacherService } from "@/services";
 
 export default async function Page() {
   const title = "Lista de Profesores"
-  const columnNames = ['ID', 'Nombre', 'Habilidad', 'Estado']
+  const columnNames = ['ID', 'Nombre', 'Habilidad', 'Fecha incorporación', 'Estado']
   const data = await teacherService.getAll()
   const primaryKey = 'Id'
-  const columnKeys = ['id', 'user.name', 'expertise', 'status']
+  const columnKeys = ['id', 'user.name', 'expertise', 'hireDate', 'status']
   const baseAddUrl = '/admin/teachers/add/'
   const baseEditUrl = '/admin/teachers/edit/'
 

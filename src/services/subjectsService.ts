@@ -11,7 +11,7 @@ export class SubjectService extends BaseService<CreateSubjectModel, SubjectViewM
 
   protected getInclude() {
     return {
-      classes: true
+      classSubject: true
     }
   }
 }

@@ -60,6 +60,7 @@ Run Prisma:
 
 ```bash
 npx prisma migrate reset
+npx @snaplet/seed sync
 npx prisma migrate dev
 npx prisma db push
 npx @snaplet/seed init prisma/seed

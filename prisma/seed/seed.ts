@@ -20,7 +20,8 @@ const main = async () => {
   await seed.teacher((x) => x(10));
   await seed.subject((x) => x(10));
   await seed.course((x) => x(10));
-  await seed.class((x) => x(10));
+  await seed.classSubject((x) => x(10));
+  await seed.schduledTimeClassSubject((x) => x(10))
   await seed.enrollment((x) => x(10));
   await seed.grade((x) => x(10));
   await seed.attendance((x) => x(10));

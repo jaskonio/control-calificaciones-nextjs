@@ -35,8 +35,8 @@ export const itemsConf: NavItem[] = [
         href: '/admin/subjects',
     },
     {
-        title: 'Clases',
-        description: 'Administra la información de las clases',
+        title: 'Cursos',
+        description: 'Administra la información de las Cursos',
         icon: House,
         href: '/admin/courses',
     },

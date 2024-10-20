@@ -147,7 +147,7 @@ model Teacher {
   status            TeacherStatus
   // Relationships
   user        User      @relation(fields: [userId], references: [id])
-  classes     Class[]
+  classes     ClassSubject[]
 }
 
 model Subject {
@@ -157,7 +157,7 @@ model Subject {
   gradeLevel  String       // e.g., "5th Grade"
   status      SubjectStatus
   // Relationships
-  classes     Class[]
+  classSubject ClassSubject[]
 }
 
 model Course {
@@ -169,23 +169,31 @@ model Course {
   status         CourseStatus
   // Relationships
   academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id])
-  classes        Class[]
+  classes        ClassSubject[]
 }
 
-model Class {
+model ClassSubject {
   id          Int          @id @default(autoincrement())
   courseId    Int
   subjectId   Int
   teacherId   Int
-  classroom   String       // e.g., "A101"
-  startTime   String       // "HH:MM:SS" format
-  endTime     String       // "HH:MM:SS" format
-  dayOfWeek   DayOfWeek
+  classroom   String       // e.g., "Matematicas - 1º ESO, Lengua - 2º ESO"
   // Relationships
   course      Course       @relation(fields: [courseId], references: [id])
   subject     Subject      @relation(fields: [subjectId], references: [id])
   teacher     Teacher      @relation(fields: [teacherId], references: [id])
+  scheduledTime schduledTimeClassSubject[]
   enrollments Enrollment[]
+}
+
+model schduledTimeClassSubject {
+  id          Int          @id @default(autoincrement())
+  classSubjectId   Int
+  startTime   String       // "HH:MM:SS" format
+  endTime     String       // "HH:MM:SS" format
+  dayOfWeek   DayOfWeek
+  // Relationships
+  classSubject      ClassSubject       @relation(fields: [classSubjectId], references: [id])
 }
 
 model Enrollment {
@@ -196,7 +204,7 @@ model Enrollment {
   status           EnrollmentStatus
   // Relationships
   student          Student           @relation(fields: [studentId], references: [id])
-  class            Class             @relation(fields: [classId], references: [id])
+  class            ClassSubject             @relation(fields: [classId], references: [id])
   grades           Grade[]
   attendances      Attendance[]
 }

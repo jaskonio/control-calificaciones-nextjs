@@ -1,11 +1,14 @@
-import { Student, User } from "@prisma/client";
+import { Student, User, UserStatus } from "@prisma/client";
 
 export interface CreateParentModel {
+    name: string,
+    email: string,
+    password: string,
+    status: UserStatus,
+
     userId: number;
     address: string;
     phone: string;
-    email: string;
-    studentId: number;
 }
 
 export interface UpdateParentModel extends CreateParentModel {
@@ -13,11 +16,15 @@ export interface UpdateParentModel extends CreateParentModel {
 
 export interface ParentViewModel {
     id: number;
+
+    name: string,
+    email: string,
+    password: string,
+    status: UserStatus,
+
     userId: number;
     address: string;
     phone: string;
-    email: string;
-    studentId: number;
 
     user: User;
     student: Student;

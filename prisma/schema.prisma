@@ -132,7 +132,6 @@ model Parent {
   userId            Int       @unique
   address           String
   phone             String
-  email             String
   // Relationships
   user        User      @relation(fields: [userId], references: [id])
   student     Student[]

@@ -5,6 +5,7 @@ import {
     UserCheck,
     BookOpenText,
     House,
+    User
 } from 'lucide-react';
 
 
@@ -39,4 +40,10 @@ export const itemsConf: NavItem[] = [
         icon: House,
         href: '/admin/courses',
     },
+    {
+        title: 'Padres',
+        description: 'Administra la información de las Padres',
+        icon: User,
+        href: '/admin/parents',
+    }
 ];

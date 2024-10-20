@@ -1,6 +1,5 @@
-import { formatDateToString, parseStringToDate } from "@/lib/utils";
 import { CreateParentModel, ParentViewModel } from "@/models/parent";
-import { Parent } from "@prisma/client";
+import { Parent, UserRole } from "@prisma/client";
 
 
 export function ConverterParentToViewModel(model: Parent & {
@@ -9,23 +8,46 @@ export function ConverterParentToViewModel(model: Parent & {
 }): ParentViewModel {
     return {
         id: model.id,
+
+        name: model.user.name,
+        password: model.user.password,
+        email: model.user.email,
+        status: model.user.status,
+
         userId: model.userId,
         address: model.address,
         phone: model.phone,
-        email: model.email,
-        studentId: model.stuentId,
 
         user: model.user,
         student: model.student
     };
 }
 
-export function ConverterParentInputToModel(input: CreateParentModel, type: string): Partial<Parent> {
+export function ConverterParentInputToModel(input: CreateParentModel, type: string): Partial<any> {
+    let userModel = {}
+    let userData = {
+        name: input.name,
+        password: input.password,
+        email: input.email,
+        status: input.status,
+        role: UserRole.parent
+    }
+
+    if (type == 'create') {
+        userModel = {
+            create: userData
+        }
+    } else if (type == 'update') {
+        userModel = {
+            update: userData
+        }
+    }
+
     return {
         userId: input.userId,
         address: input.address,
         phone: input.phone,
-        email: input.email,
-        studentId: input.studentId
+
+        user: userModel
     };
 }

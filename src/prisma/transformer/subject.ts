@@ -3,7 +3,7 @@ import { Subject } from "@prisma/client";
 
 
 export function ConverterSubjectToViewModel(model: Subject & {
-    classes: any[];
+    classSubject: any[];
 }): SubjectViewModel {
     return {
         id: model.id,
@@ -12,7 +12,7 @@ export function ConverterSubjectToViewModel(model: Subject & {
         gradeLevel: model.gradeLevel,
         status: model.status,
 
-        classes: model.classes
+        classSubject: model.classSubject
     };
 }
 

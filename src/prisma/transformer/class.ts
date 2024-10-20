@@ -1,11 +1,12 @@
 import { ClassViewModel, CreateClassModel } from "@/models/class";
-import { Class } from "@prisma/client";
+import { ClassSubject } from "@prisma/client";
 
 
-export function ConverterClassModelToViewModel(model: Class & {
+export function ConverterClassModelToViewModel(model: ClassSubject & {
     course: any;
     subject: any;
     teacher: any;
+    scheduledTime: any[];
     enrollments: any[];
 }): ClassViewModel {
     return {
@@ -14,26 +15,21 @@ export function ConverterClassModelToViewModel(model: Class & {
         subjectId: model.subjectId,
         teacherId: model.teacherId,
         classroom: model.classroom,
-        startTime: model.startTime,
-        endTime: model.endTime,
-        dayOfWeek: model.dayOfWeek,
 
         course: model.course,
         subject: model.subject,
         teacher: model.teacher,
+        scheduledTime: model.scheduledTime,
         enrollments: model.enrollments
     };
 }
 
 
-export function ConverterClassInputToClassModel(input: CreateClassModel, type: string): Partial<Class> {
+export function ConverterClassInputToClassModel(input: CreateClassModel, type: string): Partial<ClassSubject> {
     return {
         courseId: input.courseId,
         subjectId: input.subjectId,
         teacherId: input.teacherId,
         classroom: input.classroom,
-        startTime: input.startTime,
-        endTime: input.endTime,
-        dayOfWeek: input.dayOfWeek,
     };
 }

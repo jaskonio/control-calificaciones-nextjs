@@ -1,7 +1,7 @@
-import { Class, Enrollment, Subject, Teacher, User } from "@prisma/client";
+import { ClassSubject, Enrollment, schduledTimeClassSubject, Subject, Teacher, User } from "@prisma/client";
 
 
-export type CreateClassModel = Omit<Class, 'id'>
+export type CreateClassModel = Omit<ClassSubject, 'id'>
 
 export type UpdateClassModel = CreateClassModel
 
@@ -11,5 +11,6 @@ export type ClassViewModel = CreateClassModel & {
     course: User;
     subject: Subject;
     teacher: Teacher;
+    scheduledTime: schduledTimeClassSubject[];
     enrollments: Enrollment[]
 }

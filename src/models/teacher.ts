@@ -1,4 +1,4 @@
-import { Class, Teacher, User, UserStatus } from "@prisma/client";
+import { ClassSubject, Teacher, User, UserStatus } from "@prisma/client";
 
 type rewriteProperties = {
     name: string,
@@ -17,5 +17,5 @@ export type TeacherViewModel =  CreateTeacherModel & {
     id: number;
 
     user: User;
-    classes: Class[];
+    classes: ClassSubject[];
 }

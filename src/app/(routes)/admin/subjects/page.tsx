@@ -23,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteSubjects}
       primaryKey={primaryKey}
-      onCanDelete={(item: SubjectViewModel) => (item.classes && item.classes.length != 0)}
+      onCanDelete={(item: SubjectViewModel) => (item.classSubject && item.classSubject.length != 0)}
     />)
 }

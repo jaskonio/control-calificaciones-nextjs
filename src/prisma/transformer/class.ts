@@ -11,9 +11,9 @@ export function ConverterClassModelToViewModel(model: ClassSubject & {
 }): ClassViewModel {
     return {
         id: model.id,
-        courseId: model.courseId,
-        subjectId: model.subjectId,
-        teacherId: model.teacherId,
+        courseId: model.courseId.toString(),
+        subjectId: model.subjectId.toString(),
+        teacherId: model.teacherId.toString(),
         classroom: model.classroom,
 
         course: model.course,
@@ -25,11 +25,11 @@ export function ConverterClassModelToViewModel(model: ClassSubject & {
 }
 
 
-export function ConverterClassInputToClassModel(input: CreateClassModel, type: string): Partial<ClassSubject> {
+export function ConverterClassInputToClassModel(input: CreateClassModel, type: string): Partial<any> {
     return {
-        courseId: input.courseId,
-        subjectId: input.subjectId,
-        teacherId: input.teacherId,
+        courseId: Number(input.courseId),
+        subjectId: Number(input.subjectId),
+        teacherId: Number(input.teacherId),
         classroom: input.classroom,
     };
 }

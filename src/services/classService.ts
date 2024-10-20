@@ -13,7 +13,11 @@ export class ClassService extends BaseService<CreateClassModel, ClassViewModel> 
     return {
       course: true,
       subject: true,
-      teacher: true,
+      teacher: {
+        include: {
+          user: true,
+        }
+      },
       enrollments: true
     }
   }

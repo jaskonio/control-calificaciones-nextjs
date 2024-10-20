@@ -45,5 +45,11 @@ export const itemsConf: NavItem[] = [
         description: 'Administra la información de las Padres',
         icon: User,
         href: '/admin/parents',
+    },
+    {
+        title: 'Clases',
+        description: 'Administra la información de las clases',
+        icon: User,
+        href: '/admin/class',
     }
 ];

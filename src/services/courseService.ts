@@ -12,7 +12,7 @@ export class CourseService extends BaseService<CreateCourseModel, CourseViewMode
   protected getInclude() {
     return {
       academicYear: true,
-      classes: true,
+      class: true,
     }
   }
 }

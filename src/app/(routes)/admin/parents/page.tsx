@@ -1,5 +1,6 @@
 import { deleteParent } from "@/actions/parentActions";
 import { BaseTable } from "@/app/components/ui/table";
+import { ParentViewModel } from "@/models/parent";
 import { parentService } from "@/services";
 
 
@@ -22,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteParent}
       primaryKey={primaryKey}
-      onCanDelete={(item) => item.student.length != 0}
+      onCanDelete={(item: ParentViewModel) => item.student.length != 0}
     />)
 }

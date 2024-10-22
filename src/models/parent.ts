@@ -1,31 +1,15 @@
-import { Student, User, UserStatus } from "@prisma/client";
+import { Parent, Student, User, UserStatus } from "@prisma/client";
 
-export interface CreateParentModel {
-    name: string,
-    email: string,
-    password: string,
-    status: UserStatus,
-
-    userId: number;
-    address: string;
-    phone: string;
+export type CreateParentModel = Omit<Parent, 'id'> & {
+    name: string;
+    email: string;
+    password: string;
+    status: UserStatus;
 }
 
-export interface UpdateParentModel extends CreateParentModel {
-}
-
-export interface ParentViewModel {
+export type ParentViewModel = CreateParentModel & {
     id: number;
 
-    name: string,
-    email: string,
-    password: string,
-    status: UserStatus,
-
-    userId: number;
-    address: string;
-    phone: string;
-
     user: User;
-    student: Student;
+    student: Student[];
 }

@@ -34,9 +34,9 @@ export class StudentService extends BaseService<CreateStudentModel, StudentViewM
   protected getInclude() {
     return {
       user: true,
-      academicYear: true,
       parents: true,
-      enrollments: true
+      attendance: true,
+      grade: true
     }
   }
 }

@@ -3,16 +3,15 @@ import { Subject } from "@prisma/client";
 
 
 export function ConverterSubjectToViewModel(model: Subject & {
-    classSubject: any[];
+    class: any[];
 }): SubjectViewModel {
     return {
         id: model.id,
         name: model.name,
         description: model.description,
-        gradeLevel: model.gradeLevel,
         status: model.status,
 
-        classSubject: model.classSubject
+        class: model.class
     };
 }
 
@@ -20,7 +19,6 @@ export function ConverterSubjectInputToModel(input: CreateSubjectModel, type: st
     return {
         name: input.name,
         description: input.description,
-        gradeLevel: input.gradeLevel,
         status: input.status,
     };
 }

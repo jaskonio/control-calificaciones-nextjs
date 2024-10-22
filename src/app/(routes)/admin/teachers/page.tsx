@@ -1,5 +1,6 @@
 import { deleteTeacher } from "@/actions/teacherActions";
 import { BaseTable } from "@/app/components/ui/table";
+import { TeacherViewModel } from "@/models/teacher";
 import { teacherService } from "@/services";
 
 
@@ -22,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteTeacher}
       primaryKey={primaryKey}
-      onCanDelete={(item) => item.classes.length != 0}
+      onCanDelete={(item: TeacherViewModel) => !item.user}
     />)
 }

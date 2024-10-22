@@ -5,7 +5,6 @@ import { AcademicYearViewModel, CreateAcademicYearModel } from '@/models/academi
 
 export function ConverterAcademicYearToViewModel(academicYear: AcademicYear & {
     courses: any[];
-    students: any[];
     events: any[];
 }): AcademicYearViewModel {
     return {
@@ -15,7 +14,6 @@ export function ConverterAcademicYearToViewModel(academicYear: AcademicYear & {
         startDate: formatDateToString(academicYear.startDate),
         endDate: formatDateToString(academicYear.endDate),
         courses: academicYear.courses,
-        students: academicYear.students,
         events: academicYear.events,
     };
 }

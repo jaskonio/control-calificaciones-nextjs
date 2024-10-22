@@ -5,7 +5,7 @@ import { Teacher, UserRole } from "@prisma/client";
 
 export function ConverterTeacherToViewModel(model: Teacher & {
     user: any;
-    classes: any[];
+    class: any[];
 }): TeacherViewModel {
     return {
         id: model.id,
@@ -23,7 +23,7 @@ export function ConverterTeacherToViewModel(model: Teacher & {
         status: model.user.status,
 
         user: model.user,
-        classes: model.classes
+        class: model.class
     };
 }
 

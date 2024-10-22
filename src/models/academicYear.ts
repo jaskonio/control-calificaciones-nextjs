@@ -1,4 +1,4 @@
-import { Course, Student, Event, AcademicYear } from '@prisma/client';
+import { Course, Event, AcademicYear } from '@prisma/client';
 
 
 type rewriteProperties = {
@@ -14,6 +14,5 @@ export type AcademicYearViewModel = CreateAcademicYearModel & {
   id: number;
 
   courses: Course[];
-  students: Student[];
   events: Event[];
 }

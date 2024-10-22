@@ -34,7 +34,7 @@ export class TeacherService extends BaseService<CreateTeacherModel, TeacherViewM
   protected getInclude() {
     return {
       user: true,
-      classes: true,
+      class: true,
     }
   }
 }

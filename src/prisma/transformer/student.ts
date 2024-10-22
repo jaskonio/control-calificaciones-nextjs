@@ -5,9 +5,9 @@ import { Student, UserRole } from "@prisma/client";
 
 export function ConverterStudentToViewModel(model: Student & {
     user: any;
-    academicYear: any;
     parents: any[];
-    enrollments: any[];
+    attendance: any[];
+    grade: any[];
 }): StudentViewModel {
     return {
         id: model.id,
@@ -25,9 +25,9 @@ export function ConverterStudentToViewModel(model: Student & {
         gradeLevel: model.gradeLevel,
 
         user: model.user,
-        academicYear: model.academicYear,
         parents: model.parents,
-        enrollments: model.enrollments
+        attendance: model.attendance,
+        grade: model.grade
     };
 }
 

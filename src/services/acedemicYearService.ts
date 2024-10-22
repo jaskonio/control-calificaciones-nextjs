@@ -12,7 +12,6 @@ export class AcademicYearService extends BaseService<CreateAcademicYearModel, Ac
   protected getInclude() {
     return {
       courses: true,
-      students: true,
       events: true
     }
   }

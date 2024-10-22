@@ -23,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteClass}
       primaryKey={primaryKey}
-      onCanDelete={(item: ClassViewModel) => ((item.scheduledTime && item.scheduledTime.length != 0) || (item.enrollments && item.enrollments.length != 0))}
+      onCanDelete={(item: ClassViewModel) => (item.course != undefined)}
     />)
 }

@@ -6,7 +6,7 @@ import { BaseService } from './baseService';
 
 export class ClassService extends BaseService<CreateClassModel, ClassViewModel> {
   constructor() {
-    super(prisma, 'classSubject', ConverterClassInputToClassModel, ConverterClassModelToViewModel);
+    super(prisma, 'class', ConverterClassInputToClassModel, ConverterClassModelToViewModel);
   }
 
   protected getInclude() {
@@ -18,7 +18,9 @@ export class ClassService extends BaseService<CreateClassModel, ClassViewModel> 
           user: true,
         }
       },
-      enrollments: true
+      schedule: true,
+      attendances: true,
+      grades: true
     }
   }
 }

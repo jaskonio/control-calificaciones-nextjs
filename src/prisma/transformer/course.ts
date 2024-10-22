@@ -4,7 +4,7 @@ import { Course } from "@prisma/client";
 
 export function ConverterCourseToViewModel(model: Course & {
     academicYear: any;
-    classes: any[];
+    class: any[];
 }): CourseViewModel {
     return {
         id: model.id,
@@ -15,7 +15,7 @@ export function ConverterCourseToViewModel(model: Course & {
         status: model.status,
 
         academicYear: model.academicYear,
-        classes: model.classes
+        class: model.class
     };
 }
 

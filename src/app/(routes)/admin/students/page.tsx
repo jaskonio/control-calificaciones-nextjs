@@ -1,5 +1,6 @@
 import { deleteStudent } from "@/actions/studentsActions";
 import { BaseTable } from "@/app/components/ui/table";
+import { StudentViewModel } from "@/models/student";
 import { studentService } from "@/services";
 
 
@@ -22,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteStudent}
       primaryKey={primaryKey}
-      onCanDelete={(item) => (item.academicYear.length != 0 || item.enrollments.length != 0 || item.parents.length != 0)}
+      onCanDelete={(item: StudentViewModel) => (item.user != undefined)}
     />)
 }

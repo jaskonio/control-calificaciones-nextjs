@@ -1,26 +1,28 @@
 import { ClassViewModel, CreateClassModel } from "@/models/class";
-import { ClassSubject } from "@prisma/client";
+import { Class } from "@prisma/client";
 
 
-export function ConverterClassModelToViewModel(model: ClassSubject & {
+export function ConverterClassModelToViewModel(model: Class & {
     course: any;
     subject: any;
     teacher: any;
-    scheduledTime: any[];
-    enrollments: any[];
+    schedule: any[];
+    attendances: any[];
+    grades: any[];
 }): ClassViewModel {
     return {
         id: model.id,
         courseId: model.courseId.toString(),
         subjectId: model.subjectId.toString(),
         teacherId: model.teacherId.toString(),
-        classroom: model.classroom,
+        comments: model.comments,
 
         course: model.course,
         subject: model.subject,
         teacher: model.teacher,
-        scheduledTime: model.scheduledTime,
-        enrollments: model.enrollments
+        schedule: model.schedule,
+        attendances: model.attendances,
+        grades: model.grades
     };
 }
 
@@ -30,6 +32,6 @@ export function ConverterClassInputToClassModel(input: CreateClassModel, type: s
         courseId: Number(input.courseId),
         subjectId: Number(input.subjectId),
         teacherId: Number(input.teacherId),
-        classroom: input.classroom,
+        comments: input.comments,
     };
 }

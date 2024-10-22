@@ -1,5 +1,6 @@
 import { deleteSchoolYear } from "@/actions/academicYearActions";
 import { BaseTable } from "@/app/components/ui/table";
+import { AcademicYearViewModel } from "@/models/academicYear";
 import { schoolService } from "@/services";
 
 
@@ -22,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteSchoolYear}
       primaryKey={primaryKey}
-      onCanDelete={(item) => (item.courses.length != 0 || item.students.length != 0 || item.students.length != 0) }
+      onCanDelete={(item: AcademicYearViewModel) => (item.courses.length != 0 || item.events.length != 0)}
     />)
 }

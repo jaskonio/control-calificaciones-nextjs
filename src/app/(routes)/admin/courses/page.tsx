@@ -1,5 +1,6 @@
 import { deleteCourse } from "@/actions/coursesActions";
 import { BaseTable } from "@/app/components/ui/table";
+import { CourseViewModel } from "@/models/course";
 import { coursesService } from "@/services";
 
 
@@ -22,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteCourse}
       primaryKey={primaryKey}
-      onCanDelete={(item) => (!item.classes || item.classes.length != 0)}
+      onCanDelete={(item: CourseViewModel) => (item.class.length != 0)}
     />)
 }

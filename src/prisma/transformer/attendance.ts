@@ -26,9 +26,9 @@ export function ConverterAttendanceModelToViewModel(model: Attendance & {
 
 export function ConverterAttendanceInputToAttendanceModel(input: CreateAttendanceModel, type: string): Partial<any> {
     return {
-        studentId: input.studentId.toString(),
-        classId: input.classId.toString(),
-        scheduleId: input.scheduleId.toString(),
+        studentId: Number(input.studentId),
+        classId: Number(input.classId),
+        scheduleId: Number(input.scheduleId),
         date: parseStringToDate(input.date),
         attendanceStatus: input.attendanceStatus,
         comments: input.comments

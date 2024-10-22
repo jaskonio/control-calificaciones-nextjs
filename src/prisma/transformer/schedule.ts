@@ -1,5 +1,5 @@
 import { formatDateToString, parseStringToDate } from "@/lib/utils";
-import { ScheduleViewModel, CreateScheduleModel } from "@/models/scheduled";
+import { ScheduleViewModel, CreateScheduleModel } from "@/models/schedule";
 import { Schedule } from "@prisma/client";
 
 

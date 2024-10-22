@@ -1,5 +1,5 @@
 import { IBaseService } from '@/models/baseService';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 
 export abstract class BaseService<T, ViewModel> implements IBaseService<T, ViewModel> {

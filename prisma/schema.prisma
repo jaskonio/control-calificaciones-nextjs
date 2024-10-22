@@ -44,11 +44,6 @@ enum EventType {
   other
 }
 
-enum ReportType {
-  academic
-  administrative
-}
-
 enum AcademicYearStatus {
   active
   inactive
@@ -79,11 +74,6 @@ enum DayOfWeek {
   sunday
 }
 
-enum EnrollmentStatus {
-  active
-  inactive
-}
-
 /// Models representing different entities in the system
 
 model User {
@@ -108,7 +98,6 @@ model AcademicYear {
   status        AcademicYearStatus
   // Relationships
   courses       Course[]
-  students      Student[]
   events        Event[]
 }
 
@@ -122,9 +111,9 @@ model Student {
   gradeLevel       String          // e.g., "5th Grade"
   // Relationships
   user             User            @relation(fields: [userId], references: [id])
-  academicYear     AcademicYear[]
   parents          Parent[]
-  enrollments      Enrollment[]
+  attendance       Attendance[]
+  grade            Grade[]
 }
 
 model Parent {
@@ -147,17 +136,7 @@ model Teacher {
   status            TeacherStatus
   // Relationships
   user        User      @relation(fields: [userId], references: [id])
-  classes     ClassSubject[]
-}
-
-model Subject {
-  id          Int          @id @default(autoincrement())
-  name        String       @unique // e.g., "Mathematics"
-  description String
-  gradeLevel  String       // e.g., "5th Grade"
-  status      SubjectStatus
-  // Relationships
-  classSubject ClassSubject[]
+  class          Class[]
 }
 
 model Course {
@@ -169,87 +148,95 @@ model Course {
   status         CourseStatus
   // Relationships
   academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id])
-  classes        ClassSubject[]
+  class          Class[]
 }
 
-model ClassSubject {
+model Subject {
   id          Int          @id @default(autoincrement())
-  courseId    Int
-  subjectId   Int
-  teacherId   Int
-  classroom   String       // e.g., "Matematicas - 1º ESO, Lengua - 2º ESO"
+  name        String       // e.g., "Mathematics"
+  description String
+  status      SubjectStatus
   // Relationships
-  course      Course       @relation(fields: [courseId], references: [id])
-  subject     Subject      @relation(fields: [subjectId], references: [id])
-  teacher     Teacher      @relation(fields: [teacherId], references: [id])
-  scheduledTime schduledTimeClassSubject[]
-  enrollments Enrollment[]
+  class          Class[]
 }
 
-model schduledTimeClassSubject {
+model Classroom {
   id          Int          @id @default(autoincrement())
-  classSubjectId   Int
-  startTime   String       // "HH:MM:SS" format
-  endTime     String       // "HH:MM:SS" format
-  dayOfWeek   DayOfWeek
+  name        String
+  capacity    Int
   // Relationships
-  classSubject      ClassSubject       @relation(fields: [classSubjectId], references: [id])
+  schedules  Schedule[]
 }
 
-model Enrollment {
-  id               Int               @id @default(autoincrement())
-  studentId        Int
-  classId          Int
-  enrollmentDate   DateTime
-  status           EnrollmentStatus
+model Schedule {
+  id          Int           @id @default(autoincrement())
+  classroomId Int
+  classId     Int?
+  eventId     Int?
+  dayOfWeek   DayOfWeek        // e.g., "Monday", "Tuesday"
+  startTime   DateTime
+  endTime     DateTime
+  description String
   // Relationships
-  student          Student           @relation(fields: [studentId], references: [id])
-  class            ClassSubject             @relation(fields: [classId], references: [id])
-  grades           Grade[]
-  attendances      Attendance[]
+  classroom   Classroom     @relation(fields: [classroomId], references: [id])
+  class       Class?         @relation(fields: [classId], references: [id])
+  event       Event?         @relation(fields: [eventId], references: [id])
+  attendances Attendance[]
+}
+
+model Class {
+  id           Int           @id @default(autoincrement())
+  courseId     Int
+  subjectId    Int
+  teacherId    Int
+  comments     String?
+  // Relationships
+  course       Course        @relation(fields: [courseId], references: [id])
+  subject      Subject       @relation(fields: [subjectId], references: [id])
+  teacher      Teacher       @relation(fields: [teacherId], references: [id])
+  schedule     Schedule[]     // One class can have multiple schedules
+  attendances  Attendance[]
+  grades       Grade[]
+}
+
+model Attendance {
+  id                Int               @id @default(autoincrement())
+  studentId         Int
+  classId           Int
+  scheduleId        Int           // Attendance is tied to a specific schedule
+  date              DateTime
+  attendanceStatus  AttendanceStatus
+  comments          String?
+  // Relationships
+  student          Student    @relation(fields: [studentId], references: [id])
+  class            Class      @relation(fields: [classId], references: [id])
+  schedule         Schedule   @relation(fields: [scheduleId], references: [id])
 }
 
 model Grade {
   id               Int               @id @default(autoincrement())
-  enrollmentId     Int
+  studentId        Int
+  classId           Int
   evaluationType   GradeType
   score            Float             // e.g., 85.5
   evaluationDate    DateTime
   description      String
   // Relationships
-  enrollment       Enrollment        @relation(fields: [enrollmentId], references: [id])
-}
-
-model Attendance {
-  id                Int               @id @default(autoincrement())
-  enrollmentId      Int
-  date              DateTime
-  attendanceStatus  AttendanceStatus
-  comments          String?
-  // Relationships
-  enrollment        Enrollment        @relation(fields: [enrollmentId], references: [id])
+  student          Student           @relation(fields: [studentId], references: [id])
+  class            Class             @relation(fields: [classId], references: [id])
 }
 
 model Event {
   id              Int               @id @default(autoincrement())
+  academicYearId  Int
+  scheduleId      Int
   title           String
   description     String
   date            DateTime
-  time            String            // "HH:MM:SS" format
-  location        String
   eventType       EventType
-  academicYearId  Int
   // Relationships
-  academicYear    AcademicYear      @relation(fields: [academicYearId], references: [id])
-}
-
-model Report {
-  id               Int               @id @default(autoincrement())
-  title            String
-  description      String
-  reportType       ReportType
-  generationDate   DateTime
-  filePath         String            // e.g., "/reports/grades_q1.pdf"
+  academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id])
+  schedule         Schedule[]
 }
 
 model Setting {

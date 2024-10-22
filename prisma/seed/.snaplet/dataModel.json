@@ -106,20 +106,6 @@
           "isGenerated": false,
           "sequence": false,
           "hasDefaultValue": false
-        },
-        {
-          "name": "_AcademicYearToStudent",
-          "type": "_AcademicYearToStudent",
-          "isRequired": false,
-          "kind": "object",
-          "relationName": "_AcademicYearToStudentToAcademicYear",
-          "relationFromFields": [],
-          "relationToFields": [],
-          "isList": true,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
         }
       ],
       "uniqueConstraints": [
@@ -160,20 +146,6 @@
           },
           "hasDefaultValue": true,
           "isId": true,
-          "maxLength": null
-        },
-        {
-          "id": "public.Attendance.enrollmentId",
-          "name": "enrollmentId",
-          "columnName": "enrollmentId",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
           "maxLength": null
         },
         {
@@ -219,13 +191,91 @@
           "maxLength": null
         },
         {
-          "name": "Enrollment",
-          "type": "Enrollment",
+          "id": "public.Attendance.classId",
+          "name": "classId",
+          "columnName": "classId",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Attendance.scheduleId",
+          "name": "scheduleId",
+          "columnName": "scheduleId",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Attendance.studentId",
+          "name": "studentId",
+          "columnName": "studentId",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "name": "Class",
+          "type": "Class",
           "isRequired": true,
           "kind": "object",
-          "relationName": "AttendanceToEnrollment",
+          "relationName": "AttendanceToClass",
           "relationFromFields": [
-            "enrollmentId"
+            "classId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isList": false,
+          "isId": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
+        },
+        {
+          "name": "Schedule",
+          "type": "Schedule",
+          "isRequired": true,
+          "kind": "object",
+          "relationName": "AttendanceToSchedule",
+          "relationFromFields": [
+            "scheduleId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isList": false,
+          "isId": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
+        },
+        {
+          "name": "Student",
+          "type": "Student",
+          "isRequired": true,
+          "kind": "object",
+          "relationName": "AttendanceToStudent",
+          "relationFromFields": [
+            "studentId"
           ],
           "relationToFields": [
             "id"
@@ -247,13 +297,13 @@
         }
       ]
     },
-    "ClassSubject": {
-      "id": "public.ClassSubject",
+    "Class": {
+      "id": "public.Class",
       "schemaName": "public",
-      "tableName": "ClassSubject",
+      "tableName": "Class",
       "fields": [
         {
-          "id": "public.ClassSubject.id",
+          "id": "public.Class.id",
           "name": "id",
           "columnName": "id",
           "type": "int4",
@@ -262,7 +312,7 @@
           "isList": false,
           "isGenerated": false,
           "sequence": {
-            "identifier": "\"public\".\"ClassSubject_id_seq\"",
+            "identifier": "\"public\".\"Class_id_seq\"",
             "increment": 1,
             "start": 1
           },
@@ -271,7 +321,7 @@
           "maxLength": null
         },
         {
-          "id": "public.ClassSubject.courseId",
+          "id": "public.Class.courseId",
           "name": "courseId",
           "columnName": "courseId",
           "type": "int4",
@@ -285,7 +335,7 @@
           "maxLength": null
         },
         {
-          "id": "public.ClassSubject.subjectId",
+          "id": "public.Class.subjectId",
           "name": "subjectId",
           "columnName": "subjectId",
           "type": "int4",
@@ -299,7 +349,7 @@
           "maxLength": null
         },
         {
-          "id": "public.ClassSubject.teacherId",
+          "id": "public.Class.teacherId",
           "name": "teacherId",
           "columnName": "teacherId",
           "type": "int4",
@@ -313,11 +363,11 @@
           "maxLength": null
         },
         {
-          "id": "public.ClassSubject.classroom",
-          "name": "classroom",
-          "columnName": "classroom",
+          "id": "public.Class.comments",
+          "name": "comments",
+          "columnName": "comments",
           "type": "text",
-          "isRequired": true,
+          "isRequired": false,
           "kind": "scalar",
           "isList": false,
           "isGenerated": false,
@@ -331,7 +381,7 @@
           "type": "Course",
           "isRequired": true,
           "kind": "object",
-          "relationName": "ClassSubjectToCourse",
+          "relationName": "ClassToCourse",
           "relationFromFields": [
             "courseId"
           ],
@@ -349,7 +399,7 @@
           "type": "Subject",
           "isRequired": true,
           "kind": "object",
-          "relationName": "ClassSubjectToSubject",
+          "relationName": "ClassToSubject",
           "relationFromFields": [
             "subjectId"
           ],
@@ -367,7 +417,7 @@
           "type": "Teacher",
           "isRequired": true,
           "kind": "object",
-          "relationName": "ClassSubjectToTeacher",
+          "relationName": "ClassToTeacher",
           "relationFromFields": [
             "teacherId"
           ],
@@ -381,11 +431,11 @@
           "hasDefaultValue": false
         },
         {
-          "name": "Enrollment",
-          "type": "Enrollment",
+          "name": "Attendance",
+          "type": "Attendance",
           "isRequired": false,
           "kind": "object",
-          "relationName": "EnrollmentToClassSubject",
+          "relationName": "AttendanceToClass",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -395,11 +445,25 @@
           "hasDefaultValue": false
         },
         {
-          "name": "schduledTimeClassSubject",
-          "type": "schduledTimeClassSubject",
+          "name": "Grade",
+          "type": "Grade",
           "isRequired": false,
           "kind": "object",
-          "relationName": "schduledTimeClassSubjectToClassSubject",
+          "relationName": "GradeToClass",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isList": true,
+          "isId": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
+        },
+        {
+          "name": "Schedule",
+          "type": "Schedule",
+          "isRequired": false,
+          "kind": "object",
+          "relationName": "ScheduleToClass",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -411,7 +475,83 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "ClassSubject_pkey",
+          "name": "Class_pkey",
+          "fields": [
+            "id"
+          ],
+          "nullNotDistinct": false
+        }
+      ]
+    },
+    "Classroom": {
+      "id": "public.Classroom",
+      "schemaName": "public",
+      "tableName": "Classroom",
+      "fields": [
+        {
+          "id": "public.Classroom.id",
+          "name": "id",
+          "columnName": "id",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": {
+            "identifier": "\"public\".\"Classroom_id_seq\"",
+            "increment": 1,
+            "start": 1
+          },
+          "hasDefaultValue": true,
+          "isId": true,
+          "maxLength": null
+        },
+        {
+          "id": "public.Classroom.name",
+          "name": "name",
+          "columnName": "name",
+          "type": "text",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Classroom.capacity",
+          "name": "capacity",
+          "columnName": "capacity",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "name": "Schedule",
+          "type": "Schedule",
+          "isRequired": false,
+          "kind": "object",
+          "relationName": "ScheduleToClassroom",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isList": true,
+          "isId": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
+        }
+      ],
+      "uniqueConstraints": [
+        {
+          "name": "Classroom_pkey",
           "fields": [
             "id"
           ],
@@ -531,11 +671,11 @@
           "hasDefaultValue": false
         },
         {
-          "name": "ClassSubject",
-          "type": "ClassSubject",
+          "name": "Class",
+          "type": "Class",
           "isRequired": false,
           "kind": "object",
-          "relationName": "ClassSubjectToCourse",
+          "relationName": "ClassToCourse",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -557,160 +697,6 @@
           "name": "Course_name_key",
           "fields": [
             "name"
-          ],
-          "nullNotDistinct": false
-        }
-      ]
-    },
-    "Enrollment": {
-      "id": "public.Enrollment",
-      "schemaName": "public",
-      "tableName": "Enrollment",
-      "fields": [
-        {
-          "id": "public.Enrollment.id",
-          "name": "id",
-          "columnName": "id",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": {
-            "identifier": "\"public\".\"Enrollment_id_seq\"",
-            "increment": 1,
-            "start": 1
-          },
-          "hasDefaultValue": true,
-          "isId": true,
-          "maxLength": null
-        },
-        {
-          "id": "public.Enrollment.studentId",
-          "name": "studentId",
-          "columnName": "studentId",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.Enrollment.classId",
-          "name": "classId",
-          "columnName": "classId",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.Enrollment.enrollmentDate",
-          "name": "enrollmentDate",
-          "columnName": "enrollmentDate",
-          "type": "timestamp",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.Enrollment.status",
-          "name": "status",
-          "columnName": "status",
-          "type": "EnrollmentStatus",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "name": "ClassSubject",
-          "type": "ClassSubject",
-          "isRequired": true,
-          "kind": "object",
-          "relationName": "EnrollmentToClassSubject",
-          "relationFromFields": [
-            "classId"
-          ],
-          "relationToFields": [
-            "id"
-          ],
-          "isList": false,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        },
-        {
-          "name": "Student",
-          "type": "Student",
-          "isRequired": true,
-          "kind": "object",
-          "relationName": "EnrollmentToStudent",
-          "relationFromFields": [
-            "studentId"
-          ],
-          "relationToFields": [
-            "id"
-          ],
-          "isList": false,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        },
-        {
-          "name": "Attendance",
-          "type": "Attendance",
-          "isRequired": false,
-          "kind": "object",
-          "relationName": "AttendanceToEnrollment",
-          "relationFromFields": [],
-          "relationToFields": [],
-          "isList": true,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        },
-        {
-          "name": "Grade",
-          "type": "Grade",
-          "isRequired": false,
-          "kind": "object",
-          "relationName": "GradeToEnrollment",
-          "relationFromFields": [],
-          "relationToFields": [],
-          "isList": true,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        }
-      ],
-      "uniqueConstraints": [
-        {
-          "name": "Enrollment_pkey",
-          "fields": [
-            "id"
           ],
           "nullNotDistinct": false
         }
@@ -782,34 +768,6 @@
           "maxLength": null
         },
         {
-          "id": "public.Event.time",
-          "name": "time",
-          "columnName": "time",
-          "type": "text",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.Event.location",
-          "name": "location",
-          "columnName": "location",
-          "type": "text",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
           "id": "public.Event.eventType",
           "name": "eventType",
           "columnName": "eventType",
@@ -838,6 +796,20 @@
           "maxLength": null
         },
         {
+          "id": "public.Event.scheduleId",
+          "name": "scheduleId",
+          "columnName": "scheduleId",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
           "name": "AcademicYear",
           "type": "AcademicYear",
           "isRequired": true,
@@ -850,6 +822,20 @@
             "id"
           ],
           "isList": false,
+          "isId": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
+        },
+        {
+          "name": "Schedule",
+          "type": "Schedule",
+          "isRequired": false,
+          "kind": "object",
+          "relationName": "ScheduleToEvent",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isList": true,
           "isId": false,
           "isGenerated": false,
           "sequence": false,
@@ -887,20 +873,6 @@
           },
           "hasDefaultValue": true,
           "isId": true,
-          "maxLength": null
-        },
-        {
-          "id": "public.Grade.enrollmentId",
-          "name": "enrollmentId",
-          "columnName": "enrollmentId",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
           "maxLength": null
         },
         {
@@ -960,13 +932,59 @@
           "maxLength": null
         },
         {
-          "name": "Enrollment",
-          "type": "Enrollment",
+          "id": "public.Grade.classId",
+          "name": "classId",
+          "columnName": "classId",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Grade.studentId",
+          "name": "studentId",
+          "columnName": "studentId",
+          "type": "int4",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "name": "Class",
+          "type": "Class",
           "isRequired": true,
           "kind": "object",
-          "relationName": "GradeToEnrollment",
+          "relationName": "GradeToClass",
           "relationFromFields": [
-            "enrollmentId"
+            "classId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isList": false,
+          "isId": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
+        },
+        {
+          "name": "Student",
+          "type": "Student",
+          "isRequired": true,
+          "kind": "object",
+          "relationName": "GradeToStudent",
+          "relationFromFields": [
+            "studentId"
           ],
           "relationToFields": [
             "id"
@@ -1103,13 +1121,13 @@
         }
       ]
     },
-    "Report": {
-      "id": "public.Report",
+    "Schedule": {
+      "id": "public.Schedule",
       "schemaName": "public",
-      "tableName": "Report",
+      "tableName": "Schedule",
       "fields": [
         {
-          "id": "public.Report.id",
+          "id": "public.Schedule.id",
           "name": "id",
           "columnName": "id",
           "type": "int4",
@@ -1118,7 +1136,7 @@
           "isList": false,
           "isGenerated": false,
           "sequence": {
-            "identifier": "\"public\".\"Report_id_seq\"",
+            "identifier": "\"public\".\"Schedule_id_seq\"",
             "increment": 1,
             "start": 1
           },
@@ -1127,10 +1145,10 @@
           "maxLength": null
         },
         {
-          "id": "public.Report.title",
-          "name": "title",
-          "columnName": "title",
-          "type": "text",
+          "id": "public.Schedule.classroomId",
+          "name": "classroomId",
+          "columnName": "classroomId",
+          "type": "int4",
           "isRequired": true,
           "kind": "scalar",
           "isList": false,
@@ -1141,7 +1159,77 @@
           "maxLength": null
         },
         {
-          "id": "public.Report.description",
+          "id": "public.Schedule.classId",
+          "name": "classId",
+          "columnName": "classId",
+          "type": "int4",
+          "isRequired": false,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Schedule.eventId",
+          "name": "eventId",
+          "columnName": "eventId",
+          "type": "int4",
+          "isRequired": false,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Schedule.dayOfWeek",
+          "name": "dayOfWeek",
+          "columnName": "dayOfWeek",
+          "type": "DayOfWeek",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Schedule.startTime",
+          "name": "startTime",
+          "columnName": "startTime",
+          "type": "timestamp",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Schedule.endTime",
+          "name": "endTime",
+          "columnName": "endTime",
+          "type": "timestamp",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.Schedule.description",
           "name": "description",
           "columnName": "description",
           "type": "text",
@@ -1155,51 +1243,77 @@
           "maxLength": null
         },
         {
-          "id": "public.Report.reportType",
-          "name": "reportType",
-          "columnName": "reportType",
-          "type": "ReportType",
-          "isRequired": true,
-          "kind": "scalar",
+          "name": "Class",
+          "type": "Class",
+          "isRequired": false,
+          "kind": "object",
+          "relationName": "ScheduleToClass",
+          "relationFromFields": [
+            "classId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
           "isList": false,
+          "isId": false,
           "isGenerated": false,
           "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
+          "hasDefaultValue": false
         },
         {
-          "id": "public.Report.generationDate",
-          "name": "generationDate",
-          "columnName": "generationDate",
-          "type": "timestamp",
+          "name": "Classroom",
+          "type": "Classroom",
           "isRequired": true,
-          "kind": "scalar",
+          "kind": "object",
+          "relationName": "ScheduleToClassroom",
+          "relationFromFields": [
+            "classroomId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
           "isList": false,
+          "isId": false,
           "isGenerated": false,
           "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
+          "hasDefaultValue": false
         },
         {
-          "id": "public.Report.filePath",
-          "name": "filePath",
-          "columnName": "filePath",
-          "type": "text",
-          "isRequired": true,
-          "kind": "scalar",
+          "name": "Event",
+          "type": "Event",
+          "isRequired": false,
+          "kind": "object",
+          "relationName": "ScheduleToEvent",
+          "relationFromFields": [
+            "eventId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
           "isList": false,
+          "isId": false,
           "isGenerated": false,
           "sequence": false,
-          "hasDefaultValue": false,
+          "hasDefaultValue": false
+        },
+        {
+          "name": "Attendance",
+          "type": "Attendance",
+          "isRequired": false,
+          "kind": "object",
+          "relationName": "AttendanceToSchedule",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isList": true,
           "isId": false,
-          "maxLength": null
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false
         }
       ],
       "uniqueConstraints": [
         {
-          "name": "Report_pkey",
+          "name": "Schedule_pkey",
           "fields": [
             "id"
           ],
@@ -1416,11 +1530,11 @@
           "hasDefaultValue": false
         },
         {
-          "name": "Enrollment",
-          "type": "Enrollment",
+          "name": "Attendance",
+          "type": "Attendance",
           "isRequired": false,
           "kind": "object",
-          "relationName": "EnrollmentToStudent",
+          "relationName": "AttendanceToStudent",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -1430,11 +1544,11 @@
           "hasDefaultValue": false
         },
         {
-          "name": "_AcademicYearToStudent",
-          "type": "_AcademicYearToStudent",
+          "name": "Grade",
+          "type": "Grade",
           "isRequired": false,
           "kind": "object",
-          "relationName": "_AcademicYearToStudentToStudent",
+          "relationName": "GradeToStudent",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -1527,20 +1641,6 @@
           "maxLength": null
         },
         {
-          "id": "public.Subject.gradeLevel",
-          "name": "gradeLevel",
-          "columnName": "gradeLevel",
-          "type": "text",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
           "id": "public.Subject.status",
           "name": "status",
           "columnName": "status",
@@ -1555,11 +1655,11 @@
           "maxLength": null
         },
         {
-          "name": "ClassSubject",
-          "type": "ClassSubject",
+          "name": "Class",
+          "type": "Class",
           "isRequired": false,
           "kind": "object",
-          "relationName": "ClassSubjectToSubject",
+          "relationName": "ClassToSubject",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -1574,13 +1674,6 @@
           "name": "Subject_pkey",
           "fields": [
             "id"
-          ],
-          "nullNotDistinct": false
-        },
-        {
-          "name": "Subject_name_key",
-          "fields": [
-            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1712,11 +1805,11 @@
           "hasDefaultValue": false
         },
         {
-          "name": "ClassSubject",
-          "type": "ClassSubject",
+          "name": "Class",
+          "type": "Class",
           "isRequired": false,
           "kind": "object",
-          "relationName": "ClassSubjectToTeacher",
+          "relationName": "ClassToTeacher",
           "relationFromFields": [],
           "relationToFields": [],
           "isList": true,
@@ -1905,87 +1998,6 @@
           "name": "User_email_key",
           "fields": [
             "email"
-          ],
-          "nullNotDistinct": false
-        }
-      ]
-    },
-    "_AcademicYearToStudent": {
-      "id": "public._AcademicYearToStudent",
-      "schemaName": "public",
-      "tableName": "_AcademicYearToStudent",
-      "fields": [
-        {
-          "id": "public._AcademicYearToStudent.A",
-          "name": "A",
-          "columnName": "A",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": true,
-          "maxLength": null
-        },
-        {
-          "id": "public._AcademicYearToStudent.B",
-          "name": "B",
-          "columnName": "B",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": true,
-          "maxLength": null
-        },
-        {
-          "name": "AcademicYear",
-          "type": "AcademicYear",
-          "isRequired": true,
-          "kind": "object",
-          "relationName": "_AcademicYearToStudentToAcademicYear",
-          "relationFromFields": [
-            "A"
-          ],
-          "relationToFields": [
-            "id"
-          ],
-          "isList": false,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        },
-        {
-          "name": "Student",
-          "type": "Student",
-          "isRequired": true,
-          "kind": "object",
-          "relationName": "_AcademicYearToStudentToStudent",
-          "relationFromFields": [
-            "B"
-          ],
-          "relationToFields": [
-            "id"
-          ],
-          "isList": false,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        }
-      ],
-      "uniqueConstraints": [
-        {
-          "name": "_AcademicYearToStudent_AB_unique",
-          "fields": [
-            "A",
-            "B"
           ],
           "nullNotDistinct": false
         }
@@ -2199,114 +2211,6 @@
           "nullNotDistinct": false
         }
       ]
-    },
-    "schduledTimeClassSubject": {
-      "id": "public.schduledTimeClassSubject",
-      "schemaName": "public",
-      "tableName": "schduledTimeClassSubject",
-      "fields": [
-        {
-          "id": "public.schduledTimeClassSubject.id",
-          "name": "id",
-          "columnName": "id",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": {
-            "identifier": "\"public\".\"schduledTimeClassSubject_id_seq\"",
-            "increment": 1,
-            "start": 1
-          },
-          "hasDefaultValue": true,
-          "isId": true,
-          "maxLength": null
-        },
-        {
-          "id": "public.schduledTimeClassSubject.classSubjectId",
-          "name": "classSubjectId",
-          "columnName": "classSubjectId",
-          "type": "int4",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.schduledTimeClassSubject.startTime",
-          "name": "startTime",
-          "columnName": "startTime",
-          "type": "text",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.schduledTimeClassSubject.endTime",
-          "name": "endTime",
-          "columnName": "endTime",
-          "type": "text",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "public.schduledTimeClassSubject.dayOfWeek",
-          "name": "dayOfWeek",
-          "columnName": "dayOfWeek",
-          "type": "DayOfWeek",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "name": "ClassSubject",
-          "type": "ClassSubject",
-          "isRequired": true,
-          "kind": "object",
-          "relationName": "schduledTimeClassSubjectToClassSubject",
-          "relationFromFields": [
-            "classSubjectId"
-          ],
-          "relationToFields": [
-            "id"
-          ],
-          "isList": false,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        }
-      ],
-      "uniqueConstraints": [
-        {
-          "name": "schduledTimeClassSubject_pkey",
-          "fields": [
-            "id"
-          ],
-          "nullNotDistinct": false
-        }
-      ]
     }
   },
   "enums": {
@@ -2372,17 +2276,6 @@
         }
       ]
     },
-    "EnrollmentStatus": {
-      "schemaName": "public",
-      "values": [
-        {
-          "name": "active"
-        },
-        {
-          "name": "inactive"
-        }
-      ]
-    },
     "EventType": {
       "schemaName": "public",
       "values": [
@@ -2411,17 +2304,6 @@
         },
         {
           "name": "exam"
-        }
-      ]
-    },
-    "ReportType": {
-      "schemaName": "public",
-      "values": [
-        {
-          "name": "academic"
-        },
-        {
-          "name": "administrative"
         }
       ]
     },

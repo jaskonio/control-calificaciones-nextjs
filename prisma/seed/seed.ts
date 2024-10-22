@@ -18,15 +18,14 @@ const main = async () => {
   await seed.student((x) => x(10));
   await seed.parent((x) => x(10));
   await seed.teacher((x) => x(10));
-  await seed.subject((x) => x(10));
   await seed.course((x) => x(10));
-  await seed.classSubject((x) => x(10));
-  await seed.schduledTimeClassSubject((x) => x(10))
-  await seed.enrollment((x) => x(10));
-  await seed.grade((x) => x(10));
+  await seed.subject((x) => x(10));
+  await seed.classroom((x) => x(10))
+  await seed.schedule((x) => x(10));
+  await seed.class((x) => x(10));
   await seed.attendance((x) => x(10));
+  await seed.grade((x) => x(10));
   await seed.event((x) => x(10));
-  await seed.report((x) => x(10));
   await seed.setting((x) => x(10));
 
   // Type completion not working? You might want to reload your TypeScript Server to pick up the changes

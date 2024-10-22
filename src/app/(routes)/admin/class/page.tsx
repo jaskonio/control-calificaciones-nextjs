@@ -7,9 +7,9 @@ import { classService } from "@/services";
 export default async function Page() {
   const data = await classService.getAll()
   const title = 'Clases'
-  const columnNames = ['ID', 'Nombre', 'Curso', 'Asignatura', 'Profesor', 'Acciones']
+  const columnNames = ['ID', 'Curso', 'Asignatura', 'Profesor', 'Acciones']
   const primaryKey = 'id'
-  const columnKeys = ['id', 'classroom', 'course.name', 'subject.name', 'teacher.user.name']
+  const columnKeys = ['id', 'course.name', 'subject.name', 'teacher.user.name']
   const baseAddUrl = '/admin/class/add/'
   const baseEditUrl = '/admin/class/edit/'
 

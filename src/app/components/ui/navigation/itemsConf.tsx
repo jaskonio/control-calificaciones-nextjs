@@ -5,7 +5,15 @@ import {
     UserCheck,
     BookOpenText,
     House,
-    User
+    Shapes,
+    Users,
+    ListCheck,
+    School,
+    CalendarClock,
+    BookOpenCheck,
+    CalendarCheck,
+    Settings,
+    Clock
 } from 'lucide-react';
 
 
@@ -43,13 +51,49 @@ export const itemsConf: NavItem[] = [
     {
         title: 'Padres',
         description: 'Administra la información de las Padres',
-        icon: User,
+        icon: Users,
         href: '/admin/parents',
     },
     {
         title: 'Clases',
         description: 'Administra la información de las clases',
-        icon: User,
+        icon: Shapes,
         href: '/admin/class',
+    },
+    {
+        title: 'Asistencias',
+        description: 'Administra la información de las asistencias',
+        icon: ListCheck,
+        href: '/admin/attendance',
+    },
+    {
+        title: 'Aulas',
+        description: 'Administra la información de las aulas',
+        icon: School,
+        href: '/admin/classroom',
+    },
+    {
+        title: 'Eventos',
+        description: 'Administra la información de los eventos',
+        icon: CalendarClock,
+        href: '/admin/event',
+    },
+    {
+        title: 'Calificaciones',
+        description: 'Administra la información de las calificaciones',
+        icon: BookOpenCheck,
+        href: '/admin/grade',
+    },
+    {
+        title: 'Horarios',
+        description: 'Administra la información de los horarios',
+        icon: Clock,
+        href: '/admin/schedule',
+    },
+    {
+        title: 'Configuracion',
+        description: 'Administra la información de las configuraciones',
+        icon: Settings,
+        href: '/admin/setting',
     }
 ];

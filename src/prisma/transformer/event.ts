@@ -24,8 +24,8 @@ export function ConverterEventModelToViewModel(model: Event & {
 
 export function ConverterEventInputToEventModel(input: CreateEventModel, type: string): Partial<any> {
     return {
-        academicYearId: input.academicYearId.toString(),
-        scheduleId: input.scheduleId.toString(),
+        academicYearId: Number(input.academicYearId),
+        scheduleId: Number(input.scheduleId),
         title: input.title,
         description: input.description,
         date: parseStringToDate(input.date),

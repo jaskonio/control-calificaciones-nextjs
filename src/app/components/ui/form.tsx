@@ -16,6 +16,7 @@ import {
     FormMessage
 } from "@/components/ui/form"
 import { ZodSchema } from "zod";
+import { TimePicker } from "@/components/ui/data-picker";
 
 export interface SelectOption {
     label: string;
@@ -27,6 +28,7 @@ export enum FieldType {
     Number = "number",
     Select = "select",
     Date = "date",
+    Time = "time",
     Password = "password",
     Email = "email",
     Phone = "phone"
@@ -195,6 +197,28 @@ const DateInput = ({ form, fieldConfig }: inputComponent) => {
         </div>
     );
 };
+
+const TimeInput = ({ form, fieldConfig }: inputComponent) => {
+    return (
+        <div className="mb-4">
+            <FormField
+                control={form['control']}
+                name={fieldConfig.name}
+                render={({ field }) => {
+                    return (
+                    <FormItem>
+                        <FormLabel>{fieldConfig.label}</FormLabel>
+                        <FormControl>
+                            <TimePicker date={field.value}/>
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}}
+            />
+        </div>
+    );
+};
+
 interface GenericFormProps<TFormValues extends FieldValues> {
     schema: ZodSchema<TFormValues>;
     fields: FieldConfig[];
@@ -214,6 +238,7 @@ const GenericForm = <TFormValues extends FieldValues>({ schema, fields, onSubmit
         if (field.type == FieldType.Number) return (<NumberInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Select) return (<SelectInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Date) return (<DateInput form={form} fieldConfig={field} key={index} />);
+        if (field.type == FieldType.Time) return (<TimeInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Email) return (<EmailInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Password) return (<PasswordInput form={form} fieldConfig={field} key={index} />);
         if (field.type == FieldType.Phone) return (<PhoneInput form={form} fieldConfig={field} key={index} />);

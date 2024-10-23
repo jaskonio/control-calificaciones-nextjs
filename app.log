@@ -6,3 +6,29 @@
 {"level":"info","message":"Eliminando Clase: 1","timestamp":"2024-10-20T19:27:53.468Z"}
 {"level":"info","message":"Añadiendo Asistencia","timestamp":"2024-10-22T18:21:44.377Z"}
 {"level":"info","message":"Añadiendo Asistencia","timestamp":"2024-10-22T18:23:47.376Z"}
+{"level":"info","message":"Añadiendo Aula","timestamp":"2024-10-23T10:07:02.525Z"}
+{"level":"info","message":"Actualizando Aula: 1","timestamp":"2024-10-23T10:10:39.085Z"}
+{"level":"info","message":"Eliminando Evento: 1","timestamp":"2024-10-23T10:14:57.915Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:20:49.386Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:22:17.322Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:24:11.864Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:31:59.054Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:33:47.298Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:42:31.527Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:43:15.425Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:45:28.231Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:46:26.069Z"}
+{"level":"info","message":"Añadiendo Evento","timestamp":"2024-10-23T10:47:21.171Z"}
+{"level":"info","message":"Actualizando Evento: 2","timestamp":"2024-10-23T10:50:15.109Z"}
+{"level":"info","message":"Eliminando Evento: 2","timestamp":"2024-10-23T10:50:26.575Z"}
+{"level":"info","message":"Eliminando Evento: 12","timestamp":"2024-10-23T10:50:29.371Z"}
+{"level":"info","message":"Eliminando Evento: 11","timestamp":"2024-10-23T10:50:31.430Z"}
+{"level":"info","message":"Eliminando Nota: 1","timestamp":"2024-10-23T10:56:42.251Z"}
+{"level":"info","message":"Añadiendo Nota","timestamp":"2024-10-23T11:15:56.019Z"}
+{"level":"info","message":"Actualizando Nota: 2","timestamp":"2024-10-23T11:21:42.603Z"}
+{"level":"info","message":"Eliminando Nota: 2","timestamp":"2024-10-23T11:21:49.375Z"}
+{"level":"info","message":"Eliminando Horario: 1","timestamp":"2024-10-23T11:26:18.460Z"}
+{"level":"info","message":"Eliminando Horario: 2","timestamp":"2024-10-23T11:26:20.302Z"}
+{"level":"info","message":"Eliminando Setting: 1","timestamp":"2024-10-23T11:40:23.209Z"}
+{"level":"info","message":"Añadiendo Setting","timestamp":"2024-10-23T11:41:36.774Z"}
+{"level":"info","message":"Actualizando Setting: 11","timestamp":"2024-10-23T11:42:23.625Z"}

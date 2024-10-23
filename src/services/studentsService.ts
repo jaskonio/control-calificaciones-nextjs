@@ -2,6 +2,7 @@ import { StudentViewModel, CreateStudentModel } from '@/models/student';
 import prisma from '../prisma/client';
 import { ConverterStudentInputToModel, ConverterStudentToViewModel } from '@/prisma/transformer/student';
 import { BaseService } from './baseService';
+import { SelectOption } from '@/app/components/ui/form';
 
 
 export class StudentService extends BaseService<CreateStudentModel, StudentViewModel> {

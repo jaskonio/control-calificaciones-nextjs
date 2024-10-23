@@ -1,3 +1,4 @@
+import { SelectOption } from '@/app/components/ui/form';
 import { IBaseService } from '@/models/baseService';
 import { PrismaClient } from '@prisma/client';
 
@@ -94,6 +95,18 @@ export abstract class BaseService<T, ViewModel> implements IBaseService<T, ViewM
             throw new Error(`Error al eliminar el ${this.model.toString()} con ID: ${id}`);
         }
     }
+
+    async getAllOptions(primarykey: string, labelKey: string): Promise<SelectOption[]> {
+        const data = await this.getAll()
+        const options: SelectOption[] = data.map((o:any) => {
+          return {
+            label: o[labelKey],
+            value: o[primarykey].toString()
+          }
+        })
+    
+        return options
+      }
 
     protected abstract getInclude(): any
 }

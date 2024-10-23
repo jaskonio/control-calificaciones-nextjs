@@ -11,8 +11,17 @@ export class GradeService extends BaseService<CreateGradeModel, GradeViewModel> 
 
     protected getInclude() {
         return {
-            student: true,
-            class: true
+            student: {
+                include: {
+                    user: true
+                }
+            },
+            class: {
+                include: {
+                    course: true,
+                    subject: true
+                }
+            }
         }
     }
 }

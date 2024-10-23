@@ -1,11 +1,9 @@
 import { Attendance, Class, Classroom, Schedule } from "@prisma/client";
 
-export type CreateScheduleModel = Omit<Schedule, 'id' | 'startTime' | 'endTime' | 'classroomId' | 'classId' | 'eventId'> & {
+export type CreateScheduleModel = Omit<Schedule, 'id' | 'classroomId' | 'classId' | 'eventId'> & {
     classroomId: string;
     classId?: string;
     eventId?: string;
-    startTime: string;
-    endTime: string;
 }
 
 export type ScheduleViewModel = CreateScheduleModel & {

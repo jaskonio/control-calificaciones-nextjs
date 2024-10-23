@@ -6,10 +6,10 @@ import { scheduleService } from "@/services";
 
 export default async function Page() {
   const data = await scheduleService.getAll()
-  const title = 'Clases'
-  const columnNames = ['ID', 'Aula', 'Inicio', 'Final', 'Descripción', 'Acciones']
+  const title = 'Horarios'
+  const columnNames = ['ID', 'Aula', 'Dia', 'Inicio', 'Final', 'Descripción', 'Acciones']
   const primaryKey = 'id'
-  const columnKeys = ['id', 'classroom.name', 'startTime', 'endTime' , 'description']
+  const columnKeys = ['id', 'classroom.name', 'dayOfWeek', 'startTime', 'endTime' , 'description']
   const baseAddUrl = '/admin/schedule/add/'
   const baseEditUrl = '/admin/schedule/edit/'
 

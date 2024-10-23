@@ -174,8 +174,8 @@ model Schedule {
   classId     Int?
   eventId     Int?
   dayOfWeek   DayOfWeek        // e.g., "Monday", "Tuesday"
-  startTime   DateTime
-  endTime     DateTime
+  startTime   String
+  endTime     String
   description String
   // Relationships
   classroom   Classroom     @relation(fields: [classroomId], references: [id])

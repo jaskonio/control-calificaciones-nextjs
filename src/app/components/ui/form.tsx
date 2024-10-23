@@ -185,14 +185,15 @@ const DateInput = ({ form, fieldConfig }: inputComponent) => {
                 render={({ field }) => {
                     // field.value = field.value instanceof Date ? field.value.toISOString().split('T')[0] : field.value
                     return (
-                    <FormItem>
-                        <FormLabel>{fieldConfig.label}</FormLabel>
-                        <FormControl>
-                            <Input type="date" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}}
+                        <FormItem>
+                            <FormLabel>{fieldConfig.label}</FormLabel>
+                            <FormControl>
+                                <Input type="date" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )
+                }}
             />
         </div>
     );
@@ -206,14 +207,15 @@ const TimeInput = ({ form, fieldConfig }: inputComponent) => {
                 name={fieldConfig.name}
                 render={({ field }) => {
                     return (
-                    <FormItem>
-                        <FormLabel>{fieldConfig.label}</FormLabel>
-                        <FormControl>
-                            <TimePicker date={field.value}/>
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}}
+                        <FormItem>
+                            <FormLabel>{fieldConfig.label}</FormLabel>
+                            <FormControl>
+                                <TimePicker date={field.value} onChange={field.onChange} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )
+                }}
             />
         </div>
     );

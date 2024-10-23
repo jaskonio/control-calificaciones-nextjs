@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { logger } from "@/logger";
 
 
-const base_path = '/admin/Schedule'
+const base_path = '/admin/schedule'
 
 
 export async function addSchedule(data: any) {

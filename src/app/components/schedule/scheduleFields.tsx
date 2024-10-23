@@ -1,3 +1,4 @@
+import { generateTimeRange } from "@/lib/utils";
 import { FieldConfig, FieldType } from "../ui/form";
 
 
@@ -22,24 +23,36 @@ const ScheduleFields: FieldConfig[] = [
         name: "dayOfWeek",
         label: "Selecciona un dia",
         options: [
-            {label: "Lunes", value: "monday"},
-            {label: "Martes", value: "tuesday"},
-            {label: "Miercoles", value: "wednesday"},
-            {label: "Jueves", value: "thursday"},
-            {label: "Viernes", value: "friday"},
-            {label: "Sabado", value: "saturday"},
-            {label: "Domingo", value: "sunday"}
+            { label: "Lunes", value: "monday" },
+            { label: "Martes", value: "tuesday" },
+            { label: "Miercoles", value: "wednesday" },
+            { label: "Jueves", value: "thursday" },
+            { label: "Viernes", value: "friday" },
+            { label: "Sabado", value: "saturday" },
+            { label: "Domingo", value: "sunday" }
         ]
     },
     {
-        type: FieldType.Time,
+        type: FieldType.Select,
         name: "startTime",
         label: "Hora inicio",
+        options: generateTimeRange('07:00', '20:00').map((element) => {
+            return {
+                label: element.toString(),
+                value: element.toString()
+            }
+        })
     },
     {
-        type: FieldType.Time,
+        type: FieldType.Select,
         name: "endTime",
         label: "Hora final",
+        options: generateTimeRange('07:00', '20:00').map((element) => {
+            return {
+                label: element.toString(),
+                value: element.toString()
+            }
+        })
     },
     {
         type: FieldType.Text,

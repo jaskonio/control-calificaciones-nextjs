@@ -1,38 +1,36 @@
 import { auth } from "@/auth"
 import { NextResponse } from "next/server"
-
-const protectedRoutes = ["/admin"]
-const publicRoutes = ['/login', '/']
-
+import { hasAccess } from "./routes"
 
 function isAuthenticate(session: any) {
     if (!session) return false
-    
+
     if (session.user?.name != '') return true
 
     return false
 }
 
 export default auth(async (req) => {
-    const path = req.nextUrl.pathname
-    let isProtectedRoute = false 
-    protectedRoutes.map((pr => {
-        if (path.startsWith(pr)) {
-            isProtectedRoute = true
-        }
-    }))
-
-    const isPublicRoute = publicRoutes.includes(path)
+    const path: string = req.nextUrl.pathname
     const session = await auth()
     const isAuth = isAuthenticate(session)
 
-    if (isProtectedRoute && !isAuth) {
-        return NextResponse.redirect(new URL('/login', req.nextUrl))
+    if (path == '/'
+        || !(req.nextUrl.pathname.startsWith('/admin')
+            || req.nextUrl.pathname.startsWith('/login')
+            || req.nextUrl.pathname.startsWith('/settings'))) {
+        return NextResponse.next()
     }
 
-    if ( isProtectedRoute && isAuth && !req.nextUrl.pathname.startsWith('/admin')) {
-        return NextResponse.redirect(new URL('/admin', req.nextUrl))
-    }
+    if (path == '/login' && isAuth) return NextResponse.redirect(new URL('/', req.nextUrl))
+    if (path == '/login' && !isAuth) return NextResponse.next()
+
+    if (!isAuth && req.nextUrl.pathname.startsWith('/admin')) return NextResponse.redirect(new URL('/login', req.nextUrl))
+    if (!isAuth && !req.nextUrl.pathname.startsWith('/admin')) return NextResponse.redirect(new URL('/admin', req.nextUrl))
+
+    const containRoleToAccess = hasAccess(session.user.role, '/' + path.split('/')[1])
+
+    if (isAuth && !containRoleToAccess) return NextResponse.redirect(new URL('/login', req.nextUrl))
 
     return NextResponse.next()
 })

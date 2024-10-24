@@ -4,7 +4,35 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 
+interface NavItem {
+    title: string;
+    description: string;
+    href: string;
+    roles: string;
+}
+
+const itemsConf: NavItem[] = [
+    {
+        title: 'Panel administración',
+        description: 'xxx',
+        href: '/admin',
+        roles: 'admin',
+    },
+    {
+        title: 'Settings',
+        description: '',
+        href: '/settings',
+        roles: ''
+    }
+];
+
+function filterItemsByRole(items: NavItem[], userRole: string): NavItem[] {
+    return items.filter(item => item.roles === '' || item.roles === userRole);
+}
+
 export function AvatarPopover({ userInfo }: { userInfo: any }) {
+    const itemsConfFiltered = filterItemsByRole(itemsConf, userInfo.role)
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -15,12 +43,15 @@ export function AvatarPopover({ userInfo }: { userInfo: any }) {
             <DropdownMenuContent>
                 <DropdownMenuLabel>{userInfo.name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <Link href="/admin">Panel administración</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <Link href="/settings">Configuracion</Link>
-                </DropdownMenuItem>
+
+                {
+                    itemsConfFiltered.map((item, index) => (
+                        <DropdownMenuItem key={index}>
+                            <Link href={item.href}>{item.title}</Link>
+                        </DropdownMenuItem>
+                    ))
+                }
+
                 <DropdownMenuSeparator />
                 <DropdownMenuItem >
                     <button onClick={() => signOut({ redirectTo: "/" })}>cerrar sesión</button>

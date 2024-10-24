@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { userService } from "./services"
+import { JWT } from "next-auth/jwt"
+import { User } from "@auth/core/types"
 
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -20,9 +22,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return {
             id: user.id.toString(),
             name: user.name,
-            email: user.email
+            email: user.email,
+            role: user.role
         }
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    jwt({ token, user }: {token: JWT, user: User}) {
+      if(user) token.role = user.role
+      return token
+    },
+    session({ session, token }) {
+      session.user.role = token.role
+      return session
+    }
+  }
 })

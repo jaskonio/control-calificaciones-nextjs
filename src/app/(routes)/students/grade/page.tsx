@@ -1,19 +1,14 @@
 import { BaseCustomTable, BaseTableFields } from "@/app/components/ui/table";
 import { auth } from "@/auth";
-import { GradeViewModel } from "@/models/grade";
-import { gradeService, userService } from "@/services";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { gradeService } from "@/services";
 
 export default async function Page() {
     const session = await auth();
 
     if (!session || !session.user) return null
 
-    const user = await userService.getById(Number(session.user.id));
-    const data = await gradeService.getAll();
-    const dataFiltered = data
-        .filter(g => g.studentId === user.student?.id.toString())
-        .sort((a, b) => (new Date(b.evaluationDate) - new Date(a.evaluationDate)));
+    const data = await gradeService.getGradeByUserId(Number(session.user.id));
+    data.sort((a, b) => (new Date(b.evaluationDate) - new Date(a.evaluationDate)));
 
     const fields: BaseTableFields[] = [
         {
@@ -58,6 +53,6 @@ export default async function Page() {
         <BaseCustomTable
             title='Notas'
             fields={fields}
-            data={dataFiltered}
+            data={data}
         />)
 }

@@ -9,6 +9,13 @@ export class GradeService extends BaseService<CreateGradeModel, GradeViewModel> 
         super(prisma, 'grade', ConverterGradeInputToGradeModel, ConverterGradeModelToViewModel);
     }
 
+    async getGradeByUserId(userId: number) {
+        const grades = await this.getAll();
+        const gradeFiltered = grades.filter(s => s.student.userId == userId)
+
+        return gradeFiltered
+    }
+
     protected getInclude() {
         return {
             student: {

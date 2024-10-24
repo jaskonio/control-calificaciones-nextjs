@@ -3,16 +3,16 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { itemsConf } from './itemsConf';
 import NavigationItem from './navItem';
+import { NavItem } from '@/models/navItem';
 
 
-const SidebarNav = () => {
+const SidebarNav = ({ title, itemsConf }: { title: string, itemsConf: NavItem[] }) => {
   const pathname = usePathname();
 
   return (
     <nav className="min-h-screen bg-white shadow-md p-4 overflow-y-auto">
-      <h2 className="text-lg font-bold mb-6">Administración</h2>
+      <h2 className="text-lg font-bold mb-6">{title}</h2>
       <div className="space-y-2">
         {itemsConf.map((item) => (
           <NavigationItem

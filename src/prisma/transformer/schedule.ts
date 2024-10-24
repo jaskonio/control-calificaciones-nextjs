@@ -17,6 +17,7 @@ export function ConverterScheduleModelToViewModel(model: Schedule & {
         dayOfWeek: model.dayOfWeek,
         startTime: model.startTime,
         endTime: model.endTime,
+        label:  model.startTime + ' - ' +  model.endTime,
         description: model.description.toString(),
 
         classroom: model.classroom,

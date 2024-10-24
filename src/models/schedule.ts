@@ -4,6 +4,8 @@ export type CreateScheduleModel = Omit<Schedule, 'id' | 'classroomId' | 'classId
     classroomId: string;
     classId?: string;
     eventId?: string;
+
+    label: string
 }
 
 export type ScheduleViewModel = CreateScheduleModel & {

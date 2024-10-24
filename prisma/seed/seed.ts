@@ -17,7 +17,7 @@ const main = async () => {
   await seed.user((x) => x(1, ({ seed }) => ({
     name: 'admin',
     password: 'admin',
-    email: copycat.email(seed, { domain: 'fake.com' }),
+    email: 'admin@fake.com',
     role: 'admin'
   })));
 

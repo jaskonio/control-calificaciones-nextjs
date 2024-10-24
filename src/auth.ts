@@ -20,10 +20,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         return {
-            id: user.id.toString(),
-            name: user.name,
-            email: user.email,
-            role: user.role
+          id: user.id.toString(),
+          name: user.name,
+          email: user.email,
+          role: user.role
         }
       },
     }),
@@ -32,12 +32,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    jwt({ token, user }: {token: JWT, user: User}) {
-      if(user) token.role = user.role
+    jwt({ token, user }: { token: JWT, user: User }) {
+      if (user) {
+        token.role = user.role
+        token.id = user.id
+      }
       return token
     },
-    session({ session, token }) {
+    session({ session, token }: { session: Session, token: JWT }) {
+      session.user.id = token.id
       session.user.role = token.role
+
       return session
     }
   }

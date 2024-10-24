@@ -18,7 +18,11 @@ export class GradeService extends BaseService<CreateGradeModel, GradeViewModel> 
             },
             class: {
                 include: {
-                    course: true,
+                    course: {
+                        include: {
+                            academicYear: true,
+                        }
+                    },
                     subject: true
                 }
             }

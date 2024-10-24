@@ -15,6 +15,11 @@ export function ConverterGradeModelToViewModel(model: Grade & {
         score: model.score,
         evaluationDate: formatDateToString(model.evaluationDate),
         description: model.description,
+        
+        academicYearId: model.class.course.academicYearId,
+        academicYearName: model.class.course.academicYear.name,
+        courseName: model.class.course.name,
+        subjectName: model.class.subject.name,
 
         student: model.student,
         class: model.class,

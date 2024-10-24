@@ -4,25 +4,26 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 
-export function AvatarPopover({userInfo}: { userInfo: any}) {
+export function AvatarPopover({ userInfo }: { userInfo: any }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <Avatar>
-                    <AvatarFallback className="font-bold text-gray-600">{userInfo.name.slice(0,2).toUpperCase()}</AvatarFallback>
+                    <AvatarFallback className="font-bold text-gray-600">{userInfo.name.slice(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuLabel>{ userInfo.name }</DropdownMenuLabel>
+                <DropdownMenuLabel>{userInfo.name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-
-                <DropdownMenuItem><Link href="/admin">Panel administración</Link></DropdownMenuItem>
-                <DropdownMenuItem>Perfil</DropdownMenuItem>
-                <DropdownMenuItem>Preferencias</DropdownMenuItem>
-
+                <DropdownMenuItem>
+                    <Link href="/admin">Panel administración</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Link href="/settings">Configuracion</Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem >
-                    <button onClick={() => signOut({redirectTo: "/"})}>cerrar sesión</button>
+                    <button onClick={() => signOut({ redirectTo: "/" })}>cerrar sesión</button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

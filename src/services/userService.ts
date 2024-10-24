@@ -1,64 +1,40 @@
 import prisma from '../prisma/client';
-import { UserRole, UserStatus } from '@prisma/client';
+import { BaseService } from './baseService';
+import { CreateUserModel, UserViewModel } from '@/models/user';
+import { ConverterUserInputToModel, ConverterUserToViewModel } from '@/prisma/transformer/user';
 
-interface CreateUserInput {
-  name: string;
-  email: string;
-  password: string;
-  role: UserRole;
-  status: UserStatus;
-}
-
-interface UpdateUserInput {
-  id: number;
-  data: Partial<CreateUserInput>;
-}
-
-export class UserService {
-  async create(data: CreateUserInput) {
-    return await prisma.user.create({
-      data,
-    });
-  }
-
-  async getAll() {
-    return await prisma.user.findMany();
-  }
-
-  async getById(id: number) {
-    return await prisma.user.findUnique({
-      where: { id },
-    });
-  }
-
-  async update({ id, data }: UpdateUserInput) {
-    return await prisma.user.update({
-      where: { id },
-      data,
-    });
-  }
-
-  async delete(id: number) {
-    return await prisma.user.delete({
-      where: { id },
-    });
+export class UserService extends BaseService<CreateUserModel, UserViewModel> {
+  constructor() {
+    super(prisma, 'user', ConverterUserInputToModel, ConverterUserToViewModel);
   }
 
   async getByEmailAndPasword(email: string, password: string) {
-    return await prisma.user.findFirst({
+    try {
+      const data = await prisma.user.findFirst({
         where: {
-            email: {
-                equals: email,
-            },
-            password: {
-                equals: password
-            }
+          email: {
+            equals: email,
+          },
+          password: {
+            equals: password
+          }
         },
-        include: {
-            parent: true,
-            student: true,
-            teacher: true
-        }
-    })
+        include: this.getInclude()
+      })
+
+      return this.convertEntityToViewModel(data);
+    }
+    catch (error) {
+      console.error(error);
+      throw new Error(`Error getting  ${this.model.toString()}`);
+    }
+  }
+
+  protected getInclude() {
+    return {
+      student: true,
+      teacher: true,
+      parent: true
+    }
   }
 }

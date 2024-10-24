@@ -1,13 +1,16 @@
 import { CreateUserModel, UserViewModel } from "@/models/user";
 import { User } from "@prisma/client";
+import { ConverterTeacherToViewModel } from "./teacher";
+import { ConverterParentToViewModel } from "./parent";
+import { ConverterStudentToViewModel } from "./student";
 
 
 export function ConverterUserToViewModel(model: User & {
-    student: any;
-    teacher: any;
-    parent: any;
+    student?: any;
+    teacher?: any;
+    parent?: any;
 }): UserViewModel {
-    return {
+    let data: UserViewModel = {
         id: model.id,
 
         name: model.name,
@@ -15,12 +18,22 @@ export function ConverterUserToViewModel(model: User & {
         password: model.password,
         role: model.role,
         createdAt: model.createdAt,
-        status: model.status,
-
-        student: model.student,
-        teacher: model.teacher,
-        parent: model.parent
+        status: model.status
     };
+
+    if (model.student) {
+        data.student = ConverterStudentToViewModel(model.student)
+    }
+
+    if (model.teacher) {
+        data.teacher = ConverterTeacherToViewModel(model.student)
+    }
+
+    if (model.parent) {
+        data.parent = ConverterParentToViewModel(model.parent)
+    }
+
+    return data
 }
 
 export function ConverterUserInputToModel(input: CreateUserModel, type: string): Partial<any> {

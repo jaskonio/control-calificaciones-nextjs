@@ -32,9 +32,21 @@ export class UserService extends BaseService<CreateUserModel, UserViewModel> {
 
   protected getInclude() {
     return {
-      student: true,
-      teacher: true,
-      parent: true
+      student: {
+        include: {
+          user: true
+        }
+      },
+      teacher: {
+        include: {
+          user: true
+        }
+      },
+      parent: {
+        include: {
+          user: true
+        }
+      }
     }
   }
 }

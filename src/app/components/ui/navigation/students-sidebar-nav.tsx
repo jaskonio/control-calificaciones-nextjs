@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { NavItem } from '@/models/navItem';
-import { BookCheck } from 'lucide-react';
+import { BookCheck, Calendar } from 'lucide-react';
 import SidebarNav from './sidebar-nav';
 
 const studentsNavItems: NavItem[] = [
@@ -11,6 +11,12 @@ const studentsNavItems: NavItem[] = [
         description: 'Visualiza tus notas',
         icon: BookCheck,
         href: '/students/grade',
+    },
+    {
+        title: 'Calendario',
+        description: 'Visualiza tus eventos',
+        icon: Calendar,
+        href: '/students/calendar',
     }
 ];
 

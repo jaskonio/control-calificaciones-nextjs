@@ -6,8 +6,9 @@ import Header from "./components/ui/header";
 import Footer from "./components/ui/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const font = Montserrat({ subsets: ["latin"]});
+const font = Montserrat({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
@@ -22,19 +23,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="h-full">
-      <body 
-        className={cn("flex flex-col min-h-screen bg-background", font.className )}>
+      <body
+        className={cn("flex flex-col min-h-screen bg-background", font.className)}>
         <SessionProvider>
 
           <Header />
           <div className="min-h-screen bg-gradient-to-b from-secondary-light to-white">
-            {children}
+            <TooltipProvider>
+              {children}
+            </TooltipProvider>
             <Toaster />
           </div>
           <Footer />
         </SessionProvider>
 
-        </body>
+      </body>
     </html>
   );
 }

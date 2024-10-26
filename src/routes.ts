@@ -7,6 +7,7 @@ const appRoutes: Route[] = [
     { path: '/admin', roles: ['admin'] },
     { path: '/settings', roles: ['admin', 'teacher', 'student'] },
     { path: '/', roles: ['admin', 'teacher', 'student'] },
+    { path: '/students', roles: ['admin', 'student'] },
 ];
 
 export function hasAccess(role: string, url: string): boolean {

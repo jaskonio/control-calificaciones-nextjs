@@ -25,57 +25,37 @@ export class EventService extends BaseService<CreateEventModel, EventViewModel> 
         this.classService = new ClassService()
     }
 
-    async getCalendarEventsByUserId(userId: number) {
+    async getCalendarEventsByStudentId(userId: number) {
+        const events = await this.getEventParticipantById(userId, ParticipantType.student)
+        const caledarEvents: CalendarEvent[] = []
 
-        const mockEvents: CalendarEvent[] = [
-            {
-                id: 1,
-                title: "Team Standup",
-                date: new Date(2024, 9, 1, 10, 0),
-                type: "meeting",
-            },
-            {
-                id: 2,
-                title: "Project Review",
-                date: new Date(2024, 9, 2, 14, 30),
-                type: "meeting",
-            },
-            {
-                id: 3,
-                title: "Client Call",
-                date: new Date(2024, 10, 3, 11, 0),
-                type: "call",
-            },
-        ];
+        events.map((e) => {
+            e.schedules.map(s => {
+                caledarEvents.push({
+                    id: s.id,
+                    date: s.date,
+                    title: `${s.startTime}-${s.endTime}: ${e.title}`,
+                    type: e.eventType
+                })
+            })
+        })
 
-        return mockEvents
+        return caledarEvents
     }
 
-    async getEventParticipantById(participantId: number) {
-        const eventParticipant = await prisma.eventParticipant.findUnique({
-            where: { id: participantId },
+    async getEventParticipantById(participantId: number, participantType: ParticipantType) {
+        const eventParticipant = await prisma.eventParticipant.findMany({
+            where: { participantId: participantId, participantType: participantType },
+            include: {
+                event: {
+                    include: this.getInclude()
+                }
+            }
         });
 
-        if (!eventParticipant) {
-            throw new Error('EventParticipant not found');
-        }
+        const events = eventParticipant.map(ep => ep.event)
 
-        switch (eventParticipant.participantType) {
-            case ParticipantType.student:
-                return (await this.studenService.getById(eventParticipant.participantId));
-
-            case ParticipantType.teacher:
-                return (await this.teacherService.getById(eventParticipant.participantId));
-
-            case ParticipantType.parent:
-                return (await this.parentService.getById(eventParticipant.participantId));
-
-            case ParticipantType.class:
-                return (await this.classService.getById(eventParticipant.participantId));
-
-            default:
-                throw new Error('Invalid participant type');
-        }
+        return events.map(ConverterEventModelToViewModel)
     }
 
     protected getInclude() {

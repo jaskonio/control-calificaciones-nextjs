@@ -1,14 +1,11 @@
 import { Separator } from "@/components/ui/separator";
 import ProfileForm from "./profile-form";
-import { auth } from "@/auth";
 import { userService } from "@/services";
+import { GetUserId } from "@/actions/sessionActions";
 
 export default async function Page() {
-    const session = await auth()
-
-    if (!session || !session.user || !session.user.email || !session.user.name) return null
-
-    const user = await userService.getByEmailAndPasword(session.user.email, session.user.name)
+    const userId = await GetUserId()
+    const user = await userService.getById(userId)
 
     if (!user) return null
 

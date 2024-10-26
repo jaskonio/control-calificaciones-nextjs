@@ -32,7 +32,7 @@ export default auth(async (req) => {
     let containRoleToAccess = false
 
     if (session?.user?.role) {
-        containRoleToAccess = hasAccess(session?.user?.role, '/' + path.split('/')[1])
+        containRoleToAccess = hasAccess(session.user.role, '/' + path.split('/')[1])
     }
 
     if (isAuth && !containRoleToAccess) return NextResponse.redirect(new URL('/login', req.nextUrl))

@@ -1,14 +1,13 @@
+import { GetUserId } from "@/actions/sessionActions";
 import { BaseCustomTable, BaseTableFields } from "@/app/components/ui/table";
-import { auth } from "@/auth";
 import { compareDates, parseStringToDate } from "@/lib/utils";
 import { gradeService } from "@/services";
 
+
 export default async function Page() {
-    const session = await auth();
+    const userId = await GetUserId()
 
-    if (!session || !session.user) return null
-
-    const data = await gradeService.getGradeByUserId(Number(session.user.id));
+    const data = await gradeService.getGradeByUserId(userId);
     data.sort((a, b) => compareDates(parseStringToDate(a.evaluationDate), parseStringToDate(b.evaluationDate)));
 
     const fields: BaseTableFields[] = [

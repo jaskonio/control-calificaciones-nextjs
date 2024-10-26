@@ -1,14 +1,12 @@
+import { GetUserId } from "@/actions/sessionActions";
 import { CustomCalendar } from "@/app/components/ui/calendar/calendar";
-import { auth } from "@/auth";
 import { eventService } from "@/services";
 
 
 export default async function Page() {
-    const session = await auth();
+    const userId = await GetUserId()
 
-    if (!session || !session.user) return null
-
-    const data = await eventService.getCalendarEventsByUserId(Number(session.user.id));
+    const data = await eventService.getCalendarEventsByStudentId(userId);
 
     return (
         <div>

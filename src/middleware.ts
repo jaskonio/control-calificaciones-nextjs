@@ -18,7 +18,8 @@ export default auth(async (req) => {
     if (path == '/'
         || !(req.nextUrl.pathname.startsWith('/admin')
             || req.nextUrl.pathname.startsWith('/login')
-            || req.nextUrl.pathname.startsWith('/settings'))) {
+            || req.nextUrl.pathname.startsWith('/settings')
+            || req.nextUrl.pathname.startsWith('/students'))) {
         return NextResponse.next()
     }
 
@@ -27,8 +28,12 @@ export default auth(async (req) => {
 
     if (!isAuth && req.nextUrl.pathname.startsWith('/admin')) return NextResponse.redirect(new URL('/login', req.nextUrl))
     if (!isAuth && !req.nextUrl.pathname.startsWith('/admin')) return NextResponse.redirect(new URL('/admin', req.nextUrl))
+    
+    let containRoleToAccess = false
 
-    const containRoleToAccess = hasAccess(session.user.role, '/' + path.split('/')[1])
+    if (session?.user?.role) {
+        containRoleToAccess = hasAccess(session?.user?.role, '/' + path.split('/')[1])
+    }
 
     if (isAuth && !containRoleToAccess) return NextResponse.redirect(new URL('/login', req.nextUrl))
 

@@ -51,3 +51,5 @@
 {"level":"info","message":"Añadiendo Horario","timestamp":"2024-10-23T14:33:19.730Z"}
 {"level":"info","message":"Añadiendo Horario","timestamp":"2024-10-23T14:35:13.342Z"}
 {"level":"info","message":"Actualizando Horario: 38","timestamp":"2024-10-23T14:35:53.551Z"}
+{"level":"info","message":"Añadiendo Setting","timestamp":"2024-10-26T17:55:31.406Z"}
+{"level":"info","message":"Eliminando Setting: 1","timestamp":"2024-10-26T17:55:34.755Z"}

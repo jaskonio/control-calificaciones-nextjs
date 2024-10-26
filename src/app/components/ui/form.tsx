@@ -16,7 +16,7 @@ import {
     FormMessage
 } from "@/components/ui/form"
 import { ZodSchema } from "zod";
-import { TimePicker } from "@/components/ui/data-picker";
+
 
 export interface SelectOption {
     label: string;
@@ -202,21 +202,7 @@ const DateInput = ({ form, fieldConfig }: inputComponent) => {
 const TimeInput = ({ form, fieldConfig }: inputComponent) => {
     return (
         <div className="mb-4">
-            <FormField
-                control={form['control']}
-                name={fieldConfig.name}
-                render={({ field }) => {
-                    return (
-                        <FormItem>
-                            <FormLabel>{fieldConfig.label}</FormLabel>
-                            <FormControl>
-                                <TimePicker date={field.value} onChange={field.onChange} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )
-                }}
-            />
+            Not Implemented
         </div>
     );
 };

@@ -11,10 +11,7 @@ export class ScheduleService extends BaseService<CreateScheduleModel, ScheduleVi
 
     protected getInclude() {
         return {
-            classroom: true,
-            class: true,
-            event: true,
-            attendances: true
+            event: true
         }
     }
 }

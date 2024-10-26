@@ -35,8 +35,9 @@ export class StudentService extends BaseService<CreateStudentModel, StudentViewM
     return {
       user: true,
       parents: true,
-      attendance: true,
-      grade: true
+      grade: true,
+      eventParticipant: true,
+      attendance: true
     }
   }
 }

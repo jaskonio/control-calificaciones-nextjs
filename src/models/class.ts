@@ -1,10 +1,7 @@
-import { Attendance, Class, Grade, Schedule, Subject, Teacher, User } from "@prisma/client";
+import { Attendance, Class, EventParticipant, Grade, Schedule, Subject, Teacher, User } from "@prisma/client";
 
 
-export type CreateClassModel = Omit<Class, 'id' | 'courseId' | 'subjectId' | 'teacherId'> & {
-    courseId: string;
-    subjectId: string;
-    teacherId: string;
+export type CreateClassModel = Omit<Class, 'id'> & {
 }
 
 export type ClassViewModel = CreateClassModel & {
@@ -13,7 +10,7 @@ export type ClassViewModel = CreateClassModel & {
     course: User;
     subject: Subject;
     teacher: Teacher;
-    schedule: Schedule[];
-    attendances: Attendance[];
     grades: Grade[];
+    eventParticipant: EventParticipant[]
+    attendances: Attendance[];
 }

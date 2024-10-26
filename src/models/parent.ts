@@ -1,4 +1,4 @@
-import { Parent, Student, User, UserStatus } from "@prisma/client";
+import { EventParticipant, Parent, Student, User, UserStatus } from "@prisma/client";
 
 export type CreateParentModel = Omit<Parent, 'id'> & {
     name: string;
@@ -12,4 +12,5 @@ export type ParentViewModel = CreateParentModel & {
 
     user: User;
     student: Student[];
+    eventParticipant: EventParticipant[];
 }

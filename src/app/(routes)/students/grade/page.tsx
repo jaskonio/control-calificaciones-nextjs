@@ -1,5 +1,6 @@
 import { BaseCustomTable, BaseTableFields } from "@/app/components/ui/table";
 import { auth } from "@/auth";
+import { compareDates, parseStringToDate } from "@/lib/utils";
 import { gradeService } from "@/services";
 
 export default async function Page() {
@@ -8,7 +9,7 @@ export default async function Page() {
     if (!session || !session.user) return null
 
     const data = await gradeService.getGradeByUserId(Number(session.user.id));
-    data.sort((a, b) => (new Date(b.evaluationDate) - new Date(a.evaluationDate)));
+    data.sort((a, b) => compareDates(parseStringToDate(a.evaluationDate), parseStringToDate(b.evaluationDate)));
 
     const fields: BaseTableFields[] = [
         {

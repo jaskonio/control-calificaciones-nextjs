@@ -1,4 +1,4 @@
-import { Attendance, Grade, Parent, Student, User, UserStatus } from "@prisma/client";
+import { Attendance, EventParticipant, Grade, Parent, Student, User, UserStatus } from "@prisma/client";
 
 export type CreateStudentModel = Omit<Student, 'id' | 'birthDate' | 'enrollmentDate'> & {
     name: string;
@@ -15,6 +15,7 @@ export type StudentViewModel = CreateStudentModel & {
 
     user: User;
     parents: Parent[];
-    attendance: Attendance[];
     grade: Grade[];
+    eventParticipant: EventParticipant[];
+    attendance: Attendance[];
 }

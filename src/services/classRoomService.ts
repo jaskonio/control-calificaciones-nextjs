@@ -11,7 +11,7 @@ export class ClassRoomService extends BaseService<CreateClassRoomModel, ClassRoo
 
   protected getInclude() {
     return {
-      schedules: true
+      events: true
     }
   }
 }

@@ -1,34 +1,40 @@
 import { formatDateToString, parseStringToDate } from "@/lib/utils";
 import { EventViewModel, CreateEventModel } from "@/models/event";
-import { Event } from "@prisma/client";
+import { AcademicYear, Attendance, Classroom, Event, EventParticipant, Schedule } from "@prisma/client";
 
 
 export function ConverterEventModelToViewModel(model: Event & {
-    academicYear: any;
-    schedule: any[];
+    academicYear: AcademicYear;
+    classroom: Classroom;
+    participants: EventParticipant[];
+    schedules: Schedule[];
+    attendance: Attendance[];
 }): EventViewModel {
     return {
         id: model.id,
-        academicYearId: model.academicYearId.toString(),
-        scheduleId: model.scheduleId.toString(),
+        academicYearId: model.academicYearId,
+        classroomId: model.classroomId,
+        eventType: model.eventType,
         title: model.title,
         description: model.description,
         date: formatDateToString(model.date),
-        eventType: model.eventType,
 
         academicYear: model.academicYear,
-        schedule: model.schedule,
+        classroom: model.classroom,
+        participants: model.participants,
+        schedules: model.schedules,
+        attendance: model.attendance
     };
 }
 
 
 export function ConverterEventInputToEventModel(input: CreateEventModel, type: string): Partial<any> {
     return {
-        academicYearId: Number(input.academicYearId),
-        scheduleId: Number(input.scheduleId),
+        academicYearId: input.academicYearId,
+        classroomId: input.classroomId,
+        eventType: input.eventType,
         title: input.title,
         description: input.description,
-        date: parseStringToDate(input.date),
-        eventType: input.eventType,
+        date: parseStringToDate(input.date)
     };
 }

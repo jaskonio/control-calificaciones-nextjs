@@ -35,6 +35,7 @@ export class TeacherService extends BaseService<CreateTeacherModel, TeacherViewM
     return {
       user: true,
       class: true,
+      eventParticipant: true,
     }
   }
 }

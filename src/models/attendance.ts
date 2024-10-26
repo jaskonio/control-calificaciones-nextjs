@@ -1,9 +1,6 @@
-import { Attendance, Class, Schedule, Student } from "@prisma/client";
+import { Attendance, Class, Event, Student } from "@prisma/client";
 
-export type CreateAttendanceModel = Omit<Attendance, 'id' | 'studentId' | 'classId' | 'scheduleId' | 'date'> & {
-    studentId: string;
-    classId: string;
-    scheduleId: string;
+export type CreateAttendanceModel = Omit<Attendance, 'id' | 'date'> & {
     date: string;
 }
 
@@ -11,6 +8,6 @@ export type AttendanceViewModel = CreateAttendanceModel & {
     id: number;
 
     student: Student;
+    event: Event;
     class: Class;
-    schedule: Schedule;
 }

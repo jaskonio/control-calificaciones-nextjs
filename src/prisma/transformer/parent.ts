@@ -1,10 +1,11 @@
 import { CreateParentModel, ParentViewModel } from "@/models/parent";
-import { Parent, UserRole } from "@prisma/client";
+import { EventParticipant, Parent, UserRole } from "@prisma/client";
 
 
 export function ConverterParentToViewModel(model: Parent & {
     user: any;
     student: any;
+    eventParticipant: EventParticipant[];
 }): ParentViewModel {
     return {
         id: model.id,
@@ -19,7 +20,8 @@ export function ConverterParentToViewModel(model: Parent & {
         phone: model.phone,
 
         user: model.user,
-        student: model.student
+        student: model.student,
+        eventParticipant: model.eventParticipant
     };
 }
 

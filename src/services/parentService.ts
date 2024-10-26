@@ -13,6 +13,7 @@ export class ParentService extends BaseService<CreateParentModel, ParentViewMode
     return {
       user: true,
       student: true,
+      eventParticipant: true
     }
   }
 }

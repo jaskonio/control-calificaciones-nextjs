@@ -18,9 +18,9 @@ export class ClassService extends BaseService<CreateClassModel, ClassViewModel> 
           user: true,
         }
       },
-      schedule: true,
-      attendances: true,
-      grades: true
+      grades: true,
+      eventParticipant: true,
+      attendances: true
     }
   }
 }

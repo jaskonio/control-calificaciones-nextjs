@@ -1,37 +1,37 @@
 import { ClassViewModel, CreateClassModel } from "@/models/class";
-import { Class } from "@prisma/client";
+import { Attendance, Class, EventParticipant, Grade, Subject, Teacher, User } from "@prisma/client";
 
 
 export function ConverterClassModelToViewModel(model: Class & {
-    course: any;
-    subject: any;
-    teacher: any;
-    schedule: any[];
-    attendances: any[];
-    grades: any[];
+    course: User;
+    subject: Subject;
+    teacher: Teacher;
+    grades: Grade[];
+    eventParticipant: EventParticipant[]
+    attendances: Attendance[];
 }): ClassViewModel {
     return {
         id: model.id,
-        courseId: model.courseId.toString(),
-        subjectId: model.subjectId.toString(),
-        teacherId: model.teacherId.toString(),
+        courseId: model.courseId,
+        subjectId: model.subjectId,
+        teacherId: model.teacherId,
         comments: model.comments,
 
         course: model.course,
         subject: model.subject,
         teacher: model.teacher,
-        schedule: model.schedule,
-        attendances: model.attendances,
-        grades: model.grades
+        grades: model.grades,
+        eventParticipant: model.eventParticipant,
+        attendances: model.attendances
     };
 }
 
 
 export function ConverterClassInputToClassModel(input: CreateClassModel, type: string): Partial<any> {
     return {
-        courseId: Number(input.courseId),
-        subjectId: Number(input.subjectId),
-        teacherId: Number(input.teacherId),
+        courseId: input.courseId,
+        subjectId: input.subjectId,
+        teacherId: input.teacherId,
         comments: input.comments,
     };
 }

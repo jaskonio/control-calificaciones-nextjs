@@ -249,7 +249,6 @@ model EventParticipant {
   class          Class?         @relation(fields: [participantId], references: [id], map: "Class_EventParticipant_fk")
 }
 
-
 model Attendance {
   id                Int               @id @default(autoincrement())
   studentId         Int

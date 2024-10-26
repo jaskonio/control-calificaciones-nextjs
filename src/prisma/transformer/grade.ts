@@ -9,8 +9,8 @@ export function ConverterGradeModelToViewModel(model: Grade & {
 }): GradeViewModel {
     return {
         id: model.id,
-        studentId: model.studentId.toString(),
-        classId: model.classId.toString(),
+        studentId: model.studentId,
+        classId: model.classId,
         evaluationType: model.evaluationType,
         score: model.score,
         evaluationDate: formatDateToString(model.evaluationDate),
@@ -29,8 +29,8 @@ export function ConverterGradeModelToViewModel(model: Grade & {
 
 export function ConverterGradeInputToGradeModel(input: CreateGradeModel, type: string): Partial<any> {
     return {
-        studentId: Number(input.studentId),
-        classId: Number(input.classId),
+        studentId: input.studentId,
+        classId: input.classId,
         evaluationType: input.evaluationType,
         score: input.score,
         evaluationDate: parseStringToDate(input.evaluationDate),

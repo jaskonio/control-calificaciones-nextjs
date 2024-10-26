@@ -1,4 +1,4 @@
-import { Class, Teacher, User, UserStatus } from "@prisma/client";
+import { Class, EventParticipant, Teacher, User, UserStatus } from "@prisma/client";
 
 
 export type CreateTeacherModel = Omit<Teacher, 'id' | 'hireDate'> & {
@@ -15,4 +15,5 @@ export type TeacherViewModel = CreateTeacherModel & {
 
     user: User;
     class: Class[];
+    eventParticipant: EventParticipant[];
 }

@@ -23,6 +23,6 @@ export default async function Page() {
       data={data}
       onDelete={deleteSchedule}
       primaryKey={primaryKey}
-      onCanDelete={(item: ScheduleViewModel) => (item.attendances.length != 0)}
+      onCanDelete={(item: ScheduleViewModel) => !item.event}
     />)
 }

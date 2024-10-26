@@ -16,13 +16,13 @@ export class AttendanceService extends BaseService<CreateAttendanceModel, Attend
                     user: true,
                 }
             },
+            event: true,
             class: {
                 include: {
                     course: true,
                     subject: true
                 }
-            },
-            schedule: true
+            }
         }
     }
 }

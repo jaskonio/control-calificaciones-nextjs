@@ -38,6 +38,14 @@ export function updateOptionFields({ options, fields }: updateOptionFields) {
   return fieldsUpdated
 }
 
+export function compareDates(date1: Date, date2: Date): number {
+  const time1 = date1.getTime();
+  const time2 = date2.getTime();
+
+  if (time1 === time2) return 0;
+  return time1 > time2 ? 1 : -1;
+}
+
 export function generateTimeRange(startTime: string, endTime: string, intervalMinutes: number = 15): string[] {
   const range: string[] = [];
 

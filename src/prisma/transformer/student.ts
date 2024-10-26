@@ -1,13 +1,14 @@
 import { formatDateToString, parseStringToDate } from "@/lib/utils";
 import { CreateStudentModel, StudentViewModel } from "@/models/student";
-import { Student, UserRole } from "@prisma/client";
+import { Attendance, EventParticipant, Grade, Parent, Student, User, UserRole } from "@prisma/client";
 
 
 export function ConverterStudentToViewModel(model: Student & {
-    user: any;
-    parents: any[];
-    attendance: any[];
-    grade: any[];
+    user: User;
+    parents: Parent[];
+    grade: Grade[];
+    eventParticipant: EventParticipant[];
+    attendance: Attendance[];
 }): StudentViewModel {
     return {
         id: model.id,
@@ -26,8 +27,9 @@ export function ConverterStudentToViewModel(model: Student & {
 
         user: model.user,
         parents: model.parents,
-        attendance: model.attendance,
-        grade: model.grade
+        grade: model.grade,
+        eventParticipant: model.eventParticipant,
+        attendance: model.attendance
     };
 }
 

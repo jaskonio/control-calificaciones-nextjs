@@ -1,16 +1,16 @@
 import { ClassRoomViewModel, CreateClassRoomModel } from "@/models/classroom";
-import { Classroom } from "@prisma/client";
+import { Classroom, Event } from "@prisma/client";
 
 
 export function ConverterClassRoomModelToViewModel(model: Classroom & {
-    schedule: any[];
+    events: Event[];
 }): ClassRoomViewModel {
     return {
         id: model.id,
         name: model.name,
         capacity: model.capacity,
 
-        schedules: model.schedule
+        events: model.events
     };
 }
 

@@ -38,6 +38,7 @@ enum AttendanceStatus {
 }
 
 enum EventType {
+  class
   extracurricular
   meeting
   workshop
@@ -72,6 +73,13 @@ enum DayOfWeek {
   friday
   saturday
   sunday
+}
+
+enum ParticipantType {
+  student
+  teacher
+  parent
+  class
 }
 
 /// Models representing different entities in the system
@@ -112,8 +120,9 @@ model Student {
   // Relationships
   user             User            @relation(fields: [userId], references: [id])
   parents          Parent[]
-  attendance       Attendance[]
   grade            Grade[]
+  eventParticipant EventParticipant[]
+  attendance       Attendance[]
 }
 
 model Parent {
@@ -124,6 +133,7 @@ model Parent {
   // Relationships
   user        User      @relation(fields: [userId], references: [id])
   student     Student[]
+  eventParticipant EventParticipant[]
 }
 
 model Teacher {
@@ -135,8 +145,9 @@ model Teacher {
   hireDate          DateTime
   status            TeacherStatus
   // Relationships
-  user        User      @relation(fields: [userId], references: [id])
-  class          Class[]
+  user              User      @relation(fields: [userId], references: [id])
+  class             Class[]
+  eventParticipant  EventParticipant[]
 }
 
 model Course {
@@ -165,23 +176,18 @@ model Classroom {
   name        String
   capacity    Int
   // Relationships
-  schedules  Schedule[]
+  events  Event[]
 }
 
 model Schedule {
   id          Int           @id @default(autoincrement())
-  classroomId Int
-  classId     Int?
-  eventId     Int?
-  dayOfWeek   DayOfWeek        // e.g., "Monday", "Tuesday"
+  eventId     Int
+  date        DateTime
   startTime   String
   endTime     String
   description String
   // Relationships
-  classroom   Classroom     @relation(fields: [classroomId], references: [id])
-  class       Class?         @relation(fields: [classId], references: [id])
-  event       Event?         @relation(fields: [eventId], references: [id])
-  attendances Attendance[]
+  event       Event           @relation(fields: [eventId], references: [id])
 }
 
 model Class {
@@ -194,23 +200,9 @@ model Class {
   course       Course        @relation(fields: [courseId], references: [id])
   subject      Subject       @relation(fields: [subjectId], references: [id])
   teacher      Teacher       @relation(fields: [teacherId], references: [id])
-  schedule     Schedule[]     // One class can have multiple schedules
-  attendances  Attendance[]
   grades       Grade[]
-}
-
-model Attendance {
-  id                Int               @id @default(autoincrement())
-  studentId         Int
-  classId           Int
-  scheduleId        Int           // Attendance is tied to a specific schedule
-  date              DateTime
-  attendanceStatus  AttendanceStatus
-  comments          String?
-  // Relationships
-  student          Student    @relation(fields: [studentId], references: [id])
-  class            Class      @relation(fields: [classId], references: [id])
-  schedule         Schedule   @relation(fields: [scheduleId], references: [id])
+  eventParticipant  EventParticipant[]
+  attendances   Attendance[]
 }
 
 model Grade {
@@ -227,16 +219,49 @@ model Grade {
 }
 
 model Event {
-  id              Int               @id @default(autoincrement())
-  academicYearId  Int
-  scheduleId      Int
-  title           String
-  description     String
-  date            DateTime
-  eventType       EventType
+  id             Int            @id @default(autoincrement())
+  academicYearId Int
+  classroomId    Int
+  eventType      EventType
+  title          String
+  description    String
+  date           DateTime
   // Relationships
-  academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id])
-  schedule         Schedule[]
+  academicYear   AcademicYear   @relation(fields: [academicYearId], references: [id])
+  classroom      Classroom      @relation(fields: [classroomId], references: [id])
+  participants   EventParticipant[]
+  schedules      Schedule[]
+  attendance     Attendance[]
+}
+
+model EventParticipant {
+  id             Int            @id @default(autoincrement())
+  eventId        Int
+  participantId  Int
+  participantType ParticipantType
+  @@unique([eventId, participantId, participantType])
+
+  // Relationships
+  event          Event          @relation(fields: [eventId], references: [id])
+  student        Student?       @relation(fields: [participantId], references: [id], map: "Student_EventParticipant_fk")
+  teacher        Teacher?       @relation(fields: [participantId], references: [id], map: "Teacher_EventParticipant_fk")
+  parent         Parent?        @relation(fields: [participantId], references: [id], map: "Parent_EventParticipant_fk")
+  class          Class?         @relation(fields: [participantId], references: [id], map: "Class_EventParticipant_fk")
+}
+
+
+model Attendance {
+  id                Int               @id @default(autoincrement())
+  studentId         Int
+  eventId           Int
+  classId           Int
+  date              DateTime
+  attendanceStatus  AttendanceStatus
+  comments          String?
+  // Relationships
+  student           Student           @relation(fields: [studentId], references: [id])
+  event             Event             @relation(fields: [eventId], references: [id])
+  class             Class             @relation(fields: [classId], references: [id])
 }
 
 model Setting {

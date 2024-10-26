@@ -53,6 +53,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.0.3",
     "@snaplet/copycat": "^5.0.0",
     "@snaplet/seed": "^0.98.0",
     "@types/node": "^20.16.11",

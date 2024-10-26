@@ -6,6 +6,7 @@
  */
 import { createSeedClient } from "@snaplet/seed";
 import { copycat } from '@snaplet/copycat';
+import { faker }  from '@faker-js/faker';
 
 
 const main = async () => {
@@ -102,6 +103,12 @@ const main = async () => {
   const { event } = await seed.event((x) => x(10, ({ seed }) => ({
     title: `Evento ${seed}`
   })), { connect: { academicYear } });
+
+
+  await seed.eventParticipant((x) => x(10, ({seed}) => ({
+    eventId: faker.number.int({max:10, min: 1}),
+    participantId: faker.number.int({max:10, min: 1}),
+  })))
 
   // Grade
   const gradeLimit = 30

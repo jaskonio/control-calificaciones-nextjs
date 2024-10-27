@@ -2,7 +2,7 @@ import prisma from '../prisma/client';
 import { ConverterEventInputToEventModel, ConverterEventModelToViewModel } from '@/prisma/transformer/event';
 import { BaseService } from './baseService';
 import { EventViewModel, CreateEventModel } from '@/models/event';
-import { CalendarEvent } from '@/types/calendar';
+import { StudentsCalendarEvent } from '@/types/calendar';
 import { ParticipantType } from '@prisma/client';
 import { StudentService } from './studentsService';
 import { ParentService } from './parentService';
@@ -27,20 +27,7 @@ export class EventService extends BaseService<CreateEventModel, EventViewModel> 
 
     async getCalendarEventsByStudentId(userId: number) {
         const events = await this.getEventParticipantById(userId, ParticipantType.student)
-        const caledarEvents: CalendarEvent[] = []
-
-        events.map((e) => {
-            e.schedules.map(s => {
-                caledarEvents.push({
-                    id: s.id,
-                    date: s.date,
-                    title: `${s.startTime}-${s.endTime}: ${e.title}`,
-                    type: e.eventType
-                })
-            })
-        })
-
-        return caledarEvents
+        return this.groupEventsByAcademicYear(events);
     }
 
     async getEventParticipantById(participantId: number, participantType: ParticipantType) {
@@ -56,6 +43,31 @@ export class EventService extends BaseService<CreateEventModel, EventViewModel> 
         const events = eventParticipant.map(ep => ep.event)
 
         return events.map(ConverterEventModelToViewModel)
+    }
+
+    private groupEventsByAcademicYear(events: EventViewModel[]): StudentsCalendarEvent[] {
+        return events.reduce((acc, event) => {
+            const academicYearId = event.academicYearId.toString();
+            let calendarEvent = acc.find(e => e.academicYearId === event.academicYearId);
+
+            if (!calendarEvent) {
+                calendarEvent = {
+                    academicYearId: event.academicYearId,
+                    academicYearName: event.academicYear.name,
+                    events: []
+                };
+                acc.push(calendarEvent);
+            }
+
+            calendarEvent.events.push(...event.schedules.map(schedule => ({
+                id: schedule.id,
+                date: schedule.date,
+                title: `${schedule.startTime}-${schedule.endTime}: ${event.title}`,
+                type: event.eventType
+            })));
+
+            return acc;
+        }, [] as StudentsCalendarEvent[]);
     }
 
     protected getInclude() {

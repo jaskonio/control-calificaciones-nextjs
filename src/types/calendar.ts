@@ -4,3 +4,9 @@ export interface CalendarEvent {
   date: Date;
   type: "class" | "extracurricular" | "meeting" | "workshop" | "other";
 }
+
+export interface StudentsCalendarEvent {
+  academicYearId: number;
+  academicYearName: string;
+  events: CalendarEvent[];
+}

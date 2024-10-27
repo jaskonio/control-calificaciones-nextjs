@@ -1,6 +1,6 @@
 import { GetUserId } from "@/actions/sessionActions";
-import { CustomCalendar } from "@/app/components/ui/calendar/calendar";
 import { eventService } from "@/services";
+import StudentCalendar from "./student-calendar";
 
 
 export default async function Page() {
@@ -10,7 +10,7 @@ export default async function Page() {
 
     return (
         <div>
-            <CustomCalendar events={data}></CustomCalendar>
+            <StudentCalendar events={data}></StudentCalendar>
         </div>
     );
 }

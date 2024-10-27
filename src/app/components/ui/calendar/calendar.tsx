@@ -34,14 +34,14 @@ export function CustomCalendar({ events }: { events: CalendarEvent[] }) {
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
-      <CalendarHeader
+      {/* <CalendarHeader
         date={date}
         view={view}
         onPrevious={handlePrevious}
         onNext={handleNext}
         onViewChange={setView}
         onNewEvent={handleNewEvent}
-      />
+      /> */}
       <CardContent>
         <div className="rounded-lg border">
           <Calendar

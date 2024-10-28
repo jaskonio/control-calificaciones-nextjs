@@ -2,7 +2,7 @@ import prisma from '../prisma/client';
 import { ConverterEventInputToEventModel, ConverterEventModelToViewModel } from '@/prisma/transformer/event';
 import { BaseService } from './baseService';
 import { EventViewModel, CreateEventModel } from '@/models/event';
-import { StudentsCalendarEvent } from '@/types/calendar';
+import { EntityCalendarEvents } from '@/types/calendar';
 import { ParticipantType } from '@prisma/client';
 import { StudentService } from './studentsService';
 import { ParentService } from './parentService';
@@ -45,15 +45,15 @@ export class EventService extends BaseService<CreateEventModel, EventViewModel> 
         return events.map(ConverterEventModelToViewModel)
     }
 
-    private groupEventsByAcademicYear(events: EventViewModel[]): StudentsCalendarEvent[] {
+    private groupEventsByAcademicYear(events: EventViewModel[]): EntityCalendarEvents[] {
         return events.reduce((acc, event) => {
             const academicYearId = event.academicYearId.toString();
-            let calendarEvent = acc.find(e => e.academicYearId === event.academicYearId);
+            let calendarEvent = acc.find(e => e.entityId === event.academicYearId);
 
             if (!calendarEvent) {
                 calendarEvent = {
-                    academicYearId: event.academicYearId,
-                    academicYearName: event.academicYear.name,
+                    entityId: event.academicYearId,
+                    entityName: event.academicYear.name,
                     events: []
                 };
                 acc.push(calendarEvent);
@@ -67,7 +67,7 @@ export class EventService extends BaseService<CreateEventModel, EventViewModel> 
             })));
 
             return acc;
-        }, [] as StudentsCalendarEvent[]);
+        }, [] as EntityCalendarEvents[]);
     }
 
     protected getInclude() {

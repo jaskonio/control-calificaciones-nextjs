@@ -19,7 +19,7 @@ export function CalendarDay({
     return (
         <div
             className={cn(
-                "w-full h-full p-1",
+                "w-full h-full p-2",
                 !isSameMonth(date, currentMonth) && "opacity-50",
                 isToday(date) && "bg-primary/10 rounded-md"
             )}

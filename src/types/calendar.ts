@@ -5,8 +5,8 @@ export interface CalendarEvent {
   type: "class" | "extracurricular" | "meeting" | "workshop" | "other";
 }
 
-export interface StudentsCalendarEvent {
-  academicYearId: number;
-  academicYearName: string;
+export interface EntityCalendarEvents {
+  entityId: number;
+  entityName: string;
   events: CalendarEvent[];
 }

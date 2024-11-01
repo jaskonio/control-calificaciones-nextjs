@@ -1,11 +1,13 @@
 import { CreateCourseModel, CourseViewModel } from "@/models/course";
 import { Course } from "@prisma/client";
+import { EntityAcedemicYear } from "./academicYear";
 
+export type EntityCourse = Course & {
+    academicYear?: EntityAcedemicYear;
+    class?: any[];
+}
 
-export function ConverterCourseToViewModel(model: Course & {
-    academicYear: any;
-    class: any[];
-}): CourseViewModel {
+export function ConverterCourseToViewModel(model: EntityCourse): CourseViewModel {
     return {
         id: model.id,
         name: model.name,
@@ -14,8 +16,8 @@ export function ConverterCourseToViewModel(model: Course & {
         gradeLevel: model.gradeLevel,
         status: model.status,
 
-        academicYear: model.academicYear,
-        class: model.class
+        academicYear: model.academicYear as EntityAcedemicYear,
+        class: model.class as any[]
     };
 }
 

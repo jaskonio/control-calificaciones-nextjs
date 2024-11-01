@@ -9,6 +9,6 @@ export type CourseViewModel = Omit<CreateCourseModel, 'academicYearId'> & {
   id: number;
   academicYearId: string;
 
-  academicYear: AcademicYear[];
+  academicYear: AcademicYear;
   class: Class[];
 }

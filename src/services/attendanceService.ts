@@ -9,6 +9,22 @@ export class AttendanceService extends BaseService<CreateAttendanceModel, Attend
         super(prisma, 'attendance', ConverterAttendanceInputToAttendanceModel, ConverterAttendanceModelToViewModel);
     }
 
+    async getAttendanceByStudentId(studenId: number) {
+        try {
+            const results = await this.prisma.attendance.findMany({
+                where: {
+                    studentId: studenId
+                },
+                include: this.getInclude(),
+            });
+
+            return results.map(ConverterAttendanceModelToViewModel);
+        } catch (error) {
+            console.error(error);
+            throw new Error(`Error getting ${this.model.toString()}`);
+        }
+    }
+
     protected getInclude() {
         return {
             student: {
@@ -19,7 +35,11 @@ export class AttendanceService extends BaseService<CreateAttendanceModel, Attend
             event: true,
             class: {
                 include: {
-                    course: true,
+                    course: {
+                        include: {
+                            academicYear: true,
+                        }
+                    },
                     subject: true
                 }
             }

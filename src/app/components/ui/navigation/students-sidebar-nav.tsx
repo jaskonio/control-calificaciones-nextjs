@@ -17,13 +17,18 @@ const studentsNavItems: NavItem[] = [
         description: 'Visualiza tus eventos',
         icon: Calendar,
         href: '/students/calendar',
+    },
+    {
+        title: 'Asistencia',
+        description: 'Visualiza tus asistencia por materia',
+        icon: Calendar,
+        href: '/students/attendance',
     }
 ];
 
 const StudentSidebarNav = () => {
     return (
         <SidebarNav title='Estudiante' itemsConf={studentsNavItems}></SidebarNav>
-
     );
 };
 

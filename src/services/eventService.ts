@@ -47,7 +47,6 @@ export class EventService extends BaseService<CreateEventModel, EventViewModel> 
 
     private groupEventsByAcademicYear(events: EventViewModel[]): EntityCalendarEvents[] {
         return events.reduce((acc, event) => {
-            const academicYearId = event.academicYearId.toString();
             let calendarEvent = acc.find(e => e.entityId === event.academicYearId);
 
             if (!calendarEvent) {
